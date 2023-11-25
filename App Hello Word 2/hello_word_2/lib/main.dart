@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
+        appBar: AppBar( 
       title: Text('App Hello Word'),
       ),
       body: Center(child: Text('Hello Word'),),
