@@ -1,0 +1,4 @@
+#Mon Dec 04 15:17:45 CET 2023
+base.0=/Users/aurora/Documents/GitHub/ChallengeNao24/app_naonexus/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
