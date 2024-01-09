@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1843.72 609.52">
+  <defs>
+    <style>
+      .cls-1 {
+        letter-spacing: .05em;
+      }
+
+      .cls-2 {
+        font-family: Montserrat-Bold, Montserrat;
+        font-size: 290px;
+        font-weight: 700;
+      }
+
+      .cls-3 {
+        letter-spacing: .06em;
+      }
+
+      .cls-4 {
+        font-family: Montserrat-Regular, Montserrat;
+        font-size: 230px;
+      }
+
+      .cls-5 {
+        stroke-width: 0px;
+      }
+
+      .cls-6 {
+        letter-spacing: .05em;
+      }
+    </style>
+  </defs>
+  <path id="_06-Movie_Clapper" data-name="06-Movie Clapper" class="cls-5" d="M116.01,257.7c-1.11-9.31-4.41-17.95-9.39-25.39l445.96-148.9-23.41-70.12c-3.4-10.19-14.42-15.69-24.61-12.29L19.46,162.97c-10.18,3.4-15.69,14.42-12.29,24.61l11.48,34.38C7.19,232.59,0,247.77,0,264.61c0,21.8,12.05,40.83,29.84,50.81v274.66c0,10.75,8.72,19.45,19.45,19.45h511.43c10.73,0,19.45-8.71,19.45-19.45v-332.38H116.01ZM400.25,58.71l59.04-19.71-14.21,57.43-59.04,19.71,14.21-57.43ZM254.37,107.41l59.05-19.71-14.21,57.43-59.04,19.72,14.2-57.43ZM58.21,294.27c-16.35,0-29.65-13.3-29.65-29.66s13.3-29.66,29.65-29.66,29.66,13.3,29.66,29.66-13.3,29.66-29.66,29.66ZM108.51,156.12l59.05-19.71-14.21,57.43-59.05,19.72,14.21-57.43ZM166.51,323.37h-62.25l31.66-49.97h62.25l-31.66,49.97ZM289.71,273.4h62.25l-31.66,49.97h-62.25l31.66-49.97ZM274.43,514.9v-131.81l104.98,65.91-104.98,65.91ZM474.08,323.37h-62.25l31.66-49.97h62.25l-31.66,49.97Z"/>
+  <g>
+    <text class="cls-2" transform="translate(636.48 286.62)"><tspan x="0" y="0">SOCIAL</tspan></text>
+    <text class="cls-4" transform="translate(621.29 511.48)"><tspan class="cls-3" x="0" y="0">D</tspan><tspan class="cls-6" x="203.78" y="0">I</tspan><tspan class="cls-1" x="285.2" y="0">V</tspan><tspan class="cls-3" x="456.09" y="0">ISION</tspan></text>
+  </g>
+</svg>
