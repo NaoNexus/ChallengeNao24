@@ -1,0 +1,10 @@
+opencv-python==4.2.0.32
+opencv-python-headless==4.2.0.32
+flask
+yieldfrom
+PyYAML
+numpy
+requests
+selenium
+SpeechRecognition==3.8.1
+paramiko
