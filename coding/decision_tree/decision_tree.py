@@ -1,8 +1,4 @@
-"""
-decision tree
-"""
-
-
+# -- decision tree
 
 categoria = input("A che tipo di gioiello sei interessato? braccialetti/anelli/collane/orecchini")
 if categoria == "braccialetti":
