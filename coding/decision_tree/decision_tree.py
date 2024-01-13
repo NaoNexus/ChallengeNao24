@@ -2,6 +2,24 @@
 decision tree
 """
 
+
+
+categoria = input("A che tipo di gioiello sei interessato? braccialetti/anelli/collane/orecchini")
+if categoria == "braccialetti":
+
+elif categoria == "anelli":
+
+elif categoria == "collane":
+
+elif categoria == "orecchini":
+
+
+# -- categoria
+braccialetti = []
+anelli = []
+orecchini = []
+collane = []
+
 # m == man
 # w == women
 # 2_3 == dai 20 ai 30 anni
