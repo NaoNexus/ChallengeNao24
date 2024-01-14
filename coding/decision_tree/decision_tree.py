@@ -19,7 +19,7 @@ collane = []
 # m == man
 # w == women
 # 2_3 == dai 20 ai 30 anni
-# 3_4 "" ""
+# 3_4 "" ""s
 def consiglia_gioielli(genere, età):
     m_1_2 = "Gioiello 1"  # -- aggiunto indice di gradimento
     m_2_3 = "Gioiello 2"
