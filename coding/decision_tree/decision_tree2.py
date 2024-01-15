@@ -30,11 +30,11 @@ def recommend_jewelry(customer_info, product_info):
                     return 'Nessun articolo trovato'
                 
                 elif budget >= 175 and budget < 700:
-                    return prodotto 8
+                    return  8
                 
                 else:
                     # -- METTI MAGAZZINO per decidere tra 8 e 22
-                    return prodotto 22 and prodotto 8
+                    return  22 and  8
     
             else:
                 return 'Nessun articolo trovato'
@@ -47,11 +47,11 @@ def recommend_jewelry(customer_info, product_info):
                     return 'Nessun articolo trovato'
                 
                 elif budget < 155:
-                    return prodotto 4
+                    return  4
                 
                 else:
                     # -- MAGAZZINO
-                    return prodotto 6 and prodotto 4
+                    return  6 and  4
 
             elif category == 'necklace':
                 
@@ -59,11 +59,11 @@ def recommend_jewelry(customer_info, product_info):
                     return 'Nessun articolo trovato'
                 
                 elif budget < 700:
-                    return prodotto 8
+                    return  8
                 
                 else: # --if budget >= 700:
                     # -- MAGAZZINO
-                    return prodotto 8 and prodotto 22
+                    return  8 and  22
 
             else:
                 return 'Nessun articolo trovato'
@@ -76,7 +76,7 @@ def recommend_jewelry(customer_info, product_info):
             if category == 'bracelet':
         
                 if budget >= 155:
-                    return prodotto 1
+                    return  1
                 
                 else:
                     return 'Nessun articolo trovato'
@@ -87,14 +87,14 @@ def recommend_jewelry(customer_info, product_info):
                     return 'Nessun articolo trovato'
                     
                 elif 155 <= budget < 175:
-                    return prodotto 5
+                    return  5
                     
                 elif 175 <= budget < 230:
                     # -- MAGAZZINO
-                    return prodotto 5 and prodotto 24
+                    return  5 and  24
                     
                 elif budget >= 230:
-                    return prodotto 2 and prodotto 5 and prodotto 24
+                    return  2 and  5 and  24
                     
             elif category == 'earrings':
             
@@ -102,13 +102,13 @@ def recommend_jewelry(customer_info, product_info):
                     return 'Nessun articolo trovato'
                     
                 elif 115 <= budget < 125:
-                    return prodotto 7
+                    return  7
 
                 elif 125 <= budget < 135:
-                    return prodotto 7 and prodotto 25 and prodotto 26
+                    return  7 and  25 and  26
 
                 else:
-                    return prodotto 23 and prodotto 7 and prodotto 25 and prodotto 26
+                    return  23 and  7 and  25 and  26
                     
             else:
                 return 'Nessun articolo trovato'
@@ -118,7 +118,7 @@ def recommend_jewelry(customer_info, product_info):
             if category == 'bracelet':
                     
                 if budget >= 195:
-                    return prodotto 11
+                    return  11
 
                 else:
                     return 'Nessun articolo trovato'
@@ -129,10 +129,10 @@ def recommend_jewelry(customer_info, product_info):
                     return 'Nessun articolo trovato'
                     
                 elif 115 <= budget < 195:
-                    return prodotto 28
+                    return  28
 
                 else:
-                    return prodotto 28 and prodotto 13
+                    return  28 and  13
                     
             elif category == 'earrings':
                 
@@ -140,13 +140,13 @@ def recommend_jewelry(customer_info, product_info):
                     return 'Nessun articolo trovato'
                     
                 elif 125 <= budget < 129:
-                    return prodotto 27
+                    return  27
 
                 elif 129 <= budget < 195:
-                    return prodotto 27 and prodotto 29
+                    return  27 and  29
                     
                 else:
-                    return prodotto 27 and prodotto 29 and prodotto 12
+                    return  27 and  29 and  12
                 
             else:
                 return 'Nessun articolo trovato'
@@ -159,10 +159,10 @@ def recommend_jewelry(customer_info, product_info):
                     return 'Nessun articolo trovato'
                 
                 elif 175 <= budget < 350:
-                    return prodotto 9
+                    return  9
                     
                 else:
-                    return prodotto 9 and prodotto 14
+                    return  9 and  14
                     
             elif category == 'earrings'
                     
@@ -170,10 +170,10 @@ def recommend_jewelry(customer_info, product_info):
                     return 'Nessun articolo trovato'
                     
                 elif 95 <= budget < 195:
-                    return prodotto 17
+                    return  17
                     
                 else:
-                    return prodotto 17 and prodotto 10 and prodotto 15
+                    return  17 and  10 and  15
                     
             elif category == 'ring':
             
@@ -181,13 +181,13 @@ def recommend_jewelry(customer_info, product_info):
                     return 'Nessun articolo trovato'
                     
                 elif 75 <= budget < 125:
-                    return prodotto 30
+                    return  30
                     
                 elif 125 <= budget < 135:
-                    return prodotto 16 and prodotto 30
+                    return  16 and  30
                     
                 else:
-                 return prodotto 16 and prodotto 30 and prodotto 3
+                 return  16 and  30 and  3
                  
             else:
                 return 'Nessun articolo trovato'
@@ -200,7 +200,7 @@ def recommend_jewelry(customer_info, product_info):
                     return 'Nessun articolo trovato'
                 
                 else:
-                    return prodotto 18
+                    return  18
                     
             elif category == 'necklace':
             
@@ -208,7 +208,7 @@ def recommend_jewelry(customer_info, product_info):
                     return 'Nessun articolo trovato'
                     
                 else:
-                    return prodotto 20
+                    return  20
                     
             elif category == 'ring':
                 
@@ -216,7 +216,7 @@ def recommend_jewelry(customer_info, product_info):
                     return 'Nessuno articolo trovato'
                     
                 else:
-                    return prodotto 19 and prodotto 21
+                    return  19 and  21
             
             else:
                 return 'Nessuno articolo trovato'
@@ -230,3 +230,5 @@ if name == "main":
 
     gioiello_consigliato = recommend_jewelry(customer_info, product_info)
     print("Ti consigliamo: ", gioiello_consigliato)
+    
+    
