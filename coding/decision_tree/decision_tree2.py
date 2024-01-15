@@ -4,9 +4,9 @@ def recommend_jewelry(customer_info, product_info):
     age = customer_info['age']
     budget = customer_info['budget']
     
-    jewelry_name = product_info['name']
-    jeweslry_category = product_info['category']
-    jewelry_storage = product_info['storage']
+    name = primo_dizionario[list(primo_dizionario.keys())[1]]
+    category = primo_dizionario[list(primo_dizionario.keys())[2]]
+    storage = primo_dizionario[list(primo_dizionario.keys())[3]]
 
     # -- male
     if gender == 'male':
@@ -224,13 +224,19 @@ def recommend_jewelry(customer_info, product_info):
                 
 if __name__ == "__main__":
 
-
     customer_info = {'gender': 'male', 'age': 16, 'budget': 300}
     product_info = [
         {'id': 6, 'name': 'dextera necklace', 'category': 'necklace', 'storage': 5},
         {'id': 1, 'name': 'angelic_bracelet', 'category': 'bracelet', 'storage': 8},
         {'id': 2, 'name': 'angelic_necklace', 'category': 'necklace', 'storage': 2}
     ]
+
+    # Accesso al primo dizionario
+    primo_dizionario = product_info[0]
+
+    # Accesso al primo valore del primo dizionario
+    primo_valore = primo_dizionario[next(iter(primo_dizionario))]
+    secondo_valore = primo_dizionario[list(primo_dizionario.keys())[1]]
 
     gioiello_consigliato = recommend_jewelry(customer_info, product_info)
     print("Ti consigliamo: ", gioiello_consigliato)
