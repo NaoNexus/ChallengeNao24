@@ -5,14 +5,14 @@ def recommend_jewelry(customer_info, product_info):
     budget = customer_info['budget']
     
     jewelry_name = product_info['name']
-    jewelry_category = product_info['category']
+    jeweslry_category = product_info['category']
     jewelry_storage = product_info['storage']
 
     # -- male
     if gender == 'male':
 
         if age > 60:
-            return: 'Nessun articolo trovato'
+            return 'Nessun articolo trovato'
         
         elif  age < 20: 
 
@@ -164,7 +164,7 @@ def recommend_jewelry(customer_info, product_info):
                 else:
                     return  9 and  14
                     
-            elif category == 'earrings'
+            elif category == 'earrings':
                     
                 if budget < 95:
                     return 'Nessun articolo trovato'
@@ -222,11 +222,15 @@ def recommend_jewelry(customer_info, product_info):
                 return 'Nessuno articolo trovato'
                 
                 
-if name == "main":
+if __name__ == "__main__":
 
 
     customer_info = {'gender': 'male', 'age': 16, 'budget': 300}
-    product_info = [{'id': 6, 'name': 'dextera necklace', 'category': 'necklace', 'storage': 5}, {'id': 1, 'name': 'angelic_bracelet', 'category': 'bracelet', 'storage': 8} , {'id': 2, 'name': 'angelic_necklace', 'category': 'necklace', 'storage': 2}]
+    product_info = [
+        {'id': 6, 'name': 'dextera necklace', 'category': 'necklace', 'storage': 5},
+        {'id': 1, 'name': 'angelic_bracelet', 'category': 'bracelet', 'storage': 8},
+        {'id': 2, 'name': 'angelic_necklace', 'category': 'necklace', 'storage': 2}
+    ]
 
     gioiello_consigliato = recommend_jewelry(customer_info, product_info)
     print("Ti consigliamo: ", gioiello_consigliato)
