@@ -231,4 +231,4 @@ if name == "main":
     gioiello_consigliato = recommend_jewelry(customer_info, product_info)
     print("Ti consigliamo: ", gioiello_consigliato)
     
-    
+
