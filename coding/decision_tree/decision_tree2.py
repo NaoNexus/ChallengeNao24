@@ -224,14 +224,3 @@ def recommend_jewelry(customer_info, product_info):
             else:
                 return 'Nessuno articolo trovato'    
             
-
-'''
-
-if __name__ == "__main__":
-    genere_utente = input("Qual è il tuo genere? maschio/femmina ")
-    età_utente = int(input("Età? "))
-
-    gioiello_consigliato = consiglia_gioielli(genere_utente, età_utente)
-    print("Ti consigliamo", gioiello_consigliato)
-
-'''
