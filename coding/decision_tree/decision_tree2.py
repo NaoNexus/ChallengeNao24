@@ -226,9 +226,8 @@ if name == "main":
 
 
     customer_info = {'gender': 'male', 'age': 16, 'budget': 300}
-    product_info = [{'id': 6, 'name': 'dextera necklace', 'category': 'necklace', 'storage': 5}, {'id': 6, 'name': 'dextera necklace', 'category': 'necklace', 'storage': 5}]
+    product_info = [{'id': 6, 'name': 'dextera necklace', 'category': 'necklace', 'storage': 5}, {'id': 1, 'name': 'angelic_bracelet', 'category': 'bracelet', 'storage': 8} , {'id': 2, 'name': 'angelic_necklace', 'category': 'necklace', 'storage': 2}]
 
     gioiello_consigliato = recommend_jewelry(customer_info, product_info)
     print("Ti consigliamo: ", gioiello_consigliato)
     
-
