@@ -226,9 +226,14 @@ if __name__ == "__main__":
 
     customer_info = {'gender': 'male', 'age': 16, 'budget': 300}
     product_info = [
-        {'id': 6, 'name': 'dextera necklace', 'category': 'necklace', 'storage': 5},
-        {'id': 1, 'name': 'angelic_bracelet', 'category': 'bracelet', 'storage': 8},
-        {'id': 2, 'name': 'angelic_necklace', 'category': 'necklace', 'storage': 2}
+        {'id': 6, 'name': 'dextera necklace', 'category': 'necklace', 'storage': 5}, # -- 1 man
+        {'id': 4, 'name': 'dad_bracelet', 'category': 'bracelet', 'storage': 3}, # -- 2 man
+        {'id': 8, 'name': 'dextera_necklace', 'category': 'necklace', 'storage': 2},  # -- 3 man
+        {'id': 8, 'name': 'millenia_necklace', 'category': 'necklace', 'storage': 5},  # -- 4 man
+        {'id': 1, 'name': 'angelic_bracelet', 'category': 'bracelet', 'storage': 8}, # -- female bracelet
+        {'id': 2, 'name': 'angelic_necklace', 'category': 'necklace', 'storage': 2}, # -- female necklace
+        {'id': 3, 'name': 'constella_cocktail_ring', 'category': 'ring', 'storage': 4}, # -- female ring
+        {'id': 29, 'name': 'swarovski swan stud earrings', 'category': 'earrings', 'storage': 8}, # -- female earrings
     ]
 
     # Accesso al primo dizionario
