@@ -76,26 +76,26 @@
 </head>
 
 <body>
-    <a href="file:///C:/Users/edoar/Desktop/nao_webapp/codici%20webapp/templates/index.html" class="logo-link"><img src=""C:\Users\edoar\Desktop\codici webapp\templates\logo.png"" alt="Logo" width="100%" height="100%"></a>
+    <a href="file:///C:/Users/edoar/Desktop/nao_webapp/codici%20webapp/templates/index.html" class="logo-link"><img src="C:\Users\edoar\Desktop\codici webapp\templates\logo.png" alt="Logo" width="100%" height="100%"></a>
     <h1>Swarovski</h1>
     <div class="menu">
         <select onchange="window.location.href=this.value">
             <option value="" disabled selected hidden>Prodotto</option>
-            <option>Pagina 1</option>
-            <option>Pagina 2</option>
+            <option value="http://127.0.0.1:5000/pagina1">Pagina 1</option>
+            <option value="http://127.0.0.1:5000/pagina2">Pagina 2</option>
         </select>
-        <button>Vendite</button>
-        <button>Utenti</button>
+        <button onclick="window.location.href='http://127.0.0.1:5000/bilancio'">Vendite</button>
+        <button onclick="window.location.href='http://127.0.0.1:5000/utenti'">Utenti</button>
     </div>
     <div class="menu">
-        <button>Carrelli</button>
-        <button>Scaffale</button>
-        <button>Magazzino</button>
+        <button onclick="window.location.href='http://127.0.0.1:5000/carrelli'">Carrelli</button>
+        <button onclick="window.location.href='http://127.0.0.1:5000/scaffale'">Scaffale</button>
+        <button onclick="window.location.href='http://127.0.0.1:5000/magazzino'">Magazzino</button>
     </div>
-	<div class="menu">
-		<button>API</button>
-		<button>Services</button>
-	</div>
+    <div class="menu">
+        <button onclick="window.location.href='http://127.0.0.1:5000/api'">API</button>
+        <button onclick="window.location.href='http://127.0.0.1:5000/services'">Services</button>
+    </div>
 </body>
- 
+
 </html>
