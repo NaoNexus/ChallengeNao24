@@ -57,7 +57,6 @@ def recommend_jewelry(customer_info, product_info):
                 else: #(budget >= 145:)
                     gioielli_consigliati = [4, 6]
                     return gioielli_consigliati
-                #da chiedere come fare coi budget pk se non si mettono precisi si può rischiare di dare al cliente un gioiello con un prezzo più alto del budget 
 
             elif category == 'necklace':
                 
@@ -236,7 +235,6 @@ if __name__ == "__main__":
     #ho aggiunto la categoria (che forse va aggiunta nel dataset in cliente??) pk è lui che deve specificare cosa vuole insieme al budget
     customer_info = {'gender': 'male', 'age': 16, 'budget': 300, 'category': 'necklace'}
     product_info = [
-<<<<<<< HEAD:coding/decision_tree/decision_tree2.py
         {'id': 1, 'name': 'angelic bracelet', 'category': 'bracelet', 'storage': 8}, 
         {'id': 2, 'name': 'angelic necklace', 'category': 'necklace', 'storage': 5}, 
         {'id': 3, 'name': 'constella cocktail ring', 'category': 'ring', 'storage': 5}, 
@@ -267,16 +265,6 @@ if __name__ == "__main__":
         {'id': 28, 'name': 'swarovski iconic swan pendant', 'category': 'necklace', 'storage': 5}, 
         {'id': 29, 'name': 'swarovski swan stud earrings', 'category': 'earrings', 'storage': 5}, 
         {'id': 30, 'name': 'vittore ring', 'category': 'ring', 'storage': 5}
-=======
-        {'id': 6, 'name': 'dextera necklace', 'category': 'necklace', 'storage': 5}, # -- 1 man
-        {'id': 4, 'name': 'dad_bracelet', 'category': 'bracelet', 'storage': 3}, # -- 2 man
-        {'id': 8, 'name': 'dextera_necklace', 'category': 'necklace', 'storage': 2},  # -- 3 man
-        {'id': 8, 'name': 'millenia_necklace', 'category': 'necklace', 'storage': 5},  # -- 4 man
-        {'id': 1, 'name': 'angelic_bracelet', 'category': 'bracelet', 'storage': 8}, # -- female bracelet
-        {'id': 2, 'name': 'angelic_necklace', 'category': 'necklace', 'storage': 2}, # -- female necklace
-        {'id': 3, 'name': 'constella_cocktail_ring', 'category': 'ring', 'storage': 4}, # -- female ring
-        {'id': 29, 'name': 'swarovski swan stud earrings', 'category': 'earrings', 'storage': 8}, # -- female earrings
->>>>>>> 67b8ebea5a2c7d498b1d51c293f5fb704321777a:coding/decision_tree/decision_tree.py
     ]
 
     '''
