@@ -1,101 +1,71 @@
-<!DOCTYPE html>
-<html lang="it">
+from flask import Flask, request, redirect, url_for, render_template
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-z9b+7oG5fWeAOeVG2HEoaFPiFjsxxhMbDSFOx6YLLEpAt52D74BlN/C2BZJKPXyBBo5HcAc2rZSXtITc8Unw/A==" crossorigin="anonymous" />
-    <style>
-        body {
-            background-color: #A8D0F0;
-            color: #FFF8F8;
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
+app = Flask(__name__)
 
-        h1 {
-            color: #0A0A0A;
-            font-size: 150px;
-            text-align: center;
-            margin: 20px 0;
-            font-family: 'Times New Roman', serif;
-        }
+# Pagina di login
+@app.route("/", methods=['GET', 'POST'])
+def login():
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
 
-        .home-link {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 20px;
-            color: #FFF8F8;
-            text-decoration: none;
-        }
+        # Verifica credenziali utente
+        if username == "admin" and password == "admin":
+            return redirect(url_for('index'))
+        else:
+            return render_template('login.html', error=True)
+    return render_template('login.html', error=False)
 
-        .menu {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
+# Pagina homepage (index)
+@app.route("/index", methods=['GET', 'POST'])
+def index():
+    if request.method == "POST":
+        pagina = request.form.get("pagina")
+        if pagina:
+            return redirect(url_for(pagina))
 
-        .menu button,
-        .menu select {
-            flex: 1;
-            background-color: #FFF8F8;
-            color: #0A0A0A;
-            border: none;
-            padding: 15px;
-            margin: 0 10px;
-            font-size: 18px;
-            font-weight: bold;
-            text-transform: uppercase;
-            cursor: pointer;
-            border-radius: 10px;
-            transition: background-color 0.3s ease;
-        }
+    return render_template("index.html")
 
-        .menu select {
-            width: 80px;
-            text-align: center; 
-        }
+# Pagine per i singoli pulsanti
+@app.route("/prodotto", methods=['GET', 'POST'])
+def prodotto():
+    return render_template("prodotto.html")
 
-        .menu button:hover,
-        .menu select:hover {
-            background-color: #FF7370;
-        }
+@app.route("/pagina1", methods=['GET', 'POST'])
+def pagina1():
+    return render_template("pagina1.html")
 
-        .logo-link {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            width: 70px;
-            height: 70px;
-        }
-    </style>
-</head>
+@app.route("/pagina2", methods=['GET', 'POST'])
+def pagina2():
+    return render_template("pagina2.html")
 
-<body>
-    <a href="file:///C:/Users/edoar/Desktop/nao_webapp/codici%20webapp/templates/index.html" class="logo-link"><img src="C:\Users\edoar\Desktop\codici webapp\templates\logo.png" alt="Logo" width="100%" height="100%"></a>
-    <h1>Swarovski</h1>
-    <div class="menu">
-        <select onchange="window.location.href=this.value">
-            <option value="" disabled selected hidden>Prodotto</option>
-            <option value="http://127.0.0.1:5000/pagina1">Pagina 1</option>
-            <option value="http://127.0.0.1:5000/pagina2">Pagina 2</option>
-        </select>
-        <button onclick="window.location.href='http://127.0.0.1:5000/bilancio'">Vendite</button>
-        <button onclick="window.location.href='http://127.0.0.1:5000/utenti'">Utenti</button>
-    </div>
-    <div class="menu">
-        <button onclick="window.location.href='http://127.0.0.1:5000/carrelli'">Carrelli</button>
-        <button onclick="window.location.href='http://127.0.0.1:5000/scaffale'">Scaffale</button>
-        <button onclick="window.location.href='http://127.0.0.1:5000/magazzino'">Magazzino</button>
-    </div>
-    <div class="menu">
-        <button onclick="window.location.href='http://127.0.0.1:5000/api'">API</button>
-        <button onclick="window.location.href='http://127.0.0.1:5000/services'">Services</button>
-    </div>
-</body>
+@app.route("/vendite")
+def vendite():
+    return render_template("vendite.html")
 
-</html>
+@app.route("/utenti")
+def utenti():
+    return render_template("utenti.html")
+
+@app.route("/carrelli")
+def carrelli():
+    return render_template("carrelli.html")
+
+@app.route("/scaffale")
+def scaffale():
+    return render_template("scaffale.html")
+
+@app.route("/magazzino")
+def magazzino():
+    return render_template("magazzino.html")
+
+@app.route("/api")
+def api():
+    return render_template("api.html")
+
+@app.route("/services")
+def services():
+    return render_template("services.html")
+
+if __name__ == "__main__":
+    app.run(debug=True)
