@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scafale</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-z9b+7oG5fWeAOeVG2HEoaFPiFjsxxhMbDSFOx6YLLEpAt52D74BlN/C2BZJKPXyBBo5HcAc2rZSXtITc8Unw/A==" crossorigin="anonymous" />
+    <style>
+        body {
+            background-color: #A8D0F0;
+            color: #000000;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #0A0A0A;
+            font-size: 150px;
+            text-align: center;
+            margin: 20px 0;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .home-link {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 20px;
+            color: #FFF8F8;
+            text-decoration: none;
+        }
+
+        .logo-link {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 70px;
+            height: 70px;
+        }
+
+        #header-text {
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        #number-container {
+            font-size: 200px;
+            margin-top: 20px;
+            transition: color 0.5s;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 300px; /* Altezza fissa */
+        }
+
+        #report-button {
+            font-size: 40px;
+            width: 150px; /* Larghezza fissa */
+            margin-top: 20px;
+            padding: 15px 20px;
+            border-radius: 10px;
+            background-color: #FFF8F8;
+            transition: background-color 0.5s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #report-button:hover {
+            background-color: #FF7370;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="file:///C:/Users/edoar/Desktop/nao_webapp/codici%20webapp/templates/index.html" class="logo-link"><img src="C:\Users\edoar\Desktop\logo.png" alt="Logo" width="100%" height="100%"></a>
+    <h1>Swarovski</h1>
+
+    <div id="header-text">Gioielli sullo scaffale:</div>
+
+    <div id="container">
+        <div id="number-container">0</div>
+        <button id="report-button" onclick="generateReport()">Report</button>
+    </div>
+
+    <script>
+        function generateReport() {
+            alert("");
+        }
+    </script>
+</body>
+
+</html>

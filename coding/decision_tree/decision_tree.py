@@ -1,67 +1,248 @@
-"""
-decision tree
-"""
+def recommend_jewelry(customer_info, product_info):
+    
+    gender = customer_info['gender']
+    age = customer_info['age']
+    budget = customer_info['budget']
+    
+    name = primo_dizionario[list(primo_dizionario.keys())[1]]
+    category = primo_dizionario[list(primo_dizionario.keys())[2]]
+    storage = primo_dizionario[list(primo_dizionario.keys())[3]]
 
-# m == man
-# w == women
-# 2_3 == dai 20 ai 30 anni
-# 3_4 "" ""
-def consiglia_gioielli(genere, età):
-    m_1_2 = "Gioiello 1"  # -- aggiunto indice di gradimento
-    m_2_3 = "Gioiello 2"
-    m_3_4 = "Gioiello 3"
-    m_4_5 = "Gioiello 4"
-    m_5_6 = "Gioiello 5"
-    m_6 = "Gioiello 6"
+    # -- male
+    if gender == 'male':
 
-    w_2_3 = "Gioiello 7"
-    w_3_4 = "Gioiello 8"
-    w_4_5 = "Gioiello 9"
-    w_5_6 = "Gioiello 10"
-    w_6 = "Gioiello 11"
+        if age > 60:
+            return 'Nessun articolo trovato'
+        
+        elif  age < 20: 
 
-    if genere == "maschio":
-        if età >= 10 and età < 20:
-            return m_1_2
+            if category == 'bracelet':
+                
+                if budget >= 155:
+                    return 6
+                
+                else:
+                    return 'Nessun articolo trovato'
             
-        elif età >= 20 and età < 30:
-            return m_2_3
-            
-        elif età >= 30 and età < 40:
-            return m_3_4
-            
-        elif età >= 40 and età < 50:
-            return m_4_5
-            
-        elif età >= 50 and età < 60:
-            return m_5_6
-            
-        elif età >= 60:
-            return m_6
-            
-    elif genere == "femmina":
-        if età >= 10 and età < 20:
-            return w_1_2
-            
-        elif età >= 20 and età < 30:
-            return w_2_3
-            
-        elif età >= 30 and età < 40:
-            return w_3_4
-            
-        elif età >= 40 and età < 50:
-            return w_4_5
-            
-        elif età >= 50 and età < 60:
-            return w_5_6
-            
-        elif età >= 60:
-            return w_6
+            elif category == 'necklace':
+                
+                if budget < 175:
+                    return 'Nessun articolo trovato'
+                
+                elif budget >= 175 and budget < 700:
+                    return  8
+                
+                else:
+                    # -- METTI MAGAZZINO per decidere tra 8 e 22
+                    return  22 and  8
+    
+            else:
+                return 'Nessun articolo trovato'
 
+        elif 20 <= age <= 60:
+            
+            if category == 'bracelet':
+                
+                if budget < 145:
+                    return 'Nessun articolo trovato'
+                
+                elif budget < 155:
+                    return  4
+                
+                else:
+                    # -- MAGAZZINO
+                    return  6 and  4
 
+            elif category == 'necklace':
+                
+                if budget < 175:
+                    return 'Nessun articolo trovato'
+                
+                elif budget < 700:
+                    return  8
+                
+                else: # --if budget >= 700:
+                    # -- MAGAZZINO
+                    return  8 and  22
+
+            else:
+                return 'Nessun articolo trovato'
+
+    # -- female
+    elif gender == 'female':
+    
+        if 0 < age < 20:
+            
+            if category == 'bracelet':
+        
+                if budget >= 155:
+                    return  1
+                
+                else:
+                    return 'Nessun articolo trovato'
+                    
+            elif category == 'necklace':
+            
+                if budget < 155:
+                    return 'Nessun articolo trovato'
+                    
+                elif 155 <= budget < 175:
+                    return  5
+                    
+                elif 175 <= budget < 230:
+                    # -- MAGAZZINO
+                    return  5 and  24
+                    
+                elif budget >= 230:
+                    return  2 and  5 and  24
+                    
+            elif category == 'earrings':
+            
+                if budget < 115:
+                    return 'Nessun articolo trovato'
+                    
+                elif 115 <= budget < 125:
+                    return  7
+
+                elif 125 <= budget < 135:
+                    return  7 and  25 and  26
+
+                else:
+                    return  23 and  7 and  25 and  26
+                    
+            else:
+                return 'Nessun articolo trovato'
+                    
+        elif 20 <= age < 40:
+        
+            if category == 'bracelet':
+                    
+                if budget >= 195:
+                    return  11
+
+                else:
+                    return 'Nessun articolo trovato'
+                    
+            elif category == 'necklace':
+            
+                if budget < 115:
+                    return 'Nessun articolo trovato'
+                    
+                elif 115 <= budget < 195:
+                    return  28
+
+                else:
+                    return  28 and  13
+                    
+            elif category == 'earrings':
+                
+                if budget < 125:
+                    return 'Nessun articolo trovato'
+                    
+                elif 125 <= budget < 129:
+                    return  27
+
+                elif 129 <= budget < 195:
+                    return  27 and  29
+                    
+                else:
+                    return  27 and  29 and  12
+                
+            else:
+                return 'Nessun articolo trovato'
+                    
+        elif 40 <= age < 60:
+        
+            if category == 'necklace':
+            
+                if budget < 175:
+                    return 'Nessun articolo trovato'
+                
+                elif 175 <= budget < 350:
+                    return  9
+                    
+                else:
+                    return  9 and  14
+                    
+            elif category == 'earrings':
+                    
+                if budget < 95:
+                    return 'Nessun articolo trovato'
+                    
+                elif 95 <= budget < 195:
+                    return  17
+                    
+                else:
+                    return  17 and  10 and  15
+                    
+            elif category == 'ring':
+            
+                if budget < 75:
+                    return 'Nessun articolo trovato'
+                    
+                elif 75 <= budget < 125:
+                    return  30
+                    
+                elif 125 <= budget < 135:
+                    return  16 and  30
+                    
+                else:
+                 return  16 and  30 and  3
+                 
+            else:
+                return 'Nessun articolo trovato'
+                
+        elif age >= 60:
+        
+            if category == 'bracelet':
+                
+                if budget < 400:
+                    return 'Nessun articolo trovato'
+                
+                else:
+                    return  18
+                    
+            elif category == 'necklace':
+            
+                if budget < 950:
+                    return 'Nessun articolo trovato'
+                    
+                else:
+                    return  20
+                    
+            elif category == 'ring':
+                
+                if budget < 135:
+                    return 'Nessuno articolo trovato'
+                    
+                else:
+                    return  19 and  21
+            
+            else:
+                return 'Nessuno articolo trovato'
+                
+                
 if __name__ == "__main__":
-    genere_utente = input("Qual è il tuo genere? maschio/femmina ")
-    età_utente = int(input("Età? "))
 
-    gioiello_consigliato = consiglia_gioielli(genere_utente, età_utente)
-    print("Ti consigliamo", gioiello_consigliato)
+    customer_info = {'gender': 'male', 'age': 16, 'budget': 300}
+    product_info = [
+        {'id': 6, 'name': 'dextera necklace', 'category': 'necklace', 'storage': 5}, # -- 1 man
+        {'id': 4, 'name': 'dad_bracelet', 'category': 'bracelet', 'storage': 3}, # -- 2 man
+        {'id': 8, 'name': 'dextera_necklace', 'category': 'necklace', 'storage': 2},  # -- 3 man
+        {'id': 8, 'name': 'millenia_necklace', 'category': 'necklace', 'storage': 5},  # -- 4 man
+        {'id': 1, 'name': 'angelic_bracelet', 'category': 'bracelet', 'storage': 8}, # -- female bracelet
+        {'id': 2, 'name': 'angelic_necklace', 'category': 'necklace', 'storage': 2}, # -- female necklace
+        {'id': 3, 'name': 'constella_cocktail_ring', 'category': 'ring', 'storage': 4}, # -- female ring
+        {'id': 29, 'name': 'swarovski swan stud earrings', 'category': 'earrings', 'storage': 8}, # -- female earrings
+    ]
+
+    # Accesso al primo dizionario
+    primo_dizionario = product_info[0]
+
+    # Accesso al primo valore del primo dizionario
+    primo_valore = primo_dizionario[next(iter(primo_dizionario))]
+    secondo_valore = primo_dizionario[list(primo_dizionario.keys())[1]]
+
+    gioiello_consigliato = recommend_jewelry(customer_info, product_info)
+    print("Ti consigliamo: ", gioiello_consigliato)
+    

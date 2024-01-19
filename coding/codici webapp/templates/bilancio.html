@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilancio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-z9b+7oG5fWeAOeVG2HEoaFPiFjsxxhMbDSFOx6YLLEpAt52D74BlN/C2BZJKPXyBBo5HcAc2rZSXtITc8Unw/A==" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #A8D0F0;
+            color: #FFF8F8;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #0A0A0A;
+            font-size: 150px;
+            text-align: center;
+            margin: 20px 0;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .logo-link {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 70px;
+            height: 70px;
+        }
+
+        canvas {
+            width: 80%; 
+            height: 20px; 
+            margin: 20px auto; 
+        }
+    </style>
+</head>
+
+<body>
+    <a href="file:///C:/Users/edoar/Desktop/nao_webapp/codici%20webapp/templates/index.html" class="logo-link">
+        <img src="C:\Users\edoar\Desktop\logo.png" alt="Logo" width="100%" height="100%">
+    </a>
+    <h1>Swarovski</h1>
+
+    
+    <canvas id="myChart"></canvas>
+
+    <script>
+        
+        var salesData = {
+            labels: ["Giorno 1", "Giorno 2", "Giorno 3", "Giorno 4", "Giorno 5"],
+            datasets: [{
+                label: "Vendite totali della giornata",
+                data: [20, 15, 20, 25, 10], 
+                backgroundColor: 'rgba(245, 185, 44, 0.2)', 
+                borderColor: 'rgba(245, 185, 44, 1)', 
+                borderWidth: 2 
+            }]
+        };
+
+        
+        var ctx = document.getElementById('myChart').getContext('2d');
+
+        
+        var myChart = new Chart(ctx, {
+            type: 'bar', // 'bar', 'line', 'pie'
+            data: salesData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
