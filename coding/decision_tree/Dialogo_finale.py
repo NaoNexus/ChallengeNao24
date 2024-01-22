@@ -93,8 +93,8 @@ def Vittore_ring():
 #fine descrizione dei prodotto
 
 def analizza_genere(frase):
-    parole_chiave_maschili = ["fratello", "papà", "padre", "nonno", "amico", "fratello,", "papà,", "padre,", "nonno,", "amico,", "fratello.", "papà.", "padre.", "nonno.", "amico."]
-    parole_chiave_femminili = ["sorella", "mamma", "madre", "nonna", "amica", "sorella,", "mamma,", "madre,", "nonna,", "amica,", "sorella.", "mamma.", "madre.", "nonna.", "amica."]
+    parole_chiave_maschili = ["fratello", "papà", "padre", "nonno", "amico", "fratello,", "papà,", "padre,", "nonno,", "amico,", "fratello.", "papà.", "padre.", "nonno.", "amico.", "maschio", "maschio,", "maschio."]
+    parole_chiave_femminili = ["sorella", "mamma", "madre", "nonna", "amica", "sorella,", "mamma,", "madre,", "nonna,", "amica,", "sorella.", "mamma.", "madre.", "nonna.", "amica.", "femmina", "femmina,", "femmina.", "donna", "donna,", "donna."]
 
     # Tokenizza la frase in parole
     parole = frase.lower().split()  # Converto tutto in minuscolo per rendere la ricerca case-insensitive
