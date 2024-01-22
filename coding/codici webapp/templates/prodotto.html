@@ -35,33 +35,42 @@
             height: 70px;
         }
 
-        .product-menu {
+        .dropdown-container {
             position: absolute;
-            top: 40px;
+            top: 10px;
             right: 10px;
-            display: flex;
-            align-items: center;
         }
 
+        /* Stili personalizzati per il menu a tendina */
         label {
+            color: #000000;
+            font-weight: bold;
+            font-size: 18px;
             margin-right: 10px;
-            font-size: 24px;
-            color: #0A0A0A;
         }
 
         select {
-            padding: 10px;
-            font-size: 18px;
+            padding: 15px; /* Aumenta l'altezza */
+            font-size: 16px; /* Riduci la dimensione del testo */
             border: none;
             background-color: #FFF8F8;
             color: #0A0A0A;
             border-radius: 10px;
             transition: background-color 0.3s ease;
+            appearance: none; /* Nasconde il default dropdown arrow su Firefox */
         }
 
         select:hover {
             background-color: #FF7370;
         }
+
+        select:focus {
+            outline: none;
+            border: 2px solid #FF7370;
+        }
+
+        /* Aggiungi eventuali stili specifici per la tua web app */
+        /* Ad esempio, puoi modificare colori, dimensioni, margini, ecc. */
 
         canvas {
             width: 80%;
@@ -75,10 +84,13 @@
     <a href="file:///C:/Users/edoar/Desktop/nao_webapp/codici%20webapp/templates/index.html" class="logo-link">
         <img src="C:\Users\edoar\Desktop\logo.png" alt="Logo" width="100%" height="100%">
     </a>
-    <div class="product-menu">
-        <label for="gioielli">Prodotto:</label>
+    <div class="dropdown-container">
+        <label for="gioielli">Gioielli:</label>
         <select id="gioielli" name="gioielli" onchange="updateChart()">
-           
+            <option value="gioiello1">Gioiello 1</option>
+            <option value="gioiello2">Gioiello 2</option>
+            <option value="gioiello3">Gioiello 3</option>
+            <!-- Aggiungi le opzioni dei tuoi gioielli qui -->
         </select>
     </div>
     <h1>Swarovski</h1>
@@ -86,15 +98,14 @@
     <canvas id="myChart"></canvas>
 
     <script>
-        
-        var emptyData = {
-            labels: [],
+        var salesData = {
+            labels: ["1/01", "2/01", "3/01", "4/01", "5/01"],
             datasets: [{
-                label: "",
-                data: [],
-                backgroundColor: 'rgba(0, 0, 0, 0)',
-                borderColor: 'rgba(0, 0, 0, 0)',
-                borderWidth: 0
+                label: "Vendite totali della giornata",
+                data: [0, 0, 0, 0, 0],
+                backgroundColor: 'rgba(245, 185, 44, 0.2)',
+                borderColor: 'rgba(245, 185, 44, 1)',
+                borderWidth: 2
             }]
         };
 
@@ -102,7 +113,7 @@
 
         var myChart = new Chart(ctx, {
             type: 'bar', // 'bar', 'line', 'pie'
-            data: emptyData,
+            data: salesData,
             options: {
                 scales: {
                     y: {
@@ -112,46 +123,24 @@
             }
         });
 
-        
         function updateChart() {
             var selectedGioiello = document.getElementById('gioielli').value;
 
             
-            fetch('/api/get_gioiello_data?gioiello=' + selectedGioiello)
-                .then(response => response.json())
-                .then(data => {
-                   
-                    myChart.data = {
-                        labels: data.labels,
-                        datasets: [{
-                            label: "Numero di vendite del prodotto giornaliere - " + selectedGioiello,
-                            data: data.values,
-                            backgroundColor: 'rgba(245, 185, 44, 0.2)',
-                            borderColor: 'rgba(245, 185, 44, 1)',
-                            borderWidth: 2
-                        }]
-                    };
+            var newData = {
+                labels: ["1/01", "2/01", "3/01", "4/01", "5/01"],
+                datasets: [{
+                    label: "Vendite del gioiello - " + selectedGioiello,
+                    data: [15, 10, 18, 22, 12],
+                    backgroundColor: 'rgba(245, 185, 44, 0.2)',
+                    borderColor: 'rgba(245, 185, 44, 1)',
+                    borderWidth: 2
+                }]
+            };
 
-                   
-                    myChart.update();
-                })
-                .catch(error => console.error('Errore durante il recupero dei dati', error));
+            myChart.data = newData;
+            myChart.update();
         }
-
-       
-        fetch('/api/get_gioielli_options')
-            .then(response => response.json())
-            .then(options => {
-               
-                var gioielliSelect = document.getElementById('gioielli');
-                options.forEach(option => {
-                    var optionElement = document.createElement('option');
-                    optionElement.value = option;
-                    optionElement.textContent = option;
-                    gioielliSelect.appendChild(optionElement);
-                });
-            })
-            .catch(error => console.error('Errore durante il recupero delle opzioni dei gioielli', error));
     </script>
 </body>
 
