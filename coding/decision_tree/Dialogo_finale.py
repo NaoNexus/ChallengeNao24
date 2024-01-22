@@ -118,7 +118,7 @@ def estrai_eta(frase):
     lista_numeri = len(matches)
     trovato = False
     for i in range(lista_numeri):
-        if int(matches[i])<100:
+        if int(matches[i]) < 100:
             trovato = True
             return int(matches[i])
     if not trovato:
@@ -131,7 +131,7 @@ def estrai_budget(frase):
     lista_numeri = len(matches)
     trovato = False
     for i in range(lista_numeri):
-        if int(matches[i])>=100:
+        if int(matches[i]) >= 100:
             trovato = True
             return int(matches[i])
     if not trovato:
@@ -463,17 +463,17 @@ if __name__ == "__main__":
         if risposta_finale.lower() in ["no grazie","no","sono a posto cosi"]:
             break
         else:
-            risposta1= str(input())
+            risposta1 = str(input())
 
-            gender  = str(analizza_genere(risposta1))
-            age     = int(estrai_eta(risposta1))
-            budget  = int(estrai_budget(risposta1))
-            category= str(estrai_categoria(risposta1))
+            gender   = str(analizza_genere(risposta1))
+            age      = int(estrai_eta(risposta1))
+            budget   = int(estrai_budget(risposta1))
+            category = str(estrai_categoria(risposta1))
 
             profilo_utente = [gender, age, budget, category]
             
             posizioni_vuote = [pos for pos, val in enumerate(profilo_utente) if val == "" or val == 0]
-            while len(posizioni_vuote)!=0:
+            while len(posizioni_vuote) != 0:
                 for i in range(len(posizioni_vuote)):
                     if posizioni_vuote[i] == 0:
                         print("posso chiederti per chi è il gioiello")
@@ -504,7 +504,7 @@ if __name__ == "__main__":
             #print(type(id_gioiello_consigliato))
 
             if type(id_gioiello_consigliato) == list:
-                if len(id_gioiello_consigliato)>1:
+                if len(id_gioiello_consigliato) > 1:
                     for i in range(len(id_gioiello_consigliato)):
                         product_name = get_product_name_by_id(product_info, id_gioiello_consigliato[i])
                         print("Ti consiglio di prendere: ", product_name)
@@ -523,12 +523,11 @@ if __name__ == "__main__":
                     descrizione = Descrizione_prodotto(funzione_prodotto)
                     print(descrizione)
             else:
-                print("Non ho trovato un prodotto che rispecchia le tue richieste")
+                print("Non ho trovato un prodotto che rispecchia le tue richieste\n")
 
-            print()
             print("Posso consigliarti qualche altro prodotto?")
-            risposta_finale=input()
+            risposta_finale = input()
             #print("Per chi è questo gioiello?")
             
-    print("grazie per aver acquistato da swarovski")
+    print("grazie per aver acquistato da Swarovski")
   
