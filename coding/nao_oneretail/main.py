@@ -139,7 +139,7 @@ def nao_generate_frames(face_detection):
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
     except Exception as e:
-        print "Error: %s" % e
+        print ("Error: %s") % e
     finally:
         video_proxy.unsubscribe(video_client)                               # Unsubscribe from the video feed and release resources
 
