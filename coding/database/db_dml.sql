@@ -72,7 +72,7 @@ INSERT INTO OrdineOggetto (id_ordine, id_oggetto) VALUES
 	(2, 22);
 
 INSERT INTO Emozione (id_cliente, id_oggetto, eta, sesso, indice_gradimento	) VALUES
-	(1, 	18, 	'M', 	8);
+	(1, 	18, 22, 	'M', 	100);
 	
 INSERT INTO Abbinamento (id_oggetto1, id_oggetto2) VALUES
 	(1, 2),
