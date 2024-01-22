@@ -23,7 +23,7 @@ def recommend_jewelry(customer_info, product_info):
                 
                 if budget >= 155:
                     gioielli_consigliati = [6]
-                    return gioielli_consigliati
+                    return sgioielli_consigliati
                 
                 else:
                     return 'Nessun articolo trovato'
@@ -279,3 +279,5 @@ if __name__ == "__main__":
     
     gioiello_consigliato = recommend_jewelry(customer_info, product_info)
     print("Ti consigliamo: ", gioiello_consigliato)
+    
+    
