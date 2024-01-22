@@ -78,7 +78,7 @@
     <div class="product-menu">
         <label for="gioielli">Prodotto:</label>
         <select id="gioielli" name="gioielli" onchange="updateChart()">
-            <!-- Opzioni dei gioielli saranno generate dinamicamente dal server -->
+           
         </select>
     </div>
     <h1>Swarovski</h1>
@@ -86,7 +86,7 @@
     <canvas id="myChart"></canvas>
 
     <script>
-        // Inizializza il grafico con dati vuoti
+        
         var emptyData = {
             labels: [],
             datasets: [{
@@ -112,16 +112,15 @@
             }
         });
 
-        // Funzione per aggiornare il grafico con i dati del gioiello selezionato
+        
         function updateChart() {
             var selectedGioiello = document.getElementById('gioielli').value;
 
-            // Richiedi i dati al server Python tramite una chiamata AJAX (es. usando fetch)
-            // Sostituisci il seguente codice con la tua implementazione effettiva
+            
             fetch('/api/get_gioiello_data?gioiello=' + selectedGioiello)
                 .then(response => response.json())
                 .then(data => {
-                    // Aggiorna il grafico con i dati ricevuti
+                   
                     myChart.data = {
                         labels: data.labels,
                         datasets: [{
@@ -133,17 +132,17 @@
                         }]
                     };
 
-                    // Aggiorna il grafico
+                   
                     myChart.update();
                 })
                 .catch(error => console.error('Errore durante il recupero dei dati', error));
         }
 
-        // Chiamata iniziale per popolare le opzioni dei gioielli
+       
         fetch('/api/get_gioielli_options')
             .then(response => response.json())
             .then(options => {
-                // Aggiungi le opzioni al menu a tendina
+               
                 var gioielliSelect = document.getElementById('gioielli');
                 options.forEach(option => {
                     var optionElement = document.createElement('option');
