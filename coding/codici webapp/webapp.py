@@ -1,12 +1,4 @@
-import psycopg2
 from flask import Flask, request, redirect, url_for, render_template
-
-myHost = "localhost"
-myDB = "postgres"
-myUser = "postgres"
-myPasswd = "postgres"
-
-conn = psycopg2.connect(host=myHost, database=myDB, user=myUser, password=myPasswd)
 
 app = Flask(__name__)
 
@@ -31,28 +23,29 @@ def index():
         pagina = request.form.get("pagina")
         if pagina:
             return redirect(url_for(pagina))
-    
+
     return render_template("index.html")
 
-# Pagina Pagina1
-@app.route("/pagina1")
+# Pagine per i singoli pulsanti
+@app.route("/prodotto", methods=['GET', 'POST'])
+def prodotto():
+    return render_template("prodotto.html")
+
+@app.route("/pagina1", methods=['GET', 'POST'])
 def pagina1():
-    return render_template("prodotto.html")
+    return render_template("pagina1.html")
 
-# Pagina Pagina2
-@app.route("/pagina2")
+@app.route("/pagina2", methods=['GET', 'POST'])
 def pagina2():
-    return render_template("prodotto.html")
-
+    return render_template("pagina2.html")
 
 @app.route("/vendite")
 def vendite():
-    return render_template("bilancio.html")
+    return render_template("vendite.html")
 
 @app.route("/utenti")
 def utenti():
     return render_template("utenti.html")
-
 
 @app.route("/carrelli")
 def carrelli():
@@ -66,7 +59,13 @@ def scaffale():
 def magazzino():
     return render_template("magazzino.html")
 
-# ... Altre pagine ...
+@app.route("/api")
+def api():
+    return render_template("api.html")
+
+@app.route("/services")
+def services():
+    return render_template("services.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
