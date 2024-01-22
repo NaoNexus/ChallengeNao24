@@ -56,12 +56,13 @@ INSERT INTO Oggetto (titolo, 					categoria, 		prezzo, 	descrizione, 											
 	('swarovski swan stud earrings', 			'earrings', 	'129.00', 	'Swan. Black. Rose gold-tone plated', 									5, 				1, 				10, 		35, 				'F'),
 	('vittore ring', 							'ring', 		'75', 		'Round cut. White, Gold-tone finish', 									3, 				0, 				10, 		84, 				'F');
 
+INSERT INTO Oggetto (foto) VALUES 
+	('../static/img/angelic_bracelet_1.png'),
+	('../static/img/angelic_necklace_1.png');
+	
 INSERT INTO CarrelloOggetto (id_carrello, id_oggetto) VALUES
 	(1, 1),
 	(1, 4);
-
-INSERT INTO Oggetto (foto) VALUES 
-	(E'\\x' || encode(lo_import('C:\Users\kiade\OneDrive\Desktop\nao24-github\ChallengeNao24\coding\dataset\angelic_bracelet\angelic_bracelet_1.png'), 'hex'));
 
 INSERT INTO Ordine (id_cliente, prezzo_totale, data_acquisto, ora_acquisto, modalita_pagamento) VALUES
 	(7, 	'125.00', 	'2024-01-15', 	'12:30:00', 	'bonifico'),

@@ -22,7 +22,7 @@ CREATE TABLE Oggetto (
 	categoria			VARCHAR,
 	prezzo				DECIMAL,
 	descrizione			VARCHAR,
-	foto				BYTEA,
+	foto				VARCHAR,
 	qta_magazzino		INT,
 	qta_scaffale		INT,
 	sconto				INT,
