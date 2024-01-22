@@ -93,8 +93,8 @@ def Vittore_ring():
 #fine descrizione dei prodotto
 
 def analizza_genere(frase):
-    parole_chiave_maschili = ["fratello", "papà", "padre", "nonno", "amico", "fratello,", "papà,", "padre,", "nonno,", "amico,", "fratello.", "papà.", "padre.", "nonno.", "amico.", "maschio", "maschio,", "maschio."]
-    parole_chiave_femminili = ["sorella", "mamma", "madre", "nonna", "amica", "sorella,", "mamma,", "madre,", "nonna,", "amica,", "sorella.", "mamma.", "madre.", "nonna.", "amica.", "femmina", "femmina,", "femmina.", "donna", "donna,", "donna."]
+    parole_chiave_maschili = ["fratello", "papà", "padre", "nonno", "amico", "fratello,", "papà,", "padre,", "nonno,", "amico,", "fratello.", "papà.", "padre.", "nonno.", "amico."]
+    parole_chiave_femminili = ["sorella", "mamma", "madre", "nonna", "amica", "sorella,", "mamma,", "madre,", "nonna,", "amica,", "sorella.", "mamma.", "madre.", "nonna.", "amica."]
 
     # Tokenizza la frase in parole
     parole = frase.lower().split()  # Converto tutto in minuscolo per rendere la ricerca case-insensitive
@@ -118,7 +118,7 @@ def estrai_eta(frase):
     lista_numeri = len(matches)
     trovato = False
     for i in range(lista_numeri):
-        if int(matches[i]) < 100:
+        if int(matches[i])<100:
             trovato = True
             return int(matches[i])
     if not trovato:
@@ -131,7 +131,7 @@ def estrai_budget(frase):
     lista_numeri = len(matches)
     trovato = False
     for i in range(lista_numeri):
-        if int(matches[i]) >= 100:
+        if int(matches[i])>=100:
             trovato = True
             return int(matches[i])
     if not trovato:
@@ -455,6 +455,7 @@ if __name__ == "__main__":
         {'id': 29, 'name': 'swarovski swan stud earrings', 'category': 'earrings', 'storage': 5}, 
         {'id': 30, 'name': 'vittore ring', 'category': 'ring', 'storage': 5}
     ]
+
     #dialogo
     print("Buon pomeriggio, come posso aiutarti?")
 
@@ -463,17 +464,17 @@ if __name__ == "__main__":
         if risposta_finale.lower() in ["no grazie","no","sono a posto cosi"]:
             break
         else:
-            risposta1 = str(input())
+            risposta1= str(input())
 
-            gender   = str(analizza_genere(risposta1))
-            age      = int(estrai_eta(risposta1))
-            budget   = int(estrai_budget(risposta1))
-            category = str(estrai_categoria(risposta1))
+            gender  = str(analizza_genere(risposta1))
+            age     = int(estrai_eta(risposta1))
+            budget  = int(estrai_budget(risposta1))
+            category= str(estrai_categoria(risposta1))
 
             profilo_utente = [gender, age, budget, category]
             
             posizioni_vuote = [pos for pos, val in enumerate(profilo_utente) if val == "" or val == 0]
-            while len(posizioni_vuote) != 0:
+            while len(posizioni_vuote)!=0:
                 for i in range(len(posizioni_vuote)):
                     if posizioni_vuote[i] == 0:
                         print("posso chiederti per chi è il gioiello")
@@ -503,31 +504,44 @@ if __name__ == "__main__":
             #print(id_gioiello_consigliato)
             #print(type(id_gioiello_consigliato))
 
-            if type(id_gioiello_consigliato) == list:
-                if len(id_gioiello_consigliato) > 1:
-                    for i in range(len(id_gioiello_consigliato)):
+        if type(id_gioiello_consigliato) == list:
+            if len(id_gioiello_consigliato)>1:
+        
+                product_name = get_product_name_by_id(product_info, id_gioiello_consigliato[0])
+                print("Ti consiglio di prendere: ", product_name)
+                funzione_prodotto = product_name.capitalize().replace(' ','_')
+                descrizione = Descrizione_prodotto(funzione_prodotto)
+                print(descrizione)
+
+                print("Posso consigliarti qualche abbinamento")                             #chiedi a jack per gli abbinamenti
+                tmp = input()
+                if tmp in ["no grazie","no","sono a posto cosi"]:
+                    break
+                else:
+                    for i in range(1,len(id_gioiello_consigliato)):
                         product_name = get_product_name_by_id(product_info, id_gioiello_consigliato[i])
                         print("Ti consiglio di prendere: ", product_name)
-                    
+                            
                         #descrizione del prodotto consigliato
                         funzione_prodotto = product_name.capitalize().replace(' ','_')
                         descrizione = Descrizione_prodotto(funzione_prodotto)
                         print(descrizione)
-                        print("oppure")
-                else:
-                    product_name = get_product_name_by_id(product_info, id_gioiello_consigliato[0])
-                    print("Ti consiglio di prendere: ", product_name)
-                        
-                    #descrizione del prodotto consigliato
-                    funzione_prodotto = product_name.capitalize().replace(' ','_')
-                    descrizione = Descrizione_prodotto(funzione_prodotto)
-                    print(descrizione)
             else:
-                print("Non ho trovato un prodotto che rispecchia le tue richieste\n")
+                product_name = get_product_name_by_id(product_info, id_gioiello_consigliato[0])
+                print("Ti consiglio di prendere: ", product_name)
+                                
+                #descrizione del prodotto consigliato
+                funzione_prodotto = product_name.capitalize().replace(' ','_')
+                descrizione = Descrizione_prodotto(funzione_prodotto)
+                print(descrizione)
+        else:
+            print("Non ho trovato un prodotto che rispecchia le tue richieste")
 
-            print("Posso consigliarti qualche altro prodotto?")
-            risposta_finale = input()
-            #print("Per chi è questo gioiello?")
+
+        print()
+        print("Posso consigliarti qualche altro prodotto?")
+        risposta_finale=input()
+        #print("Per chi è questo gioiello?")
             
-    print("grazie per aver acquistato da Swarovski")
-  
+    print("grazie per aver acquistato da swarovski")
+
