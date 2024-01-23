@@ -47,14 +47,14 @@ INSERT INTO Oggetto (titolo, 					categoria, 		prezzo, 	descrizione,												
 	('mesmera necklace', 						'necklace', 	'950.00', 	'Statement, Mixed cuts, White, Rhodium plated', 						('../static/img/mesmera_necklace_1.png'),									4, 				1, 				10, 		38,					'F'),
 	('millenia cocktail ring', 					'ring', 		'135.00', 	'Pear cut, Pavé, White, Rhodium plated', 								('../static/img/millenia_cocktail_ring_1.png'),								8, 				0, 				10, 		47, 				'F'),
 	('millenia necklace', 						'necklace', 	'700.00', 	'Square cut, Gray, Ruthenium plated', 									('../static/img/millenia_necklace_1.png'),									8, 				0, 				10, 		37, 				'M'),
-	('stella drop earrings', 					'earrings',		'135.00', 	'Kite cut, Star, White, Rose gold-tone plated',							('../static/img/screenshot_stella_drop_earrings_1.png'),					7, 				1, 				10, 		63, 				'F'),
-	('stella necklace', 						'necklace', 	'175.00', 	'Star, White, Rose gold-tone plated', 									('../static/img/screenshot_stella_necklace_1.png'),							4, 				1, 				10, 		23, 				'F'),
-	('stella stud earrings', 					'earrings', 	'125.00', 	'Round cut, Star, White, Rose gold-tone plated', 						('../static/img/screenshot_stella_stud_earrings_1.png'),					7, 				0, 				10, 		62, 				'F'),
-	('stone hoop earrings', 					'earrings', 	'125.00', 	'Pavé, Large, White. Rhodium plated', 									('../static/img/screenshot_stone_hoop_earrings_1.png'),						4, 				1, 				10, 		37, 				'F'),
-	('swarovski iconic swan earring jackets', 	'earrings', 	'125.00', 	'Swan. Black. Rose gold-tone plated', 									('../static/img/screenshot_swarovski_iconic_swan_earring_jackets_1.png'),	9, 				0, 				10, 		39, 				'F'),
-	('swarovski iconic swan pendant', 			'necklace', 	'115.00', 	'Swan. Black. Rose gold-tone plated', 									('../static/img/screenshot_swarovski_iconic_swan_pendant_1.png'),			6, 				0, 				10, 		79, 				'F'),
-	('swarovski swan stud earrings', 			'earrings', 	'129.00', 	'Swan. Black. Rose gold-tone plated', 									('../static/img/screenshot_swarovski_swan_stud_earrings_1.png'),			5, 				1, 				10, 		35, 				'F'),
-	('vittore ring', 							'ring', 		'75', 		'Round cut. White, Gold-tone finish', 									('../static/img/screenshot_vittore_ring_1.png'),							3, 				0, 				10, 		84, 				'F');
+	('stella drop earrings', 					'earrings',		'135.00', 	'Kite cut, Star, White, Rose gold-tone plated',							('../static/img/stella_drop_earrings_1.png'),								7, 				1, 				10, 		63, 				'F'),
+	('stella necklace', 						'necklace', 	'175.00', 	'Star, White, Rose gold-tone plated', 									('../static/img/stella_necklace_1.png'),									4, 				1, 				10, 		23, 				'F'),
+	('stella stud earrings', 					'earrings', 	'125.00', 	'Round cut, Star, White, Rose gold-tone plated', 						('../static/img/stella_stud_earrings_1.png'),								7, 				0, 				10, 		62, 				'F'),
+	('stone hoop earrings', 					'earrings', 	'125.00', 	'Pavé, Large, White. Rhodium plated', 									('../static/img/stone_hoop_earrings_1.png'),								4, 				1, 				10, 		37, 				'F'),
+	('swarovski iconic swan earring jackets', 	'earrings', 	'125.00', 	'Swan. Black. Rose gold-tone plated', 									('../static/img/swarovski_iconic_swan_earring_jackets_1.png'),				9, 				0, 				10, 		39, 				'F'),
+	('swarovski iconic swan pendant', 			'necklace', 	'115.00', 	'Swan. Black. Rose gold-tone plated', 									('../static/img/swarovski_iconic_swan_pendant_1.png'),						6, 				0, 				10, 		79, 				'F'),
+	('swarovski swan stud earrings', 			'earrings', 	'129.00', 	'Swan. Black. Rose gold-tone plated', 									('../static/img/swarovski_swan_stud_earrings_1.png'),						5, 				1, 				10, 		35, 				'F'),
+	('vittore ring', 							'ring', 		'75.00', 	'Round cut. White, Gold-tone finish', 									('../static/img/vittore_ring_1.png'),										3, 				0, 				10, 		84, 				'F');
 	
 INSERT INTO CarrelloOggetto (id_carrello, id_oggetto) VALUES
 	(1, 1),
