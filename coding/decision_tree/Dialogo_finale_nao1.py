@@ -157,8 +157,11 @@ def estrai_categoria(frase):
         return "earrings"
     else:
         return ""
+        
+        
+def abbinamento
 
-#decizion tree
+#decision tree
 def recommend_jewelry(customer_info, product_info):
     
     gender = customer_info[0]
