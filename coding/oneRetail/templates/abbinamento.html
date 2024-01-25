@@ -37,15 +37,18 @@
             border-radius: 15px;
             padding: 30px;
             margin-bottom: 0px;
+            display: flex;
+            align-items: flex-start; /* Allinea il contenuto in alto */
         }
 
         table {
-            width: 100%;
+            width: 70%;
             border-collapse: collapse;
-            margin-top: 20px;
+            margin-right: 20px;
         }
 
-        th, td {
+        th,
+        td {
             border: 2px solid #0A0A0A;
             padding: 15px;
             text-align: center;
@@ -57,33 +60,21 @@
             color: #FFF8F8;
         }
 
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
+        .product-list {
+            width: 30%;
         }
 
-        form input[type="text"] {
-            width: 300px;
+        .product-list select {
+            width: 100%;
             padding: 10px;
             margin-bottom: 10px;
-            border-radius: 5px;
-            border: none;
         }
 
-        form input[type="submit"] {
-            width: 150px;
-            padding: 15px;
-            background-color: #FF7370;
-            color: #FFF8F8;
+        .product-list button {
+            padding: 10px;
+            background-color: #FFC87D;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
-        }
-
-        form input[type="submit"]:hover {
-            background-color: #F57267;
         }
     </style>
 </head>
@@ -98,19 +89,31 @@
                 <th>Id Titolo</th>
                 <th>Id Titolo</th>
             </tr>
-            <!-- Le righe verranno aggiunte dinamicamente dal form -->
         </table>
 
-        <form id="dataForm">
-            <input type="text" id="idTitolo1" name="idTitolo1" placeholder="Inserisci Id Titolo" required>
-            <input type="text" id="idTitolo2" name="idTitolo2" placeholder="Inserisci Id Titolo" required>
-            <input type="submit" value="Aggiungi Riga">
-        </form>
+        <div class="product-list">
+            <select id="productSelect1">
+                <option value="Prodotto 1">Prodotto 1</option>
+                <option value="Prodotto 2">Prodotto 2</option>
+                <option value="Prodotto 3">Prodotto 3</option>
+                <!-- Aggiungi altri prodotti secondo necessità -->
+            </select>
+            <select id="productSelect2">
+                <option value="Prodotto 1">Prodotto 1</option>
+                <option value="Prodotto 2">Prodotto 2</option>
+                <option value="Prodotto 3">Prodotto 3</option>
+                <!-- Aggiungi altri prodotti secondo necessità -->
+            </select>
+            <button onclick="addProducts()">Aggiungi</button>
+        </div>
     </div>
 
     <script>
-        document.getElementById('dataForm').addEventListener('submit', function (event) {
-            event.preventDefault();
+        function addProducts() {
+            var productSelect1 = document.getElementById('productSelect1');
+            var productSelect2 = document.getElementById('productSelect2');
+            var selectedProduct1 = productSelect1.options[productSelect1.selectedIndex].value;
+            var selectedProduct2 = productSelect2.options[productSelect2.selectedIndex].value;
 
             var table = document.getElementById('dataTable');
             var newRow = table.insertRow(table.rows.length);
@@ -118,15 +121,9 @@
             var cell1 = newRow.insertCell(0);
             var cell2 = newRow.insertCell(1);
 
-            var idTitolo1 = document.getElementById('idTitolo1').value;
-            var idTitolo2 = document.getElementById('idTitolo2').value;
-
-            cell1.innerHTML = idTitolo1;
-            cell2.innerHTML = idTitolo2;
-
-            // Pulisci i campi del form dopo l'aggiunta della riga
-            document.getElementById('dataForm').reset();
-        });
+            cell1.innerHTML = selectedProduct1;
+            cell2.innerHTML = selectedProduct2;
+        }
     </script>
 </body>
 
