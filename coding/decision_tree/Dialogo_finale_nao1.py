@@ -19,7 +19,7 @@ def Dancing_swan_necklace():
 def Dextera_bracelet():
     return "Dettagli intricati incontrano una costruzione audace in questo moderno braccialetto della famiglia Dextera. Impreziosito dalla nostra celebre tecnica del pave e, presenta file di cristalli grigio-argento incastonati in una montatura placcata rutenio nero. Indossalo da solo o impilato, a seconda del tuo umore e del tuo outfit. Il bracciale appartiene alla collezione Dextera con cristalli e placcatura in rutenio"
 
-def Dextera_hoop_earings():
+def Dextera_hoop_earrings():
     return "Un tocco moderno ai classici orecchini a cerchio, questo paio genderless conferira dinamismo a qualsiasi outfit. Il design scultoreo celebra l iconica tecnica pave e di Swarovski con cristalli luccicanti laminati incastonati in una montatura placcata rodio. Questo duo  e adatto di giorno ma perfetto anche per la sera. Parte della famiglia Dextera, questi orecchini sono ideati dalla Direttrice Creativa Giovanna Engelbert per la Collection II. Questi orecchini fanno parte della collezione Dextera con cristalli e placcatura in rodio"
 
 def Dextera_necklace():
@@ -93,8 +93,8 @@ def Vittore_ring():
 #fine descrizione dei prodotto
 
 def analizza_genere(frase):
-    parole_chiave_maschili = ["fratello", "papà", "padre", "nonno", "amico", "fratello,", "papà,", "padre,", "nonno,", "amico,", "fratello.", "papà.", "padre.", "nonno.", "amico."]
-    parole_chiave_femminili = ["sorella", "mamma", "madre", "nonna", "amica", "sorella,", "mamma,", "madre,", "nonna,", "amica,", "sorella.", "mamma.", "madre.", "nonna.", "amica."]
+    parole_chiave_maschili = ["fratello", "papà", "padre", "nonno", "amico","figlio", "fratello,", "papà,", "padre,", "nonno,", "amico,","figlio,", "fratello.", "papà.", "padre.", "nonno.", "amico.","figlio."]
+    parole_chiave_femminili = ["sorella", "mamma", "madre", "nonna", "amica", "sorella,", "mamma,", "madre,", "nonna,", "amica,", "sorella.", "mamma.", "madre.", "nonna.", "amica.","figlia","figlia,","figlia."]
 
     # Tokenizza la frase in parole
     parole = frase.lower().split()  # Converto tutto in minuscolo per rendere la ricerca case-insensitive
@@ -134,6 +134,7 @@ def estrai_budget(frase):
         if int(matches[i])>=100:
             trovato = True
             return int(matches[i])
+    
     if not trovato:
         return 0
 
@@ -153,7 +154,7 @@ def estrai_categoria(frase):
     elif any(parola in parole for parola in parole_chiave_bracelet):
         return "bracelet"
     elif any(parola in parole for parola in parole_chiave_earring):
-        return "earring"
+        return "earrings"
     else:
         return ""
 
@@ -407,7 +408,7 @@ def recommend_jewelry(customer_info, product_info):
                 else:
                     gioielli_consigliati = [19,21]
                     return  gioielli_consigliati
-            
+                
             else:
                 return 0
 
@@ -422,17 +423,33 @@ def Descrizione_prodotto(funzione_prodotto):
         result = globals()[funzione_prodotto]()
         return result
 
+def estrai_si_no(frase):
+    parole_chiave_no = ["no", "non mi piace", "non mi ispira", "no grazie"]
+    parole_chiave_si = ["si", "mi piace", "si grazie"]      
+    frase = frase.lower() 
+
+    if any(parola in frase for parola in parole_chiave_no):
+        return "no"
+    elif any(parola in frase for parola in parole_chiave_si):
+        return "si"
+    else:
+        return ""
+
+def funzione_abbinamento(): #product_name or id
+    return 'angelic bracelet'
+
+
 if __name__ == "__main__":
     product_info = [
-        {'id': 1, 'name': 'angelic bracelet', 'category': 'bracelet', 'storage': 8}, 
-        {'id': 2, 'name': 'angelic necklace', 'category': 'necklace', 'storage': 5}, 
-        {'id': 3, 'name': 'constella cocktail ring', 'category': 'ring', 'storage': 5}, 
-        {'id': 4, 'name': 'dad bracelet', 'category': 'bracelet', 'storage': 5},
-        {'id': 5, 'name': 'dancing swan necklace', 'category': 'necklace', 'storage': 5}, 
-        {'id': 6, 'name': 'dextera bracelet', 'category': 'bracelet', 'storage': 5},  
-        {'id': 7, 'name': 'dextera hoop earrings', 'category': 'earrings', 'storage': 5}, 
-        {'id': 8, 'name': 'dextera necklace', 'category': 'necklace', 'storage': 5}, 
-        {'id': 9, 'name': 'florere necklace', 'category': 'necklace', 'storage': 5}, 
+        {'id': 1,  'name': 'angelic bracelet', 'category': 'bracelet', 'storage': 8}, 
+        {'id': 2,  'name': 'angelic necklace', 'category': 'necklace', 'storage': 5}, 
+        {'id': 3,  'name': 'constella cocktail ring', 'category': 'ring', 'storage': 5}, 
+        {'id': 4,  'name': 'dad bracelet', 'category': 'bracelet', 'storage': 5},
+        {'id': 5,  'name': 'dancing swan necklace', 'category': 'necklace', 'storage': 5}, 
+        {'id': 6,  'name': 'dextera bracelet', 'category': 'bracelet', 'storage': 5},  
+        {'id': 7,  'name': 'dextera hoop earrings', 'category': 'earrings', 'storage': 5}, 
+        {'id': 8,  'name': 'dextera necklace', 'category': 'necklace', 'storage': 5}, 
+        {'id': 9,  'name': 'florere necklace', 'category': 'necklace', 'storage': 5}, 
         {'id': 10, 'name': 'florere stud earrings', 'category': 'earrings', 'storage': 5}, 
         {'id': 11, 'name': 'gema bracelet', 'category': 'bracelet', 'storage': 5}, 
         {'id': 12, 'name': 'gema drop earrings', 'category': 'earrings', 'storage': 5}, 
@@ -458,6 +475,7 @@ if __name__ == "__main__":
 
     #dialogo
     print("Buon pomeriggio, come posso aiutarti?")
+    carrello = []
 
     risposta_finale=""
     while True:
@@ -501,47 +519,118 @@ if __name__ == "__main__":
 
             id_gioiello_consigliato = recommend_jewelry(profilo_utente, product_info)
 
-            #print(id_gioiello_consigliato)
+            print(id_gioiello_consigliato)
             #print(type(id_gioiello_consigliato))
-
-        if type(id_gioiello_consigliato) == list:
-            if len(id_gioiello_consigliato)>1:
         
+        if type(id_gioiello_consigliato) == list:
+            if len(id_gioiello_consigliato) > 0:
+                i=0
+                while i < len(id_gioiello_consigliato):
+                    product_name = get_product_name_by_id(product_info, id_gioiello_consigliato[i])
+
+                    print("Ti consiglio di prendere:", product_name)
+                    funzione_prodotto = product_name.capitalize().replace(' ', '_')
+                    descrizione = Descrizione_prodotto(funzione_prodotto)
+                    print(descrizione)
+
+                    print("Che ne pensi?")
+                    risposta_a1 = str(input())
+                    risposta_a1_= estrai_si_no(risposta_a1.lower())
+                
+                    if risposta_a1_ =="si":
+                        carrello.append(product_name)
+                        
+                        print("Posso consigliarti qualche abbinamento")                         
+                        risposta_= input()
+                        risposta__= estrai_si_no(risposta_.lower())
+                        
+                        if risposta__ == "si":
+                            abbinamento = funzione_abbinamento()
+
+                            print("Ti consiglio di prendere:", abbinamento,"con", product_name)
+                            funzione_prodotto2 = abbinamento .capitalize().replace(' ', '_')
+                            descrizione2 = Descrizione_prodotto(funzione_prodotto2)
+                            print(descrizione2)
+                            
+                            print("ti piace?")
+                            risposta3=input()
+                            risposta3_ = estrai_si_no(risposta3.lower())
+                            
+                            if risposta3 =="si":
+                                carrello.append(abbinamento)
+                                print(carrello)        
+                                print("grazie per aver acquistato da swarovski")
+                                break
+                            else:
+                                print("non so che prodotto consigliarti")
+                                print(carrello)
+                                print("grazie per aver acquistato da swarovski")
+                                break
+                                
+                        else:
+                            print(carrello)        
+                            print("grazie per aver acquistato da swarovski")
+                            break
+                            
+                    i+=1
+                    if i==len(id_gioiello_consigliato):
+                        print("Non ho trovato un prodotto che rispecchia le tue richieste")
+                        print(carrello)        
+                        print("grazie per aver acquistato da swarovski")
+                        break
+                          
+            else:
+                '''
                 product_name = get_product_name_by_id(product_info, id_gioiello_consigliato[0])
-                print("Ti consiglio di prendere: ", product_name)
-                funzione_prodotto = product_name.capitalize().replace(' ','_')
+
+                print("Ti consiglio di prendere:", product_name)
+                funzione_prodotto = product_name.capitalize().replace(' ', '_')
                 descrizione = Descrizione_prodotto(funzione_prodotto)
                 print(descrizione)
 
-                print("Posso consigliarti qualche abbinamento")                             #chiedi a jack per gli abbinamenti
-                tmp = input()
-                if tmp in ["no grazie","no","sono a posto cosi"]:
-                    break
-                else:
-                    for i in range(1,len(id_gioiello_consigliato)):
-                        product_name = get_product_name_by_id(product_info, id_gioiello_consigliato[i])
-                        print("Ti consiglio di prendere: ", product_name)
+                print("Che ne pensi?")
+                risposta_a1 = str(input())
+                risposta_a1_= estrai_si_no(risposta_a1.lower())
+
+                if risposta_a1_== "si":
+                    carrello.append(product_name)
+                        
+                    print("Posso consigliarti qualche abbinamento")                         
+                    risposta_= input()
+                    risposta__=estrai_si_no(risposta_.lower())
+
+                    if risposta_ == "si":
+                        abbinamento = funzione_abbinamento()
+
+                        print("Ti consiglio di prendere:", abbinamento,"con", product_name)
+                        funzione_prodotto2 = abbinamento .capitalize().replace(' ', '_')
+                        descrizione2 = Descrizione_prodotto(funzione_prodotto2)
+                        print(descrizione2)
                             
-                        #descrizione del prodotto consigliato
-                        funzione_prodotto = product_name.capitalize().replace(' ','_')
-                        descrizione = Descrizione_prodotto(funzione_prodotto)
-                        print(descrizione)
-            else:
-                product_name = get_product_name_by_id(product_info, id_gioiello_consigliato[0])
-                print("Ti consiglio di prendere: ", product_name)
-                                
-                #descrizione del prodotto consigliato
-                funzione_prodotto = product_name.capitalize().replace(' ','_')
-                descrizione = Descrizione_prodotto(funzione_prodotto)
-                print(descrizione)
+                        print("ti piace?")
+                        risposta3=input()
+                        risposta3_=estrai_si_no(risposta3.lower())
+                        
+                        if risposta3_ == "si":
+                            carrello.append(abbinamento)
+                            #print(carrello)        
+                            #print("grazie per aver acquistato da swarovski")
+                            break
+                        else:
+                            print("non so che prodotto consigliarti")
+                            break
+                    else:
+                        #print(carrello)        
+                        #print("grazie per aver acquistato da swarovski")
+                        break
+                else:
+                    print("Non ho trovato un prodotto che rispecchia le tue richieste")
+                    break
+                '''
         else:
             print("Non ho trovato un prodotto che rispecchia le tue richieste")
-
-
-        print()
-        print("Posso consigliarti qualche altro prodotto?")
-        risposta_finale=input()
-        #print("Per chi è questo gioiello?")
-            
+            break
+    
+    print(carrello)        
     print("grazie per aver acquistato da swarovski")
 
