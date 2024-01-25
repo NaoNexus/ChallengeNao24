@@ -448,7 +448,7 @@ def funzione_abbinamento(): #product_name or id
 
 if __name__ == '__main__':
     product_info = [
-        {'id': 1,  'name': 'angelic bracelet', 'category': 'bracelet', 'storage': 8}, 
+        {'id': 1,  'name': 'angelic bracelet', 'category': 'bracelet', 'storage': 8,}, 
         {'id': 2,  'name': 'angelic necklace', 'category': 'necklace', 'storage': 5}, 
         {'id': 3,  'name': 'constella cocktail ring', 'category': 'ring', 'storage': 5}, 
         {'id': 4,  'name': 'dad bracelet', 'category': 'bracelet', 'storage': 5},
@@ -579,10 +579,10 @@ if __name__ == '__main__':
             print("Non ho trovato un prodotto che rispecchia le tue richieste")
             break
 
-        print("Vuoi acquistare acquistare unaltro prodotto?")
+        print("Vuoi acquistare acquistare un'altro prodotto?")
         user_input=str(input())
-        user_input_1=estrai_si_no(user_input)
-        if user_input_1=="no":
+        user_input_1 = estrai_si_no(user_input)
+        if user_input_1 == "no":
             break
         else:
             risposta1 = ""
