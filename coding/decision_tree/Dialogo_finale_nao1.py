@@ -1,4 +1,5 @@
 import re
+import random
 
 #descrizione prodotti
 def Angelic_bracelet():
@@ -144,6 +145,9 @@ def estrai_categoria(frase):
     parole_chiave_bracelet = ["bracciale","bracciali", "braccialetto", "braccialetti", "bracciale,","bracciali,", "braccialetto,", "braccialetti,", "bracciale.","bracciali.", "braccialetto.", "braccialetti."]               
     parole_chiave_earring = ["orecchino","orecchini", "orecchino,","orecchini,", "orecchino.","orecchini."]
 
+    category = ["necklace","ring","bracelet","earrings"]
+    parola_chiave=["uguale","indifferente"]
+    
     # Tokenizza la frase in parole
     parole = frase.lower().split()  # Converto tutto in minuscolo per rendere la ricerca case-insensitive
 
@@ -155,13 +159,13 @@ def estrai_categoria(frase):
         return "bracelet"
     elif any(parola in parole for parola in parole_chiave_earring):
         return "earrings"
+    elif any(parola in parole for parola in parola_chiave):
+        random_category = random.choice(category)
+        return random_category
     else:
         return ""
-        
-        
-def abbinamento
 
-#decision tree
+#decizion tree
 def recommend_jewelry(customer_info, product_info):
     
     gender = customer_info[0]
@@ -427,7 +431,7 @@ def Descrizione_prodotto(funzione_prodotto):
         return result
 
 def estrai_si_no(frase):
-    parole_chiave_no = ["no", "non mi piace", "non mi ispira", "no grazie"]
+    parole_chiave_no = ["no", "non mi piace", "non mi ispira", "no grazie","a posto cosi"] #chiedere se mettono le accentate
     parole_chiave_si = ["si", "mi piace", "si grazie"]      
     frase = frase.lower() 
 
@@ -442,7 +446,7 @@ def funzione_abbinamento(): #product_name or id
     return 'angelic bracelet'
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     product_info = [
         {'id': 1,  'name': 'angelic bracelet', 'category': 'bracelet', 'storage': 8}, 
         {'id': 2,  'name': 'angelic necklace', 'category': 'necklace', 'storage': 5}, 
@@ -477,163 +481,115 @@ if __name__ == "__main__":
     ]
 
     #dialogo
-    print("Buon pomeriggio, come posso aiutarti?")
+    
+    print("Buon pomeriggio")
     carrello = []
-
-    risposta_finale=""
     while True:
-        if risposta_finale.lower() in ["no grazie","no","sono a posto cosi"]:
-            break
-        else:
-            risposta1= str(input())
+        print("Hai bisogno di qualcosa")
+        risposta1= str(input())
 
-            gender  = str(analizza_genere(risposta1))
-            age     = int(estrai_eta(risposta1))
-            budget  = int(estrai_budget(risposta1))
-            category= str(estrai_categoria(risposta1))
+        gender  = str(analizza_genere(risposta1))
+        age     = int(estrai_eta(risposta1))
+        budget  = int(estrai_budget(risposta1))
+        category= str(estrai_categoria(risposta1))
 
-            profilo_utente = [gender, age, budget, category]
-            
-            posizioni_vuote = [pos for pos, val in enumerate(profilo_utente) if val == "" or val == 0]
-            while len(posizioni_vuote)!=0:
-                for i in range(len(posizioni_vuote)):
-                    if posizioni_vuote[i] == 0:
-                        print("posso chiederti per chi è il gioiello")
-                        risposta2 = str(input())
-                        gender = str(analizza_genere(risposta2))
-                        
-                    elif posizioni_vuote[i] == 1:
-                        print("E quanti ha?")
-                        risposta3 = str(input())
-                        age = int(estrai_eta(risposta3))
-                        
-                    elif posizioni_vuote[i] == 2:
-                        print("Avresti un budget specifico in mente per questo regalo?")
-                        risposta4 = str(input())
-                        budget = int(estrai_budget(risposta4))
-                        
-                    elif posizioni_vuote[i] == 3:
-                        print("E che genere di gioielli preferisce? Collane, bracciali, orecchini o anelli?")
-                        risposta5 = str(input())
-                        category = str(estrai_categoria(risposta5))
-                
-                profilo_utente = [gender, age, budget, category]
-                posizioni_vuote = [pos for pos, val in enumerate(profilo_utente) if val == "" or val == 0]
+        profilo_utente = [gender, age, budget, category]
+                    
+        posizioni_vuote = [pos for pos, val in enumerate(profilo_utente) if val == "" or val == 0]
 
-            id_gioiello_consigliato = recommend_jewelry(profilo_utente, product_info)
-
-            print(id_gioiello_consigliato)
-            #print(type(id_gioiello_consigliato))
-        
-        if type(id_gioiello_consigliato) == list:
-            if len(id_gioiello_consigliato) > 0:
-                i=0
-                while i < len(id_gioiello_consigliato):
-                    product_name = get_product_name_by_id(product_info, id_gioiello_consigliato[i])
-
-                    print("Ti consiglio di prendere:", product_name)
-                    funzione_prodotto = product_name.capitalize().replace(' ', '_')
-                    descrizione = Descrizione_prodotto(funzione_prodotto)
-                    print(descrizione)
-
-                    print("Che ne pensi?")
-                    risposta_a1 = str(input())
-                    risposta_a1_= estrai_si_no(risposta_a1.lower())
-                
-                    if risposta_a1_ =="si":
-                        carrello.append(product_name)
-                        
-                        print("Posso consigliarti qualche abbinamento")                         
-                        risposta_= input()
-                        risposta__= estrai_si_no(risposta_.lower())
-                        
-                        if risposta__ == "si":
-                            abbinamento = funzione_abbinamento()
-
-                            print("Ti consiglio di prendere:", abbinamento,"con", product_name)
-                            funzione_prodotto2 = abbinamento .capitalize().replace(' ', '_')
-                            descrizione2 = Descrizione_prodotto(funzione_prodotto2)
-                            print(descrizione2)
-                            
-                            print("ti piace?")
-                            risposta3=input()
-                            risposta3_ = estrai_si_no(risposta3.lower())
-                            
-                            if risposta3 =="si":
-                                carrello.append(abbinamento)
-                                print(carrello)        
-                                print("grazie per aver acquistato da swarovski")
-                                break
-                            else:
-                                print("non so che prodotto consigliarti")
-                                print(carrello)
-                                print("grazie per aver acquistato da swarovski")
-                                break
+        while len(posizioni_vuote)!=0:
+            for i in range(len(posizioni_vuote)):
+                if posizioni_vuote[i] == 0:
+                    print("posso chiederti per chi è il gioiello?")
+                    risposta2 = str(input())
+                    gender = str(analizza_genere(risposta2))
                                 
-                        else:
-                            print(carrello)        
-                            print("grazie per aver acquistato da swarovski")
-                            break
-                            
-                    i+=1
-                    if i==len(id_gioiello_consigliato):
-                        print("Non ho trovato un prodotto che rispecchia le tue richieste")
-                        print(carrello)        
-                        print("grazie per aver acquistato da swarovski")
-                        break
-                          
-            else:
-                '''
-                product_name = get_product_name_by_id(product_info, id_gioiello_consigliato[0])
+                elif posizioni_vuote[i] == 1:
+                    print("E quanti ha?")
+                    risposta3 = str(input())
+                    age = int(estrai_eta(risposta3))
+                                
+                elif posizioni_vuote[i] == 2:
+                    print("Quanto vorresti spendere?")
+                    risposta4 = str(input())
+                    budget = int(estrai_budget(risposta4))
+                                
+                elif posizioni_vuote[i] == 3:
+                    print("E che genere di gioielli preferisce? Collane, bracciali, orecchini o anelli?")
+                    risposta5 = str(input())
+                    category = str(estrai_categoria(risposta5))
+                        
+            profilo_utente = [gender, age, budget, category]
+            posizioni_vuote = [pos for pos, val in enumerate(profilo_utente) if val == "" or val == 0]
+
+        id_gioiello_consigliato = recommend_jewelry(profilo_utente, product_info)
+
+        print(id_gioiello_consigliato)
+
+        if type(id_gioiello_consigliato) == list:
+            i=0
+            while i < len(id_gioiello_consigliato):
+                product_name = get_product_name_by_id(product_info, id_gioiello_consigliato[i])
 
                 print("Ti consiglio di prendere:", product_name)
                 funzione_prodotto = product_name.capitalize().replace(' ', '_')
                 descrizione = Descrizione_prodotto(funzione_prodotto)
                 print(descrizione)
 
-                print("Che ne pensi?")
+                print("Cosa ne pensi?")
                 risposta_a1 = str(input())
                 risposta_a1_= estrai_si_no(risposta_a1.lower())
-
-                if risposta_a1_== "si":
+                            
+                if risposta_a1_ =="si":
                     carrello.append(product_name)
-                        
+                                    
                     print("Posso consigliarti qualche abbinamento")                         
                     risposta_= input()
-                    risposta__=estrai_si_no(risposta_.lower())
-
-                    if risposta_ == "si":
+                    risposta__= estrai_si_no(risposta_.lower())
+                                    
+                    if risposta__ == "si":
                         abbinamento = funzione_abbinamento()
 
                         print("Ti consiglio di prendere:", abbinamento,"con", product_name)
                         funzione_prodotto2 = abbinamento .capitalize().replace(' ', '_')
                         descrizione2 = Descrizione_prodotto(funzione_prodotto2)
                         print(descrizione2)
-                            
+                                    
                         print("ti piace?")
                         risposta3=input()
-                        risposta3_=estrai_si_no(risposta3.lower())
-                        
-                        if risposta3_ == "si":
+                        risposta3_ = estrai_si_no(risposta3.lower())
+                                        
+                        if risposta3 =="si":
                             carrello.append(abbinamento)
-                            #print(carrello)        
-                            #print("grazie per aver acquistato da swarovski")
                             break
                         else:
                             print("non so che prodotto consigliarti")
                             break
+                                            
                     else:
-                        #print(carrello)        
-                        #print("grazie per aver acquistato da swarovski")
                         break
-                else:
+
+                i+=1
+                if i==len(id_gioiello_consigliato):
                     print("Non ho trovato un prodotto che rispecchia le tue richieste")
+                    user_input=False
                     break
-                '''
+                    
         else:
             print("Non ho trovato un prodotto che rispecchia le tue richieste")
             break
-    
+
+        print("Vuoi acquistare acquistare unaltro prodotto?")
+        user_input=str(input())
+        user_input_1=estrai_si_no(user_input)
+        if user_input_1=="no":
+            break
+        else:
+            risposta1 = ""
+            
     print(carrello)        
     print("grazie per aver acquistato da swarovski")
+    
+
+
 
