@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abbinamenti</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-z9b+7oG5fWeAOeVG2HEoaFPiFjsxxhMbDSFOx6YLLEpAt52D74BlN/C2BZJKPXyBBo5HcAc2rZSXtITc8Unw/A==" crossorigin="anonymous" />
+    <style>
+        body {
+            background-color: #A8D0F0;
+            color: #0A0A0A;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #0A0A0A;
+            font-size: 150px;
+            text-align: center;
+            margin: 10px 0;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .logo-link {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 70px;
+            height: 70px;
+        }
+
+        .text-border {
+            border: 10px solid #0A0A0A;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 0px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 2px solid #0A0A0A;
+            padding: 15px;
+            text-align: center;
+            background-color: #FFF; /* Sfondo bianco per tutte le righe */
+        }
+
+        th {
+            background-color: #FF7370;
+            color: #FFF8F8;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        form input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        form input[type="submit"] {
+            width: 150px;
+            padding: 15px;
+            background-color: #FF7370;
+            color: #FFF8F8;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #F57267;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="/index" class="logo-link"><img src="{{url_for('static', filename='logo.png')}}" alt="Logo" width="100%" height="100%"></a>
+    <h1>Swarovski</h1>
+
+    <div class="text-border">
+        <table id="dataTable">
+            <tr>
+                <th>Id Titolo</th>
+                <th>Id Titolo</th>
+            </tr>
+            <!-- Le righe verranno aggiunte dinamicamente dal form -->
+        </table>
+
+        <form id="dataForm">
+            <input type="text" id="idTitolo1" name="idTitolo1" placeholder="Inserisci Id Titolo" required>
+            <input type="text" id="idTitolo2" name="idTitolo2" placeholder="Inserisci Id Titolo" required>
+            <input type="submit" value="Aggiungi Riga">
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('dataForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            var table = document.getElementById('dataTable');
+            var newRow = table.insertRow(table.rows.length);
+
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+
+            var idTitolo1 = document.getElementById('idTitolo1').value;
+            var idTitolo2 = document.getElementById('idTitolo2').value;
+
+            cell1.innerHTML = idTitolo1;
+            cell2.innerHTML = idTitolo2;
+
+            // Pulisci i campi del form dopo l'aggiunta della riga
+            document.getElementById('dataForm').reset();
+        });
+    </script>
+</body>
+
+</html>
