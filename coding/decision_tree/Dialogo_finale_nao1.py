@@ -327,7 +327,10 @@ def recommend_jewelry(customer_info, product_info):
                 else:
                     gioielli_consigliati = [27,29,12]
                     return  gioielli_consigliati
-                
+            
+            elif category == 'watch':
+            
+            
             else:
                 return 0
                     
