@@ -208,18 +208,22 @@ def nao_dialog():
 
     local_dialog.append(dialogo)
 
-
+login = -1
 
 
 # PAGINE WEB
 @app.route("/", methods=['GET', 'POST'])
 def login():
+        
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
+        
+    
 
         # Verifica credenziali utente
         if username == "admin" and password == "admin":
+            login = 1
             return redirect(url_for('index'))
         else:
             return render_template('login.html', error=True)
@@ -228,77 +232,88 @@ def login():
 
 @app.route("/index", methods=['GET', 'POST'])
 def index():
+ if login == 1:
     if request.method == "POST":
         pagina = request.form.get("pagina")
         if pagina:
-            return redirect(url_for(pagina))
+                return redirect(url_for(pagina))
     return render_template("index.html")
+ else: 
+    return render_template("login.html")
 
 
 @app.route('/analisi_morphcast', methods=['GET'])
 def analisi_morphcast():
-    return render_template('analisi_morphcast.html')
-
+    if login == 1:
+        return render_template('analisi_morphcast.html')
+    else:
+        return render_template("login.html")
 
 @app.route('/webcam', methods=['GET'])
 def webcam():
-    return Response(nao_generate_frames(face_detection), mimetype='multipart/x-mixed-replace; boundary=frame')
-
+    if login == 1:
+        return Response(nao_generate_frames(face_detection), mimetype='multipart/x-mixed-replace; boundary=frame')
+    else:
+        return render_template("login.html")
 
 @app.route("/prodotto", methods=['GET', 'POST'])
 def prodotto():
-    return render_template("prodotto.html")
-
-
-@app.route("/pagina1", methods=['GET', 'POST'])
-def pagina1():
-    return render_template("pagina1.html")
-
-
-@app.route("/pagina2", methods=['GET', 'POST'])
-def pagina2():
-    return render_template("pagina2.html")
-
+    if login == 1:
+        return render_template("prodotto.html")
+    else:
+        return render_template("login.html")
 
 @app.route("/vendite")
 def vendite():
-    return render_template("vendite.html")
-
+    if login == 1:
+        return render_template("vendite.html")
+    else:
+        return render_template("login.html")
 
 @app.route("/utenti")
 def utenti():
-    cliente = db_helper.get_cliente()
-    count_cliente = db_helper.get_count_cliente()
-    return render_template("utenti.html", cliente=cliente, count_cliente=count_cliente)
-
+    if login == 1:
+        cliente = db_helper.get_cliente()
+        count_cliente = db_helper.get_count_cliente()
+        return render_template("utenti.html", cliente=cliente, count_cliente=count_cliente)
+    else:
+        return render_template("login.html")
 
 @app.route("/carrelli")
 def carrelli():
-    return render_template("carrelli.html")
-
+    if login == 1:
+        return render_template("carrelli.html")
+    else:
+        return render_template("login.html")
 
 @app.route("/scaffale")
 def scaffale():
-    return render_template("scaffale.html")
-
+    if login == 1:
+        return render_template("scaffale.html")
+    else:
+        return render_template("login.html")
 
 @app.route("/magazzino")
 def magazzino():
-    return render_template("magazzino.html")
-
+    if login == 1:
+        return render_template("magazzino.html")
+    else:
+        return render_template("login.html")
 
 
 
 # API
 @app.route('/api', methods=['GET'])
 def api():
-    return render_template('api.html')
+    if login == 1:
+        return render_template('api.html')
+    else:
+        return render_template("login.html")
 
 
 @app.route('/api/info', methods=['GET'])
 def api_info():
     return jsonify({'code': 200, 'status': 'online', 'elapsed time': utilities.getElapsedTime(startTime)}), 200
-
 
 @app.route('/api/audio_rec', methods=['GET'])
 def api_audio_rec():
@@ -339,7 +354,10 @@ def api_morphcast():
 # SERVICES
 @app.route('/services', methods=['GET'])
 def services():
-    return render_template('services.html')
+    if login == 1:
+        return render_template('services.html')
+    else:
+        return render_template("login.html")
 
 # Servizio START morphcast
 @app.route('/services/start_morphcast', methods=['GET'])
