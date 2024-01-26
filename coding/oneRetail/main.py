@@ -239,7 +239,7 @@ def index():
                 return redirect(url_for(pagina))
     return render_template("index.html")
  else: 
-    return render_template("login.html")
+    return redirect(url_for('login'))
 
 
 @app.route('/analisi_morphcast', methods=['GET'])
@@ -247,28 +247,28 @@ def analisi_morphcast():
     if login == 1:
         return render_template('analisi_morphcast.html')
     else:
-        return render_template("login.html")
+        return redirect(url_for('login'))
 
 @app.route('/webcam', methods=['GET'])
 def webcam():
     if login == 1:
         return Response(nao_generate_frames(face_detection), mimetype='multipart/x-mixed-replace; boundary=frame')
     else:
-        return render_template("login.html")
+        return redirect(url_for('login'))
 
 @app.route("/prodotto", methods=['GET', 'POST'])
 def prodotto():
     if login == 1:
         return render_template("prodotto.html")
     else:
-        return render_template("login.html")
+        return redirect(url_for('login'))
 
 @app.route("/vendite")
 def vendite():
     if login == 1:
         return render_template("vendite.html")
     else:
-        return render_template("login.html")
+        return redirect(url_for('login'))
 
 @app.route("/utenti")
 def utenti():
@@ -277,28 +277,28 @@ def utenti():
         count_cliente = db_helper.get_count_cliente()
         return render_template("utenti.html", cliente=cliente, count_cliente=count_cliente)
     else:
-        return render_template("login.html")
+        return redirect(url_for('login'))
 
 @app.route("/carrelli")
 def carrelli():
     if login == 1:
         return render_template("carrelli.html")
     else:
-        return render_template("login.html")
+        return redirect(url_for('login'))
 
 @app.route("/scaffale")
 def scaffale():
     if login == 1:
         return render_template("scaffale.html")
     else:
-        return render_template("login.html")
+        return redirect(url_for('login'))
 
 @app.route("/magazzino")
 def magazzino():
     if login == 1:
         return render_template("magazzino.html")
     else:
-        return render_template("login.html")
+        return redirect(url_for('login'))
 
 
 
@@ -308,7 +308,7 @@ def api():
     if login == 1:
         return render_template('api.html')
     else:
-        return render_template("login.html")
+        return redirect(url_for('login'))
 
 
 @app.route('/api/info', methods=['GET'])
@@ -357,7 +357,7 @@ def services():
     if login == 1:
         return render_template('services.html')
     else:
-        return render_template("login.html")
+        return redirect(url_for('login'))
 
 # Servizio START morphcast
 @app.route('/services/start_morphcast', methods=['GET'])
