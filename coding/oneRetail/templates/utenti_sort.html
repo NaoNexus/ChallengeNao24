@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utenti</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-z9b+7oG5fWeAOeVG2HEoaFPiFjsxxhMbDSFOx6YLLEpAt52D74BlN/C2BZJKPXyBBo5HcAc2rZSXtITc8Unw/A==" crossorigin="anonymous" />
+    <style>
+        body {
+            background-color: #A8D0F0;
+            color: #F5B92C;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #0A0A0A;
+            font-size: 150px;
+            text-align: center;
+            margin: 10px 0;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .home-link {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 20px;
+            color: #FFF8F8;
+            text-decoration: none;
+        }
+
+        .logo-link {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 70px;
+            height: 70px;
+        }
+
+        .text-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            margin-top: 0px;
+            margin-bottom: -20px; /* Aggiunto il margine inferiore negativo */
+        }
+
+        .text-border {
+            border: 10px solid #0A0A0A;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 0px;
+        }
+
+        .small-text {
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .large-text {
+            font-size: 200px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .sort-container {
+            margin-top: 70px;
+        }
+
+        .sort-label {
+            font-size: 20px;
+            color: #0A0A0A;
+            margin-right: 10px;
+        }
+
+        select {
+            padding: 10px;
+            font-size: 18px;
+            border: none;
+            background-color: #FFF8F8;
+            color: #0A0A0A;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: #FFF;
+            border-radius: 15px;
+            margin-bottom: 200px;
+            margin-top: -150px; /* Mantenuto il margine superiore per evitare sovrapposizioni */
+        }
+
+        th, td {
+            border: 3px solid #0A0A0A;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        th {
+            background-color: #FFF8F8;
+            font-size: 20px;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="file:///C:/Users/edoar/Desktop/nao_webapp/codici%20webapp/templates/index.html" class="logo-link">
+        <img src="C:\Users\edoar\Desktop\logo.png" alt="Logo" width="100%" height="100%">
+    </a>
+    <h1>Swarovski</h1>
+
+    <div class="text-container">
+        <div class="text-border">
+            <div class="small-text">Abbiamo raggiunto un totale di</div>
+            <div class="large-text">33</div>
+            <div class="small-text">utenti</div>
+        </div>
+
+        <div class="sort-container">
+            <label class="sort-label" for="sortSelect">Ordina per:</label>
+            <select id="sortSelect" onchange="sortTable()">
+                <option value="0">ID</option>
+                <option value="1">Username</option>
+                <option value="2">Nome</option>
+                <option value="3">Cognome</option>
+            </select>
+        </div>
+    </div>
+
+    <table id="userTable">
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Nome</th>
+            <th>Cognome</th>
+            <th>Password</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>user1</td>
+            <td>Nome5</td>
+            <td>Cognome1</td>
+            <td>Password1</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>user2</td>
+            <td>Nome2</td>
+            <td>Cognome7</td>
+            <td>Password2</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>user3</td>
+            <td>Nome3</td>
+            <td>Cognome3</td>
+            <td>Password3</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>user4</td>
+            <td>Nome4</td>
+            <td>Cognome4</td>
+            <td>Password4</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>user5</td>
+            <td>Nome5</td>
+            <td>Cognome5</td>
+            <td>Password5</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>user6</td>
+            <td>Nome6</td>
+            <td>Cognome6</td>
+            <td>Password6</td>
+        </tr>
+    </table>
+
+    <script>
+        function sortTable() {
+            var table, rows, switching, i, x, y, shouldSwitch;
+            table = document.getElementById("userTable");
+            switching = true;
+
+            var columnIndex = document.getElementById("sortSelect").value;
+
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+
+                    x = rows[i].getElementsByTagName("td")[columnIndex];
+                    y = rows[i + 1].getElementsByTagName("td")[columnIndex];
+
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
