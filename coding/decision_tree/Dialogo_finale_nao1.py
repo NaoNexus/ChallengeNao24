@@ -569,8 +569,8 @@ if __name__ == '__main__':
                     else:
                         break
 
-                i+=1
-                if i==len(id_gioiello_consigliato):
+                i += 1
+                if i == len(id_gioiello_consigliato):
                     print("Non ho trovato un prodotto che rispecchia le tue richieste")
                     user_input=False
                     break
