@@ -3,11 +3,14 @@ def recommend_jewelry(customer_info, product_info):
     gender = customer_info['gender']
     age = customer_info['age']
     budget = customer_info['budget']
-    
+    category = customer_info['category']
+
+    '''
     name = primo_dizionario[list(primo_dizionario.keys())[1]]
     category = primo_dizionario[list(primo_dizionario.keys())[2]]
     storage = primo_dizionario[list(primo_dizionario.keys())[3]]
-
+    '''
+    
     # -- male
     if gender == 'male':
 
@@ -19,22 +22,27 @@ def recommend_jewelry(customer_info, product_info):
             if category == 'bracelet':
                 
                 if budget >= 155:
-                    return 6
+                    gioielli_consigliati = [6]
+                    return sgioielli_consigliati
                 
                 else:
                     return 'Nessun articolo trovato'
             
             elif category == 'necklace':
+
+                #tengo cmq due return distinti e non una lista pk i prezzi sono motlo diversi
                 
                 if budget < 175:
                     return 'Nessun articolo trovato'
                 
                 elif budget >= 175 and budget < 700:
-                    return  8
+                    gioielli_consigliati = [8]
+                    return  gioielli_consigliati
                 
                 else:
-                    # -- METTI MAGAZZINO per decidere tra 8 e 22
-                    return  22 and  8
+                    #indice? magazzino?
+                    gioielli_consigliati = [8, 22]
+                    return  gioielli_consigliati
     
             else:
                 return 'Nessun articolo trovato'
@@ -46,12 +54,9 @@ def recommend_jewelry(customer_info, product_info):
                 if budget < 145:
                     return 'Nessun articolo trovato'
                 
-                elif budget < 155:
-                    return  4
-                
-                else:
-                    # -- MAGAZZINO
-                    return  6 and  4
+                else: #(budget >= 145:)
+                    gioielli_consigliati = [4, 6]
+                    return gioielli_consigliati
 
             elif category == 'necklace':
                 
@@ -59,11 +64,13 @@ def recommend_jewelry(customer_info, product_info):
                     return 'Nessun articolo trovato'
                 
                 elif budget < 700:
-                    return  8
+                    gioielli_consigliati = [8]
+                    return  gioielli_consigliati
                 
-                else: # --if budget >= 700:
-                    # -- MAGAZZINO
-                    return  8 and  22
+                else: #(budget >= 700):
+                    #indice? magazzino?
+                    gioielli_consigliati = [8, 22]
+                    return gioielli_consigliati
 
             else:
                 return 'Nessun articolo trovato'
@@ -76,7 +83,8 @@ def recommend_jewelry(customer_info, product_info):
             if category == 'bracelet':
         
                 if budget >= 155:
-                    return  1
+                    gioielli_consigliati = [1]
+                    return gioielli_consigliati
                 
                 else:
                     return 'Nessun articolo trovato'
@@ -224,25 +232,52 @@ def recommend_jewelry(customer_info, product_info):
                 
 if __name__ == "__main__":
 
-    customer_info = {'gender': 'male', 'age': 16, 'budget': 300}
+    #ho aggiunto la categoria (che forse va aggiunta nel dataset in cliente??) pk è lui che deve specificare cosa vuole insieme al budget
+    customer_info = {'gender': 'male', 'age': 16, 'budget': 300, 'category': 'necklace'}
     product_info = [
-        {'id': 6, 'name': 'dextera necklace', 'category': 'necklace', 'storage': 5}, # -- 1 man
-        {'id': 4, 'name': 'dad_bracelet', 'category': 'bracelet', 'storage': 3}, # -- 2 man
-        {'id': 8, 'name': 'dextera_necklace', 'category': 'necklace', 'storage': 2},  # -- 3 man
-        {'id': 8, 'name': 'millenia_necklace', 'category': 'necklace', 'storage': 5},  # -- 4 man
-        {'id': 1, 'name': 'angelic_bracelet', 'category': 'bracelet', 'storage': 8}, # -- female bracelet
-        {'id': 2, 'name': 'angelic_necklace', 'category': 'necklace', 'storage': 2}, # -- female necklace
-        {'id': 3, 'name': 'constella_cocktail_ring', 'category': 'ring', 'storage': 4}, # -- female ring
-        {'id': 29, 'name': 'swarovski swan stud earrings', 'category': 'earrings', 'storage': 8}, # -- female earrings
+        {'id': 1, 'name': 'angelic bracelet', 'category': 'bracelet', 'storage': 8}, 
+        {'id': 2, 'name': 'angelic necklace', 'category': 'necklace', 'storage': 5}, 
+        {'id': 3, 'name': 'constella cocktail ring', 'category': 'ring', 'storage': 5}, 
+        {'id': 4, 'name': 'dad bracelet', 'category': 'bracelet', 'storage': 5},
+        {'id': 5, 'name': 'dancing swan necklace', 'category': 'necklace', 'storage': 5}, 
+        {'id': 6, 'name': 'dextera bracelet', 'category': 'bracelet', 'storage': 5},  
+        {'id': 7, 'name': 'dextera hoop earrings', 'category': 'earrings', 'storage': 5}, 
+        {'id': 8, 'name': 'dextera necklace', 'category': 'necklace', 'storage': 5}, 
+        {'id': 9, 'name': 'florere necklace', 'category': 'necklace', 'storage': 5}, 
+        {'id': 10, 'name': 'florere stud earrings', 'category': 'earrings', 'storage': 5}, 
+        {'id': 11, 'name': 'gema bracelet', 'category': 'bracelet', 'storage': 5}, 
+        {'id': 12, 'name': 'gema drop earrings', 'category': 'earrings', 'storage': 5}, 
+        {'id': 13, 'name': 'gema necklace', 'category': 'necklace', 'storage': 5}, 
+        {'id': 14, 'name': 'matrix tennis necklace', 'category': 'necklace', 'storage': 5}, 
+        {'id': 15, 'name': 'matrix drop earrings', 'category': 'earrings', 'storage': 5}, 
+        {'id': 16, 'name': 'matrix ring', 'category': 'ring', 'storage': 5}, 
+        {'id': 17, 'name': 'matrix stud earrings', 'category': 'earrings', 'storage': 5}, 
+        {'id': 18, 'name': 'mesmera bracelet', 'category': 'bracelet', 'storage': 5}, 
+        {'id': 19, 'name': 'mesmera cocktail ring', 'category': 'ring', 'storage': 5}, 
+        {'id': 20, 'name': 'mesmera necklace', 'category': 'necklace', 'storage': 5}, 
+        {'id': 21, 'name': 'millenia cocktail ring', 'category': 'ring', 'storage': 5}, 
+        {'id': 22, 'name': 'millenia necklace', 'category': 'necklace', 'storage': 5}, 
+        {'id': 23, 'name': 'stella drop earrings', 'category': 'earrings', 'storage': 5}, 
+        {'id': 24, 'name': 'stella necklace', 'category': 'necklace', 'storage': 5}, 
+        {'id': 25, 'name': 'stella stud earrings', 'category': 'earrings', 'storage': 5}, 
+        {'id': 26, 'name': 'stone hoop earrings', 'category': 'earrings', 'storage': 5},
+        {'id': 27, 'name': 'swarovski iconic swan earring jackets', 'category': 'earrings', 'storage': 5}, 
+        {'id': 28, 'name': 'swarovski iconic swan pendant', 'category': 'necklace', 'storage': 5}, 
+        {'id': 29, 'name': 'swarovski swan stud earrings', 'category': 'earrings', 'storage': 5}, 
+        {'id': 30, 'name': 'vittore ring', 'category': 'ring', 'storage': 5}
     ]
 
+    '''
     # Accesso al primo dizionario
     primo_dizionario = product_info[0]
+    secondo_dizionario = product_info[1]
 
-    # Accesso al primo valore del primo dizionario
+    # Accesso al primo e al secondo valore del primo dizionario
     primo_valore = primo_dizionario[next(iter(primo_dizionario))]
     secondo_valore = primo_dizionario[list(primo_dizionario.keys())[1]]
-
+    '''
+    
     gioiello_consigliato = recommend_jewelry(customer_info, product_info)
     print("Ti consigliamo: ", gioiello_consigliato)
+    
     

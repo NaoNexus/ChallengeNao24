@@ -6,7 +6,7 @@ server:
 
 database:
   host: "localhost"
-  name: "naochallenge24"
+  name: "naochallenge2024"
   user: "postgres"
   password: "postgres"
 

@@ -13,7 +13,7 @@ CREATE TABLE Carrello (
 	id_cliente	INT,
 	
 	PRIMARY KEY(id),
-	FOREIGN KEY(id_cliente) REFERENCES Cliente(id)
+	FOREIGN KEY(id_cliente) REFERENCES Cliente(id) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 CREATE TABLE Oggetto (
@@ -22,7 +22,7 @@ CREATE TABLE Oggetto (
 	categoria			VARCHAR,
 	prezzo				DECIMAL,
 	descrizione			VARCHAR,
-	foto				BYTEA,
+	foto				VARCHAR,
 	qta_magazzino		INT,
 	qta_scaffale		INT,
 	sconto				INT,
@@ -38,8 +38,8 @@ CREATE TABLE CarrelloOggetto (
 	id_oggetto 	INT,
 	
 	PRIMARY KEY(id),
-	FOREIGN KEY(id_carrello) REFERENCES Carrello(id),
-	FOREIGN KEY(id_oggetto) REFERENCES Oggetto(id)
+	FOREIGN KEY(id_carrello) REFERENCES Carrello(id) ON UPDATE CASCADE ON DELETE SET NULL,
+	FOREIGN KEY(id_oggetto) REFERENCES Oggetto(id) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 CREATE TABLE Ordine (
@@ -51,7 +51,7 @@ CREATE TABLE Ordine (
 	modalita_pagamento	VARCHAR,
 	
 	PRIMARY KEY(id),
-	FOREIGN KEY(id_cliente) REFERENCES Cliente(id)
+	FOREIGN KEY(id_cliente) REFERENCES Cliente(id) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 CREATE TABLE OrdineOggetto (
@@ -60,8 +60,8 @@ CREATE TABLE OrdineOggetto (
 	id_oggetto	INT,
 	
 	PRIMARY KEY(id),
-	FOREIGN KEY(id_ordine) REFERENCES Ordine(id),
-	FOREIGN KEY(id_oggetto) REFERENCES Oggetto(id)
+	FOREIGN KEY(id_ordine) REFERENCES Ordine(id) ON UPDATE CASCADE ON DELETE SET NULL,
+	FOREIGN KEY(id_oggetto) REFERENCES Oggetto(id) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 CREATE TABLE Emozione (
@@ -73,8 +73,8 @@ CREATE TABLE Emozione (
 	indice_gradimento	INT,
 	
 	PRIMARY KEY(id),
-	FOREIGN KEY(id_cliente) REFERENCES Cliente(id),
-	FOREIGN KEY(id_oggetto) REFERENCES Oggetto(id)
+	FOREIGN KEY(id_cliente) REFERENCES Cliente(id) ON UPDATE CASCADE ON DELETE SET NULL,
+	FOREIGN KEY(id_oggetto) REFERENCES Oggetto(id) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 CREATE TABLE Abbinamento (
@@ -83,6 +83,6 @@ CREATE TABLE Abbinamento (
 	id_oggetto2	INT,
 	
 	PRIMARY KEY(id),
-	FOREIGN KEY(id_oggetto1) REFERENCES Oggetto(id),
-	FOREIGN KEY(id_oggetto2) REFERENCES Oggetto(id)
+	FOREIGN KEY(id_oggetto1) REFERENCES Oggetto(id) ON UPDATE CASCADE ON DELETE SET NULL,
+	FOREIGN KEY(id_oggetto2) REFERENCES Oggetto(id) ON UPDATE CASCADE ON DELETE SET NULL
 );

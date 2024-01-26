@@ -1,31 +1,61 @@
 import psycopg2
-import config_helper as config_helper
-from logging_helper import logger
 
+from logging_helper import logger
 from datetime import datetime
 
 
 class DB:
-    def __init__(self, config: config_helper.Config):
+
+    def __init__(self):
+        import config_helper
+        config_helper = config_helper.Config()
+
         try:
-            self.connection = psycopg2.connect(host=config.db_host, database=config.db_name,
-                                               user=config.db_user, password=config.db_password)
+            self.connection = psycopg2.connect(host=config_helper.db_host, 
+                                               database=config_helper.db_name,
+                                               user=config_helper.db_user, 
+                                               password=config_helper.db_password)
         except Exception as e:
             logger.error(str(e))
 
+
+    def get_cliente(self):
         with self.connection:
             with self.connection.cursor() as cur:
                 cur.execute('''
-                    CREATE TABLE IF NOT EXISTS Reports(
-                        id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-                        date TEXT NOT NULL UNIQUE,
-                        temperature NUMERIC(5, 2) NOT NULL,
-                        co2 NUMERIC(6),
-                        humidity NUMERIC(3),
-                        "nPeople" NUMERIC(4) DEFAULT 0,
-                        "internalLight" NUMERIC(5) DEFAULT 0,
-                        "externalLight" NUMERIC(5) DEFAULT 0);''')
+                            SELECT * 
+                            FROM Cliente;
+                            ''')
 
+                if (cur.rowcount == 0):
+                    return {}
+                data = []
+                for tupla in cur:
+                    data.append({
+                                'id'      : tupla[0], 
+                                'username': tupla[1], 
+                                'nome'    : tupla[2], 
+                                'cognome' : tupla[3], 
+                                'password': tupla[4]
+                            })
+                return data
+
+    def get_count_cliente(self):
+        with self.connection:
+            with self.connection.cursor() as cur:
+                cur.execute('''
+                            SELECT COUNT(*)
+                            FROM Cliente;
+                            ''')
+
+                if (cur.rowcount == 0):
+                    return {}
+                for tupla in cur:
+                    return {'count': tupla[0]}
+
+
+
+    """
     def save_report(self, report):
         with self.connection:
             with self.connection.cursor() as cur:
@@ -83,3 +113,4 @@ class DB:
                             (str(id),))
 
                 return id
+    """

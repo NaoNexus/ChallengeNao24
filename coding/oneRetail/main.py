@@ -5,7 +5,7 @@ python2 main.py
 
 # Modules
 from naoqi import ALProxy
-from flask import Flask, render_template, Response, jsonify, request
+from flask import Flask, render_template, Response, jsonify, request, redirect, url_for
 import cv2
 import time
 import numpy as np
@@ -17,10 +17,11 @@ import utilities
 import config_helper
 from logging_helper import logger
 from speech_recognition_helper import SpeechRecognition
-#from db_helper import DB
+import db_helper
 
 
 config_helper  = config_helper.Config()
+db_helper      = db_helper.DB()
 
 nao_ip         = config_helper.nao_ip
 nao_port       = config_helper.nao_port
@@ -211,9 +212,27 @@ def nao_dialog():
 
 
 # PAGINE WEB
-@app.route('/', methods=['GET'])
+@app.route("/", methods=['GET', 'POST'])
+def login():
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+
+        # Verifica credenziali utente
+        if username == "admin" and password == "admin":
+            return redirect(url_for('index'))
+        else:
+            return render_template('login.html', error=True)
+    return render_template('login.html', error=False)
+
+
+@app.route("/index", methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
+    if request.method == "POST":
+        pagina = request.form.get("pagina")
+        if pagina:
+            return redirect(url_for(pagina))
+    return render_template("index.html")
 
 
 @app.route('/analisi_morphcast', methods=['GET'])
@@ -224,6 +243,48 @@ def analisi_morphcast():
 @app.route('/webcam', methods=['GET'])
 def webcam():
     return Response(nao_generate_frames(face_detection), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+@app.route("/prodotto", methods=['GET', 'POST'])
+def prodotto():
+    return render_template("prodotto.html")
+
+
+@app.route("/pagina1", methods=['GET', 'POST'])
+def pagina1():
+    return render_template("pagina1.html")
+
+
+@app.route("/pagina2", methods=['GET', 'POST'])
+def pagina2():
+    return render_template("pagina2.html")
+
+
+@app.route("/vendite")
+def vendite():
+    return render_template("vendite.html")
+
+
+@app.route("/utenti")
+def utenti():
+    cliente = db_helper.get_cliente()
+    count_cliente = db_helper.get_count_cliente()
+    return render_template("utenti.html", cliente=cliente, count_cliente=count_cliente)
+
+
+@app.route("/carrelli")
+def carrelli():
+    return render_template("carrelli.html")
+
+
+@app.route("/scaffale")
+def scaffale():
+    return render_template("scaffale.html")
+
+
+@app.route("/magazzino")
+def magazzino():
+    return render_template("magazzino.html")
 
 
 
@@ -347,5 +408,5 @@ TO DO
 -dialogo con le funzioni Shenal
 -db_helper con query
 -decision tree Giacomo
--dashboard Edoardo
+-dashboard Edoardo: logout, login "sicuro" se cambio link
 '''
