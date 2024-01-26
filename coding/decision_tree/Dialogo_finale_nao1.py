@@ -197,21 +197,14 @@ def recommend_jewelry(customer_info, product_info):
                     return 0
             
             elif category == 'necklace':
-
-                #tengo cmq due return distinti e non una lista pk i prezzi sono motlo diversi
                 
                 if budget < 175:
                     return 0
                 
-                elif budget >= 175 and budget < 700:
+                else:
                     gioielli_consigliati = [8]
                     return  gioielli_consigliati
                 
-                else:
-                    #indice? magazzino?
-                    gioielli_consigliati = [8, 22]
-                    return  gioielli_consigliati
-    
             else:
                 return 0
 
@@ -222,7 +215,11 @@ def recommend_jewelry(customer_info, product_info):
                 if budget < 145:
                     return 0
                 
-                else: #(budget >= 145:)
+                elif 145 <= budget < 155:
+                    gioielli_consigliti = [4]
+                    return gioielli_consigliati
+                
+                else: #(budget >= 155:)
                     gioielli_consigliati = [4, 6]
                     return gioielli_consigliati
 
@@ -231,13 +228,8 @@ def recommend_jewelry(customer_info, product_info):
                 if budget < 175:
                     return 0
                 
-                elif budget < 700:
+                else:
                     gioielli_consigliati = [8]
-                    return  gioielli_consigliati
-                
-                else: #(budget >= 700):
-                    #indice? magazzino?
-                    gioielli_consigliati = [8, 22]
                     return gioielli_consigliati
 
             else:
