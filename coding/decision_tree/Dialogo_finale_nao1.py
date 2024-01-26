@@ -250,21 +250,24 @@ def recommend_jewelry(customer_info, product_info):
                     return 0
                     
             elif category == 'necklace':
-            
-                if budget < 155:
+                
+                if budget < 125:
                     return 0
                     
+                elif 125 <= budget < 155:
+                    gioielli_consigliati = [31]
+                    return gioielli_consigliati
+                    
                 elif 155 <= budget < 175:
-                    gioielli_consigliati = [5]
+                    gioielli_consigliati = [5,31]
                     return  gioielli_consigliati
                     
                 elif 175 <= budget < 230:
-                    # -- MAGAZZINO
-                    gioielli_consigliati = [5,24]
+                    gioielli_consigliati = [5,24,31]
                     return  gioielli_consigliati
                     
                 elif budget >= 230:
-                    gioielli_consigliati = [2,5,24]
+                    gioielli_consigliati = [2,5,24,31]
                     return  gioielli_consigliati
                     
             elif category == 'earrings':
@@ -329,8 +332,11 @@ def recommend_jewelry(customer_info, product_info):
                     return  gioielli_consigliati
             
             elif category == 'watch':
-            
-            
+                
+                if budget >= 300:
+                    gioielli_consigliati = [22]
+                    return gioielli_consigliati
+        
             else:
                 return 0
                     
