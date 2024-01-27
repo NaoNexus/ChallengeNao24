@@ -1,15 +1,15 @@
 INSERT INTO Cliente (username, nome, cognome, password) VALUES 
-	('alberto_rubini', 			'Alberto', 	'Rubini', 			'ar'),
-	('antonio_galati', 			'Antonio', 	'Galati', 			'ag'),
-	('arianna_antonelli', 		'Arianna', 	'Antonelli', 		'aa'),
-	('aurora_savoia', 			'Aurora', 	'Savoia', 			'as'),
-	('chiara_demarchi', 		'Chiara', 	'De Marchi', 		'cd'),
-	('davide_masini', 			'Davide', 	'Masini', 			'dm'),
-	('edoardo_polfranceschi', 	'Edoardo', 	'Polfranceschi', 	'ep'),
-	('giacomo_santi', 			'Giacomo', 	'Santi', 			'gs'),
-	('giovanni_bellorio', 		'Giovanni',	'Bellorio', 		'gb'),
-	('laura_mascalzoni', 		'Laura', 	'Mascalzoni', 		'lm'),
-	('shenal_fernando', 		'Shenal', 	'Fernando', 		'sf');
+	('alberto_rubini', 			'Alberto', 	'Rubini', 			'c582dec943ff7b743aa0691df291cea6'),
+	('antonio_galati', 			'Antonio', 	'Galati', 			'4e42f7dd43ecbfe104de58610557c5ba'),
+	('arianna_antonelli', 		'Arianna', 	'Antonelli', 		'4124bc0a9335c27f086f24ba207a4912'),
+	('aurora_savoia', 			'Aurora', 	'Savoia', 			'f970e2767d0cfe75876ea857f92e319b'),
+	('chiara_demarchi', 		'Chiara', 	'De Marchi', 		'6865aeb3a9ed28f9a79ec454b259e5d0'),
+	('davide_masini', 			'Davide', 	'Masini', 			'608e7dc116de7157306012b4f0be82ac'),
+	('edoardo_polfranceschi', 	'Edoardo', 	'Polfranceschi', 	'6aa1e040c8b4607538970731e4040ed6'),
+	('giacomo_santi', 			'Giacomo', 	'Santi', 			'1d8d5e912302108b5e88c3e77fcad378'),
+	('giovanni_bellorio', 		'Giovanni',	'Bellorio', 		'7885444af42e4b30c518c5be17c8850b'),
+	('laura_mascalzoni', 		'Laura', 	'Mascalzoni', 		'192292e35fbe73f6d2b8d96bd1b6697d'),
+	('shenal_fernando', 		'Shenal', 	'Fernando', 		'60d31eb37595dd44584be5ef363283e3');
 
 INSERT INTO Carrello (id_cliente) VALUES
 	(1),
