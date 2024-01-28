@@ -119,7 +119,7 @@ def estrai_eta(frase):
     lista_numeri = len(matches)
     trovato = False
     for i in range(lista_numeri):
-        if int(matches[i])<100:
+        if int(matches[i]) < 100:
             trovato = True
             return int(matches[i])
     if not trovato:
@@ -449,7 +449,7 @@ def funzione_abbinamento(): #product_name or id
 
 if __name__ == '__main__':
     product_info = [
-        {'id': 1,  'name': 'angelic bracelet', 'category': 'bracelet', 'storage': 8,}, 
+        {'id': 1,  'name': 'angelic bracelet', 'category': 'bracelet', 'storage': 8},
         {'id': 2,  'name': 'angelic necklace', 'category': 'necklace', 'storage': 5}, 
         {'id': 3,  'name': 'constella cocktail ring', 'category': 'ring', 'storage': 5}, 
         {'id': 4,  'name': 'dad bracelet', 'category': 'bracelet', 'storage': 5},
@@ -557,10 +557,10 @@ if __name__ == '__main__':
                         print(descrizione2)
                                     
                         print("ti piace?")
-                        risposta3=input()
+                        risposta3 = input()
                         risposta3_ = estrai_si_no(risposta3.lower())
                                         
-                        if risposta3 =="si":
+                        if risposta3 == "si":
                             carrello.append(abbinamento)
                             break
                         else:
@@ -573,7 +573,7 @@ if __name__ == '__main__':
                 i += 1
                 if i == len(id_gioiello_consigliato):
                     print("Non ho trovato un prodotto che rispecchia le tue richieste")
-                    user_input=False
+                    user_input = False
                     break
                     
         else:
@@ -581,7 +581,7 @@ if __name__ == '__main__':
             break
 
         print("Vuoi acquistare acquistare un'altro prodotto?")
-        user_input=str(input())
+        user_input = str(input())
         user_input_1 = estrai_si_no(user_input)
         if user_input_1 == "no":
             break

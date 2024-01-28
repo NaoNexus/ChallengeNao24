@@ -2,7 +2,7 @@ server:
   debug: false
   host: "0.0.0.0" # Current machine ip
   port: 5010
-  drivers: 'drivers/chromedriver_mac'
+  drivers: 'drivers/chromedriver_x64.exe'
 
 database:
   host: "localhost"
