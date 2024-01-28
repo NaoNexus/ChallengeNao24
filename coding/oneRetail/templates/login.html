@@ -1,16 +1,13 @@
 <!DOCTYPE html>
-<html lang="it">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrelli</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-z9b+7oG5fWeAOeVG2HEoaFPiFjsxxhMbDSFOx6YLLEpAt52D74BlN/C2BZJKPXyBBo5HcAc2rZSXtITc8Unw/A==" crossorigin="anonymous" />
+    <title>Accesso a SWAROVSKI</title>
     <style>
         body {
             background-color: #A8D0F0;
-            color: #F5B92C;
-            font-family: 'Arial', sans-serif;
+            color: #FFF8F8;
+            font-family: Arial, sans-serif;
             text-align: center;
             margin: 0;
             padding: 0;
@@ -20,81 +17,17 @@
             color: #0A0A0A;
             font-size: 150px;
             text-align: center;
-            margin: 10px 0;
+            margin: 20px 0;
             font-family: 'Times New Roman', serif;
         }
 
-        .home-link {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 20px;
-            color: #FFF8F8;
-            text-decoration: none;
+        img {
+            width: 50%;
+            max-width: 300px;
+            height: auto;
+            margin-top: 20px;
         }
 
-        .logo-link {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            width: 70px;
-            height: 70px;
-        }
-
-        .text-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            height: 50vh;
-            margin-top: 0px;
-            margin-bottom: 0px;
-        }
-
-        .text-border {
-            border: 10px solid #0A0A0A;
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 0px;
-        }
-
-        .small-text {
-            font-size: 18px;
-            font-weight: bold;
-            text-transform: uppercase;
-            color: #0A0A0A; /* Testo in nero */
-        }
-
-        .large-text {
-            font-size: 200px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        /* Stili per la tabella */
-        table {
-            width: 80%;
-            margin: 0 auto;
-            border-collapse: collapse;
-            background-color: #FFF;
-            border-radius: 15px;
-            margin-bottom: 200px;
-        }
-
-        th, td {
-            border: 3px solid #0A0A0A;
-            padding: 10px;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        th {
-            background-color: #FFF8F8;
-            font-size: 20px;
-            border-radius: 15px;
-        }
-
-        /* Stili per il form */
         form {
             display: flex;
             flex-direction: column;
@@ -120,37 +53,17 @@
             border-radius: 5px;
             cursor: pointer;
         }
-
-        input[type="submit"]:hover {
-            background-color: #F57267;
-        }
     </style>
 </head>
 
 <body>
-    <a href="/index" class="logo-link"><img src="{{url_for('static', filename='logo.png')}}" alt="Logo" width="100%" height="100%"></a>
     <h1>Swarovski</h1>
 
-    <!-- Form per inserire Nome, Cognome, Username, e Password -->
-    <div class="text-container">
-        <div class="text-border">
-            <form action="/process_form" method="post">
-                <label class="small-text" for="nome">Nome:</label>
-                <input type="text" id="nome" name="nome" required>
-
-                <label class="small-text" for="cognome">Cognome:</label>
-                <input type="text" id="cognome" name="cognome" required>
-
-                <label class="small-text" for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-
-                <label class="small-text" for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-
-                <input type="submit" value="Invia">
-            </form>
-        </div>
-    </div>
+    <form method="post" action="/">
+        <input type="text" name="username" id="username" placeholder="Username" required>
+        <input type="password" name="password" id="password" placeholder="Password" required>
+        <input type="submit" value="Accedi">
+    </form>
 </body>
 
 </html>
