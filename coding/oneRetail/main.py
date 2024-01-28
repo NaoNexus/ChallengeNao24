@@ -5,13 +5,16 @@ python2 main.py
 
 # Modules
 from naoqi import ALProxy
+from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
 from flask import Flask, render_template, Response, jsonify, request, redirect, url_for
+from hashlib import md5, sha256
 import cv2
 import time
 import numpy as np
 import random
 from selenium import webdriver
 import paramiko
+import os
 
 import utilities
 import config_helper
@@ -39,6 +42,22 @@ local_dialog   = []
 
 
 app  = Flask(__name__)
+
+# flask-login
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = '/'
+login_manager.session_protection = 'strong'
+
+
+def make_md5(s):
+    encoding = 'utf-8'
+    return md5(s.encode(encoding)).hexdigest()
+
+
+def make_sha256(s):
+        encoding = 'utf-8'
+        return sha256(s.encode(encoding)).hexdigest()
 
 
 def nao_speech_to_text(sec_sleep):
@@ -208,112 +227,210 @@ def nao_dialog():
 
     local_dialog.append(dialogo)
 
-login = -1
+
 
 
 # PAGINE WEB
+# Per impedire all'utente di tornare indietro dopo aver fatto il logout
+@app.after_request
+def after_request(response):
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    return response
+
+class User(UserMixin):
+    def __init__(self, id = None, username = ''):
+        self.id = id
+
+users = {'1': {'id': '1', 'username': 'admin', 'password': '21232f297a57a5a743894a0e4a801fc3'}, #md5(admin)
+         '2': {'id': '2', 'username': 'naonexus', 'password': '898d0dc0895b537fc1732a03cba7aff4'}} #md5(naonexus)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User(user_id)
+
 @app.route("/", methods=['GET', 'POST'])
 def login():
-        
     if request.method == "POST":
         username = request.form["username"]
-        password = request.form["password"]
-        
-    
+        password = make_md5(request.form["password"])
 
         # Verifica credenziali utente
-        if username == "admin" and password == "admin":
-            login = 1
-            return redirect(url_for('index'))
-        else:
-            return render_template('login.html', error=True)
-    return render_template('login.html', error=False)
+        user = next((u for u in users.values() if u['username'] == username and u['password'] == password), None)
+        if user:
+            user_obj = User(user['id'])
+            login_user(user_obj)
+            return redirect(url_for('dashboard'))
+
+    return render_template('login.html')
 
 
-@app.route("/index", methods=['GET', 'POST'])
-def index():
- if login == 1:
+@app.route("/logout", methods=['GET'])
+@login_required
+def logout():
+    logout_user()
+    return redirect('/')
+
+
+@app.route("/dashboard", methods=['GET', 'POST'])
+@login_required
+def dashboard():
     if request.method == "POST":
         pagina = request.form.get("pagina")
         if pagina:
-                return redirect(url_for(pagina))
-    return render_template("index.html")
- else: 
-    return redirect(url_for('login'))
+            return redirect(url_for(pagina))
+    oggetto = db_helper.get_oggetto()
+    return render_template("dashboard.html", oggetto=oggetto)
 
 
 @app.route('/analisi_morphcast', methods=['GET'])
 def analisi_morphcast():
-    if login == 1:
-        return render_template('analisi_morphcast.html')
-    else:
-        return redirect(url_for('login'))
+    return render_template('analisi_morphcast.html')
+
 
 @app.route('/webcam', methods=['GET'])
 def webcam():
-    if login == 1:
-        return Response(nao_generate_frames(face_detection), mimetype='multipart/x-mixed-replace; boundary=frame')
-    else:
-        return redirect(url_for('login'))
+    return Response(nao_generate_frames(face_detection), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@app.route("/prodotto", methods=['GET', 'POST'])
-def prodotto():
-    if login == 1:
-        return render_template("prodotto.html")
-    else:
-        return redirect(url_for('login'))
+
+@app.route("/prodotti", methods=['GET'])
+@login_required
+def prodotti():
+    ordine_oggetto = db_helper.get_ordine_oggetto()
+    return render_template("prodotti.html", ordine_oggetto=ordine_oggetto)
+
+
+@app.route("/abbinamenti", methods=['GET'])
+@login_required
+def abbinamenti():
+    oggetti = db_helper.get_oggetto()
+    abbinamenti = db_helper.get_abbinamento()
+    lista_oggetti = []
+    for abb in abbinamenti:
+        id_oggetto1 = db_helper.get_id_oggetto(abb['id_oggetto1'])
+        id_oggetto2 = db_helper.get_id_oggetto(abb['id_oggetto2'])
+        lista_oggetti.append({'id':abb['id'],'oggetto1':id_oggetto1,'oggetto2':id_oggetto2})
+    return render_template("abbinamenti.html", oggetti=oggetti, lista_oggetti=lista_oggetti)
+
+
+@app.route("/gestione_prodotto/<id>", methods=['GET'])
+@login_required
+def gestione_prodotto(id):
+    if (id != None and id != ''):
+        try:
+            prodotto = db_helper.get_id_oggetto(id)
+            return render_template('gestione_prodotto.html', prodotto=prodotto)
+        except Exception as e:
+            logger.error(str(e))
+            return redirect("/dashboard", code=500)
+    return redirect("/dashboard", code=500)
+
+
+@app.route("/nuovo_prodotto", methods=['GET'])
+@login_required
+def nuovo_prodotto():
+    prodotto = db_helper.get_id_oggetto(0)
+    return render_template('gestione_prodotto.html', prodotto=prodotto)
+
 
 @app.route("/vendite")
+@login_required
 def vendite():
-    if login == 1:
-        return render_template("vendite.html")
-    else:
-        return redirect(url_for('login'))
+    return render_template("vendite.html")
+
 
 @app.route("/utenti")
+@login_required
 def utenti():
-    if login == 1:
-        cliente = db_helper.get_cliente()
-        count_cliente = db_helper.get_count_cliente()
-        return render_template("utenti.html", cliente=cliente, count_cliente=count_cliente)
-    else:
-        return redirect(url_for('login'))
+    cliente = db_helper.get_cliente()
+    count_cliente = db_helper.get_count_cliente()
+    return render_template("utenti.html", cliente=cliente, count_cliente=count_cliente)
 
-@app.route("/carrelli")
+
+@app.route("/gestione_utente/<id>", methods=['GET'])
+@login_required
+def gestione_utente(id):
+    if (id != None and id != ''):
+        try:
+            cliente = db_helper.get_id_cliente(id)
+            return render_template('gestione_utente.html', cliente=cliente)
+        except Exception as e:
+            logger.error(str(e))
+            return redirect("/utenti", code=500)
+    return redirect("/utenti", code=500)
+
+
+@app.route("/nuovo_utente", methods=['GET'])
+@login_required
+def nuovo_utente():
+    cliente = db_helper.get_id_cliente(0)
+    return render_template('gestione_utente.html', cliente=cliente)
+        
+
+@app.route("/carrelli", methods=['GET'])
+@login_required
 def carrelli():
-    if login == 1:
-        return render_template("carrelli.html")
-    else:
-        return redirect(url_for('login'))
+    carrello = db_helper.get_carrello()
+    carrello_oggetto = db_helper.get_carrello_oggetto()
+    result = []
+    for item in carrello:
+        key   = 'carrello'
+        value = {'id':item['id']}
+        oggetto = []
+        for index in carrello_oggetto:
+            if(item['id'] == index['carrello']['id']):
+                oggetto.append(index['oggetto'])
 
-@app.route("/scaffale")
+            if(item['id_cliente'] == index['cliente']['id']):
+                if('cliente' not in value):
+                    value['cliente'] = index['cliente']
+
+        value['oggetto'] = oggetto
+        if (len(oggetto) > 0):
+            result.append({key:value})
+    carrello_oggetto = result
+    count_carrello = 0
+    for item in carrello_oggetto:
+        totale_carrello = 0
+        if(len(item['carrello']['oggetto']) != 0):
+            count_carrello += 1
+        for index in item['carrello']['oggetto']:
+            totale_carrello += index['prezzo']
+        item['carrello']['totale'] = totale_carrello
+    return render_template("carrelli.html", carrello_oggetto=carrello_oggetto, count_carrello=count_carrello)
+
+
+@app.route("/scaffale", methods=['GET'])
+@login_required
 def scaffale():
-    if login == 1:
-        return render_template("scaffale.html")
-    else:
-        return redirect(url_for('login'))
+    oggetto = db_helper.get_oggetto()
+    count_scaffale = 0
+    for item in oggetto:
+        count_scaffale += item['qta_scaffale']
+    return render_template("scaffale.html", oggetto=oggetto, count_scaffale=count_scaffale)
 
-@app.route("/magazzino")
+
+@app.route("/magazzino", methods=['GET'])
+@login_required
 def magazzino():
-    if login == 1:
-        return render_template("magazzino.html")
-    else:
-        return redirect(url_for('login'))
+    oggetto = db_helper.get_oggetto()
+    count_magazzino = 0
+    for item in oggetto:
+        count_magazzino += item['qta_magazzino']
+    return render_template("magazzino.html", oggetto=oggetto, count_magazzino=count_magazzino)
+
 
 
 
 # API
 @app.route('/api', methods=['GET'])
 def api():
-    if login == 1:
-        return render_template('api.html')
-    else:
-        return redirect(url_for('login'))
+    return render_template('api.html')
 
 
 @app.route('/api/info', methods=['GET'])
 def api_info():
     return jsonify({'code': 200, 'status': 'online', 'elapsed time': utilities.getElapsedTime(startTime)}), 200
+
 
 @app.route('/api/audio_rec', methods=['GET'])
 def api_audio_rec():
@@ -349,15 +466,172 @@ def api_morphcast():
             return jsonify({'code': 500, 'message': str(e)}), 500
 
 
+@app.route('/api/utente/<id>', methods=['POST', 'DELETE'])
+def api_utente(id):
+    if (id != None and id != ''):
+        if request.method == 'POST':
+            try:
+                username = request.form["username"]
+                nome     = request.form["nome"]
+                cognome  = request.form["cognome"]
+                password = make_md5(request.form["password"])
+                data     = db_helper.set_id_cliente(id,username,nome,cognome,password)
+                return redirect("/utenti")  #return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.set_id_cliente(id,username,nome,cognome,password)}), 200
+            except Exception as e:
+                logger.error(str(e))
+                return redirect("/utenti")  #return jsonify({'code': 500, 'message': str(e)}), 500
+        elif request.method == 'DELETE':
+            try:
+                return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.delete_cliente(id)}), 200
+            except Exception as e:
+                logger.error(str(e))
+                return jsonify({'code': 500, 'message': str(e)}), 500
+    else:
+        logger.error('No id argument passed')
+        return redirect("/utenti")          #return jsonify({'code': 500, 'message': 'No id was passed'}), 500
+
+
+@app.route('/api/nuovo_utente', methods=['POST'])
+def api_nuovo_utente():
+    if request.method == 'POST':
+        try:
+            username = request.form["username"]
+            nome     = request.form["nome"]
+            cognome  = request.form["cognome"]
+            password = make_md5(request.form["password"])
+            data     = db_helper.set_cliente(username,nome,cognome,password)
+            return redirect("/utenti")      #return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.set_cliente(username,nome,cognome,password)}), 200
+        except Exception as e:
+            logger.error(str(e))
+            return redirect("/utenti")
+    return redirect("/utenti")
+
+
+@app.route('/api/prodotto/<id>', methods=['POST', 'DELETE'])
+def api_prodotto(id):
+    if (id != None and id != ''):
+        if request.method == 'POST':
+            try:
+                titolo              = request.form["titolo"]
+                categoria           = request.form["categoria"]
+                prezzo              = request.form["prezzo"]
+                descrizione         = request.form["descrizione"]
+                foto                = request.form["foto"]
+                qta_magazzino       = request.form["qta_magazzino"]
+                qta_scaffale        = request.form["qta_scaffale"]
+                sconto              = request.form["sconto"]
+                eta_consigliata     = request.form["eta_consigliata"]
+                sesso_consigliato   = request.form["sesso_consigliato"]
+                data = db_helper.set_id_oggetto(id,titolo,categoria,prezzo,descrizione,foto,qta_magazzino,qta_scaffale,sconto,eta_consigliata,sesso_consigliato)
+                return redirect("/dashboard")  #return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.set_id_oggetto(id,titolo,categoria,prezzo,descrizione,foto,qta_magazzino,qta_scaffale,sconto,eta_consigliata,sesso_consigliato)}), 200
+            except Exception as e:
+                logger.error(str(e))
+                return redirect("/dashboard")  #return jsonify({'code': 500, 'message': str(e)}), 500
+        elif request.method == 'DELETE':
+            try:
+                return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.delete_oggetto(id)}), 200
+            except Exception as e:
+                logger.error(str(e))
+                return jsonify({'code': 500, 'message': str(e)}), 500
+    else:
+        logger.error('No id argument passed')
+        return redirect("/dashboard")          #return jsonify({'code': 500, 'message': 'No id was passed'}), 500
+
+
+@app.route('/api/nuovo_prodotto', methods=['POST'])
+def api_nuovo_prodotto():
+    if request.method == 'POST':
+        try:
+            titolo              = request.form["titolo"]
+            categoria           = request.form["categoria"]
+            prezzo              = request.form["prezzo"]
+            descrizione         = request.form["descrizione"]
+            foto                = request.form["foto"]
+            qta_magazzino       = request.form["qta_magazzino"]
+            qta_scaffale        = request.form["qta_scaffale"]
+            sconto              = request.form["sconto"]
+            eta_consigliata     = request.form["eta_consigliata"]
+            sesso_consigliato   = request.form["sesso_consigliato"]
+            data = db_helper.set_oggetto(titolo,categoria,prezzo,descrizione,foto,qta_magazzino,qta_scaffale,sconto,eta_consigliata,sesso_consigliato)
+            return redirect("/dashboard")      #return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.set_oggetto(titolo,categoria,prezzo,descrizione,foto,qta_magazzino,qta_scaffale,sconto,eta_consigliata,sesso_consigliato)}), 200
+        except Exception as e:
+            logger.error(str(e))
+            return redirect("/dashboard")
+    return redirect("/dashboard")
+
+
+@app.route('/api/qta_scaffale/<id>', methods=['PLUS', 'MINUS'])
+def api_qta_scaffale(id):
+    if (id != None and id != ''):
+        if request.method == 'PLUS':
+            try:
+                return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.set_qta_scaffale_plus(id)}), 200
+            except Exception as e:
+                logger.error(str(e))
+                return jsonify({'code': 500, 'message': str(e)}), 500
+        elif request.method == 'MINUS':
+            try:
+                return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.set_qta_scaffale_minus(id)}), 200
+            except Exception as e:
+                logger.error(str(e))
+                return jsonify({'code': 500, 'message': str(e)}), 500
+    else:
+        logger.error('No id argument passed')
+        return jsonify({'code': 500, 'message': 'No id was passed'}), 500
+
+
+@app.route('/api/qta_magazzino/<id>', methods=['PLUS', 'MINUS'])
+def api_qta_magazzino(id):
+    if (id != None and id != ''):
+        if request.method == 'PLUS':
+            try:
+                return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.set_qta_magazzino_plus(id)}), 200
+            except Exception as e:
+                logger.error(str(e))
+                return jsonify({'code': 500, 'message': str(e)}), 500
+        elif request.method == 'MINUS':
+            try:
+                return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.set_qta_magazzino_minus(id)}), 200
+            except Exception as e:
+                logger.error(str(e))
+                return jsonify({'code': 500, 'message': str(e)}), 500
+    else:
+        logger.error('No id argument passed')
+        return jsonify({'code': 500, 'message': 'No id was passed'}), 500
+
+
+@app.route('/api/abbinamenti', methods=['POST'])
+def api_abbinamenti():
+    if request.method == 'POST':
+        try:
+            id_oggetto1 = request.form["productSelect1"]
+            id_oggetto2 = request.form["productSelect2"]
+            data = db_helper.set_abbinamento(id_oggetto1, id_oggetto2)
+            return redirect("/abbinamenti")
+        except Exception as e:
+            logger.error(str(e))
+            return redirect("/abbinamenti")
+    return redirect("/abbinamenti")
+
+
+@app.route('/api/delete_abbinamenti/<id>', methods=['DELETE'])
+def api_delete_abbinamenti(id):
+    if request.method == 'DELETE':
+        try:
+            data = db_helper.delete_abbinamento(id)
+            return redirect("/abbinamenti")
+        except Exception as e:
+            logger.error(str(e))
+            return redirect("/abbinamenti")
+    return redirect("/abbinamenti")
+
+
 
 
 # SERVICES
 @app.route('/services', methods=['GET'])
 def services():
-    if login == 1:
-        return render_template('services.html')
-    else:
-        return redirect(url_for('login'))
+    return render_template('services.html')
 
 # Servizio START morphcast
 @app.route('/services/start_morphcast', methods=['GET'])
@@ -418,13 +692,15 @@ if __name__ == "__main__":
     else:
         nao_stop_face_tracker()
     '''
+    app.secret_key = os.urandom(12)
     app.run(host=config_helper.srv_host, port=config_helper.srv_port, debug=config_helper.srv_debug)
 
 
 '''
 TO DO
--dialogo con le funzioni Shenal
--db_helper con query
--decision tree Giacomo
--dashboard Edoardo: logout, login "sicuro" se cambio link
+-creare/cancellare carrello quando si crea/cancella utente
+-decision tree: manca abbinamento + db
+-report nao x scaffale e magazzino sotto una certa soglia (con dialogo nao)
+
+-relazione: architettura MCV
 '''
