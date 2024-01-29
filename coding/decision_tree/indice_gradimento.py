@@ -1,0 +1,1 @@
+morfcast =  {'angry': 1,  'disgust': , 'fear': , 'happy': , 'neutral' : , 'sad' : , 'surprise' : }
