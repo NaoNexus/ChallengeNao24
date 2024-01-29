@@ -649,10 +649,10 @@ if __name__ == '__main__':
     
     print("Buon pomeriggio")
     carrello = []
-    user_input=True
-    while user_input==True:
+    user_input = True
+    while user_input == True:
         print("Hai bisogno di qualcosa")
-        risposta1= str(input())
+        risposta1 = str(input())
 
         gender  = str(analizza_genere(risposta1))
         age     = int(estrai_eta(risposta1))
@@ -693,7 +693,7 @@ if __name__ == '__main__':
         print(id_gioiello_consigliato)
 
         if type(id_gioiello_consigliato) == list:
-            i=0
+            i = 0
             while i < len(id_gioiello_consigliato):
                 product_name = get_product_name_by_id(product_info, id_gioiello_consigliato[i])
 
@@ -706,7 +706,7 @@ if __name__ == '__main__':
                 risposta_a1 = str(input())
                 risposta_a1_= estrai_si_no(risposta_a1.lower())
                             
-                if risposta_a1_ =="si":
+                if risposta_a1_ == "si":
                     carrello.append(product_name)
                                     
                     print("Posso consigliarti qualche abbinamento")                         
@@ -722,24 +722,24 @@ if __name__ == '__main__':
                         descrizione2 = Descrizione_prodotto(funzione_prodotto2)
                         print(descrizione2)
                                     
-                        print("ti piace?")
-                        risposta3=input()
+                        print("Ti piace?")
+                        risposta3 = input()
                         risposta3_ = estrai_si_no(risposta3.lower())
                                         
-                        if risposta3 =="si":
+                        if risposta3 == "si":
                             carrello.append(abbinamento)
-                            user_input=False
+                            user_input = False
                             break
                         else:
                             print("non so che prodotto consigliarti")
-                            user_input=False
+                            user_input = False
                             break
                                             
                     else:
                         break
 
-                i+=1
-                if i==len(id_gioiello_consigliato):
+                i += 1
+                if i == len(id_gioiello_consigliato):
                     print("Non ho trovato un prodotto che rispecchia le tue richieste")
                     user_input=False
                     break
@@ -757,11 +757,11 @@ if __name__ == '__main__':
             user_input=False
             break
         else:
-            user_input=True
+            user_input = True
             risposta1 = ""
             
     print(carrello)        
-    print("grazie per aver acquistato da swarovski")
+    print("Grazie per aver acquistato da swarovski")
 
 
 
