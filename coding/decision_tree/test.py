@@ -667,14 +667,19 @@ if __name__ == '__main__':
     
     print("Buon pomeriggio")
     carrello = []
-
     print("Hai bisogno di qualcosa")
     risposta1 = str(input())
 
-    gender  = str(analizza_genere(risposta1))
-    age     = int(estrai_eta(risposta1))
-    budget  = int(estrai_budget(risposta1))
-    category= str(estrai_categoria(risposta1))
+    if risposta1 == "per me":
+        #usa morphcast
+        budget  = int(estrai_budget(risposta1))
+        category= str(estrai_categoria(risposta1))
+        
+    else:
+        gender  = str(analizza_genere(risposta1))
+        age     = int(estrai_eta(risposta1))
+        budget  = int(estrai_budget(risposta1))
+        category= str(estrai_categoria(risposta1))
 
     profilo_utente = [gender, age, budget, category]
                     
