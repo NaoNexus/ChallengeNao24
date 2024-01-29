@@ -221,7 +221,7 @@ def estrai_categoria(frase):
     parole_chiave_ring = ["anello","anelli", "anello,","anelli,", "anello.","anelli."]
     parole_chiave_bracelet = ["bracciale","bracciali", "braccialetto", "braccialetti", "bracciale,","bracciali,", "braccialetto,", "braccialetti,", "bracciale.","bracciali.", "braccialetto.", "braccialetti."]               
     parole_chiave_earring = ["orecchino","orecchini", "orecchino,","orecchini,", "orecchino.","orecchini."]
-    parole_chiave_watch = ["orologio","orologio,","orologio."]
+    parole_chiave_watch = ["orologio","orologio,","orologio.","orologi","orologi,","orologi."]
     
     category = ["necklace","ring","bracelet","earrings"]
     parola_chiave=["uguale","indifferente"]
@@ -596,7 +596,21 @@ def funzione_abbinamento(product_name):
 
     return abbinamenti.get(product_name, None)
 
+def morphcast(emozioni):
+    angry = int(emozioni['angry'] * 100)
+    disgust = int(emozioni['disgust'] * 100)
+    happy = int(emozioni['happy'] * 100)
+    #neutral = int(emozioni['neutral'] * 100)
+    sad = int(emozioni['sad'] * 100)
+    surprise = int(emozioni['surprise'] * 100)
+    attention = int(emozioni['attention'] * 100)
 
+    indice_gradimento = 50 - angry - disgust + happy - sad + surprise + attention
+
+    if indice_gradimento > 55:
+        return "si"
+    else:
+        return "no"
 
 
 if __name__ == '__main__':
@@ -647,24 +661,28 @@ if __name__ == '__main__':
         
     ]
 
+    emozioni =  {'angry': 0.2, 'disgust': 0.3, 'happy': 0.9, 'neutral': 0.5, 'sad': 0.1, 'surprise': 0.6, 'attention': 0.8} #preso da morphcast il porf lo sistema
+
     #dialogo
     
     print("Buon pomeriggio")
     carrello = []
+
+    print("Hai bisogno di qualcosa")
+    risposta1 = str(input())
+
+    gender  = str(analizza_genere(risposta1))
+    age     = int(estrai_eta(risposta1))
+    budget  = int(estrai_budget(risposta1))
+    category= str(estrai_categoria(risposta1))
+
+    profilo_utente = [gender, age, budget, category]
+                    
+    posizioni_vuote = [pos for pos, val in enumerate(profilo_utente) if val == "" or val == 0]
+    print(posizioni_vuote)
+    
     user_input = True
     while user_input == True:
-        print("Hai bisogno di qualcosa")
-        risposta1 = str(input())
-
-        gender  = str(analizza_genere(risposta1))
-        age     = int(estrai_eta(risposta1))
-        budget  = int(estrai_budget(risposta1))
-        category= str(estrai_categoria(risposta1))
-
-        profilo_utente = [gender, age, budget, category]
-                    
-        posizioni_vuote = [pos for pos, val in enumerate(profilo_utente) if val == "" or val == 0]
-
         while len(posizioni_vuote)!=0:
             for i in range(len(posizioni_vuote)):
                 if posizioni_vuote[i] == 0:
@@ -673,7 +691,7 @@ if __name__ == '__main__':
                     gender = str(analizza_genere(risposta2))
                                 
                 elif posizioni_vuote[i] == 1:
-                    print("E quanti ha?")
+                    print("E quanti anni ha?")
                     risposta3 = str(input())
                     age = int(estrai_eta(risposta3))
                                 
@@ -683,7 +701,7 @@ if __name__ == '__main__':
                     budget = int(estrai_budget(risposta4))
                                 
                 elif posizioni_vuote[i] == 3:
-                    print("E che genere di gioielli preferisce? Collane, bracciali, orecchini o anelli?")
+                    print("E che categoria di gioielli preferisce? Collane, bracciali, orecchini, anelli o orologi?")
                     risposta5 = str(input())
                     category = str(estrai_categoria(risposta5))
                         
@@ -704,9 +722,9 @@ if __name__ == '__main__':
                 descrizione = Descrizione_prodotto(funzione_prodotto)
                 print(descrizione)
 
-                print("Che ne pensi?")
-                risposta_a1 = str(input())
-                risposta_a1_= estrai_si_no(risposta_a1.lower())
+                #print("Che ne pensi?")
+                #risposta_a1 = str(input())
+                risposta_a1_ = morphcast(emozioni)
                             
                 if risposta_a1_ == "si":
                     carrello.append(product_name)
@@ -716,7 +734,7 @@ if __name__ == '__main__':
                     risposta__= estrai_si_no(risposta_.lower())
                                     
                     if risposta__ == "si":
-                        print(type(product_name))
+                        #print(type(product_name))
                         abbinamento = funzione_abbinamento(product_name)
                         
                         print("Ti consiglio di prendere:", abbinamento,"con", product_name)
@@ -724,9 +742,9 @@ if __name__ == '__main__':
                         descrizione2 = Descrizione_prodotto(funzione_prodotto2)
                         print(descrizione2)
                                     
-                        print("Ti piace?")
-                        risposta3 = input()
-                        risposta3_ = estrai_si_no(risposta3.lower())
+                        #print("Ti piace?")
+                        #risposta3 = input()
+                        risposta3 = morphcast(emozioni)
                                         
                         if risposta3 == "si":
                             carrello.append(abbinamento)
@@ -759,6 +777,7 @@ if __name__ == '__main__':
             user_input=False
             break
         else:
+            posizioni_vuote=[0,1,2,3]
             user_input = True
             risposta1 = ""
             
