@@ -827,7 +827,7 @@ if __name__ == '__main__':
             {'category': 'ring', 'prezzo': '400.00', 'sconto': 10, 'name': 'florere cocktail ring', 'gender': 'F', 'age': 84, 'storage': 3, 'id': 42}
         ]
     
-    print product_info
+    print(product_info)
 
     '''
     if __DATABASE__:
@@ -890,7 +890,7 @@ if __name__ == '__main__':
             while i < len(id_gioiello_consigliato):
                 product_name = get_product_name_by_id(product_info, id_gioiello_consigliato[i])
 
-                print("Fammi pensare... io ti consiglierei:", product_name)
+                print("Fammi pensare... io ti consiglierei: " + product_name)
                 funzione_prodotto = product_name.capitalize().replace(' ', '_')
                 descrizione = Descrizione_prodotto(funzione_prodotto)
                 print(descrizione)
@@ -899,14 +899,14 @@ if __name__ == '__main__':
                 if risposta_a1_ == "si":
                     carrello.append(product_name)
                                     
-                    print("Vuoi che ti consigli qualche abbinamento da fare?")                         
+                    print("Vuoi che ti consigli qualche abbinamento da fare?")                       
                     risposta_= raw_input()
                     risposta__= estrai_si_no(risposta_.lower())
                                     
                     if risposta__ == "si":
                         abbinamento = funzione_abbinamento(product_name)
                         
-                        print("Perfetto, allora ti consiglierei di abbinarci", abbinamento,"con", product_name)
+                        print("Perfetto, allora ti consiglierei di abbinarci " + abbinamento + "con" + product_nam)
                         funzione_prodotto2 = abbinamento.capitalize().replace(' ', '_')
                         descrizione2 = Descrizione_prodotto(funzione_prodotto2)
                         print(descrizione2)
@@ -949,3 +949,13 @@ if __name__ == '__main__':
     print(carrello)        
     print("Spero di averti aiutato al meglio delle mie possibilita, grazie per aver acquistato da svaroschi utilizzando la tecnologia naonecsus!")
     sys.exit()
+
+
+'''
+TO DO
+-salutare il cliente con nome e cognome (arrivano dall'app)
+-considerare numero elementi scaffale e in magazzino
+
+-chiedere al cliente se aggiungere elemento al carrello
+-chiedere al cliente se ha terminato la scelta e se sì invitare il cliente ad andare in cassa dall'altro nao
+'''
