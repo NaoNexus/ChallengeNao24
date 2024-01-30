@@ -211,7 +211,6 @@ def estrai_categoria(frase):
     parole_chiave_bracelet = ["bracciale","bracciali", "braccialetto", "braccialetti", "bracciale,","bracciali,", "braccialetto,", "braccialetti,", "bracciale.","bracciali.", "braccialetto.", "braccialetti."]               
     parole_chiave_earring = ["orecchino","orecchini", "orecchino,","orecchini,", "orecchino.","orecchini."]
     parole_chiave_watch = ["orologio","orologio,","orologio.","orologi","orologi,","orologi."]
-    parole_chiave_regalo = ["regalo","regalo,","regalo."]
     
     category = ["necklace","ring","bracelet","earrings"]
     parola_chiave=["uguale","indifferente"]
@@ -229,12 +228,19 @@ def estrai_categoria(frase):
         return "earrings"
     elif any(parola in parole for parola in parole_chiave_watch):
         return "watch"
-    elif any(parola in parole for parola in parole_chiave_regalo):
-        return "regalo"
     
     elif any(parola in parole for parola in parola_chiave):
         random_category = random.choice(category)
         return random_category
+    else:
+        return ""
+
+
+def estrai_regalo(frase):
+    parole = frase.lower().split()
+    parole_chiave_regalo = ["regalo","regalo,","regalo."]
+    if any(parola in parole for parola in parole_chiave_regalo):
+        return "regalo"
     else:
         return ""
 
@@ -660,20 +666,22 @@ if __name__ == '__main__':
     carrello = []
     print("Come posso aiutarti? Anche se sono un robot di gioielli ne so un bel po")
     risposta1 = str(input())
-    regalo = estrai_categoria(risposta1)
+    regalo = estrai_regalo(risposta1)
     
     if regalo == "regalo":
+
         gender  = str(analizza_genere(risposta1))
         age     = int(estrai_eta(risposta1))
         budget  = int(estrai_budget(risposta1))
         category= str(estrai_categoria(risposta1))
+        profilo_utente = [gender, age, budget, category]
+        
     else:
         gender = emozioni['gender']
         age = emozioni['age']
         budget  = int(estrai_budget(risposta1))
         category= str(estrai_categoria(risposta1))
-
-    profilo_utente = [gender, age, budget, category]
+        profilo_utente = [gender, age, budget, category]
     
     posizioni_vuote = [pos for pos, val in enumerate(profilo_utente) if val == "" or val == 0]
     
