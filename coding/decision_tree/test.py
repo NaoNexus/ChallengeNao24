@@ -566,24 +566,24 @@ def estrai_si_no(frase):
 
 def funzione_abbinamento(product_name):
     abbinamenti = {
-        'angelic necklace': 'stilla necklace',
-        'creativity pendant': 'disney mickey mouse pendant',
-        'crystalline delight watch': 'gema bracelet',
-        'dextera hoop earrings': 'hyperbola drop earrings',
-        'disney mickey mouse pendant': 'creativity pendant',
-        'florere cocktail ring': 'luna cocktail ring',
+        'angelic necklace': 'crystalline delight watch',
+        'creativity pendant': 'meteora drop earrings',
+        'crystalline delight watch': 'angelic necklace',
+        'dextera hoop earrings': 'disney mickey mouse pendant',
+        'disney mickey mouse pendant': 'dextera hoop earrings',
+        'florere cocktail ring': 'millenia necklace',
         'gema bracelet': 'gema necklace',
         'gema necklace': 'gema bracelet',
-        'hyperbola drop earrings': 'meteora drop earrings',
+        'hyperbola drop earrings': 'angelic necklace',
         'lucent bangle': 'lucent cocktail ring',
         'lucent cocktail ring': 'lucent bangle',
         'lucent hoop earrings': 'lucent cocktail ring',
         'luna cocktail ring': 'luna drop earrings',
         'luna drop earrings': 'luna cocktail ring',
-        'matrix tennis necklace': 'millenia necklace',
-        'meteora drop earrings': 'hyperbola drop earrings',
-        'millenia necklace': 'matrix tennis necklace',
-        'stilla necklace': 'angelic necklace',
+        'matrix tennis necklace': 'florere cocktail ring',
+        'meteora drop earrings': 'creativity pendant',
+        'millenia necklace': 'florere cocktail ring',
+        'stilla necklace': 'florere cocktail ring',
     }
 
     return abbinamenti.get(product_name, None)
