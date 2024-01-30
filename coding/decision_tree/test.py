@@ -1,5 +1,6 @@
 import re
 import random
+import sys
 
 #descrizione prodotti
 def Angelic_bracelet():
@@ -20,9 +21,6 @@ def Dancing_swan_necklace():
 def Dextera_bracelet():
     return "Dettagli intricati incontrano una costruzione audace in questo moderno braccialetto della famiglia Dextera. Impreziosito dalla nostra celebre tecnica del pave e, presenta file di cristalli grigio-argento incastonati in una montatura placcata rutenio nero. Indossalo da solo o impilato, a seconda del tuo umore e del tuo outfit. Il bracciale appartiene alla collezione Dextera con cristalli e placcatura in rutenio"
 
-#def Dextera_hoop_earrings():
-#    return "Un tocco moderno ai classici orecchini a cerchio, questo paio genderless conferira dinamismo a qualsiasi outfit. Il design scultoreo celebra l iconica tecnica pave e di Swarovski con cristalli luccicanti laminati incastonati in una montatura placcata rodio. Questo duo  e adatto di giorno ma perfetto anche per la sera. Parte della famiglia Dextera, questi orecchini sono ideati dalla Direttrice Creativa Giovanna Engelbert per la Collection II. Questi orecchini fanno parte della collezione Dextera con cristalli e placcatura in rodio"
-
 def Dextera_necklace():
     return "Ispirata alla nostra tradizione industriale, questa collana a tutto tondo raggiunge l equilibrio tra audace e raffinato. Caratterizzato da pave e di cristalli grigio argento e catene intrecciate,  e rifinito con una montatura placcata rutenio. Indossalo con altri pezzi della famiglia Dextera per un look audace. Questa collana appartiene alla collezione Dextera con cristalli e placcatura in rutenio"
 
@@ -31,9 +29,6 @@ def Florere_necklace():
 
 def Florere_stud_earrings():
     return "Ispirato dalla meravigliosa bellezza della natura, questo gioiello luminoso sboccia con gli eleganti cristalli. Caratterizzati da una montatura placcata color oro, cinque petali rosa sono disposti attorno ad una pietra dalla tonalit a pi u scura. Scegli questi orecchini per illuminare la tua giornata. QUesti orecchini appartengono alla collezione Florere, con zirconi e placcatura color oro"
-
-#def Gema_bracelet():
-#    return "Questo gioioso braccialetto prismatico della famiglia Gema presenta uno scintillante mix di cristalli nelle pi u belle tonalit a pastello su una raffinata montatura rodiata. L abbagliante gamma di tagli e colori  e organizzata in modo organico, ma preciso, dando vita a un pezzo di inaspettata bellezza. Indossa questo braccialetto da solo o con i gioielli Gema abbinati per dare vivacit a alla tua quotidianit a. Questo bracciale appartiene alla collezione Gema, con cristalli e placcatura in rodio"
 
 def Gema_drop_earrings():
     return "Questi orecchini a buco Gema di un lussureggiante savoir-faire infonderanno in ogni tuo outfit tutta la bellezza della natura. Il mix di cristalli multicolor  e disposto in maniera originale ma rigorosa su una raffinata montatura placcata rodio che fa risplendere ogni sfumatura. Da abbinare a una collana della famiglia Gema o da indossare da soli per un effetto glamour disinvolto al calar della notte. Questi orecchini appartengono alla collezione Gema, con cristalli e placcatura in rodio"
@@ -50,9 +45,6 @@ def Matrix_ring():
 def Matrix_stud_earrings():
     return "Semplici ma affascinanti, questi borchie della famiglia Matrix offrono stile. Gli zirconi Swarovski rettangolari verde brillante sono inseriti in una raffinata montatura a doppia griffe placcata nella tonalit a oro. Scegli questi orecchini sfaccettati per un tocco di verde da far girare la testa. Questi orecchini fanno parte della collezione Matrix, con zirconi e placcatura color oro"
 
-#def Matrix_tennis_necklace():
-#    return "Combinando l eleganza classica con un tocco contemporaneo, questa collana da tennis Matrix  e allo stesso tempo raffinata e lussuosa. Un design a tutto tondo di pietre rotonde chiare  e intervallato da pietre rettangolari in verde intenso, illuminate da una montatura placcata rodio. Questo pezzo aggiunger a glamour immediato a qualsiasi look celebrativo e sar a anche un regalo memorabile. Questa collana fa parte della collezione Matrix, con zirconi e placcatura in rodio"
-
 def Mesmera_bracelet():
     return "Questo sorprendente braccialetto rigido mette in risalto le qualita ipnotiche della famiglia Mesmera. Innovativi grappoli di cristalli sono sapientemente disposti a forma di mosaico, che nasconde abilmente la montatura delle griffe placcate rodio. Indossalo come una dichiarazione diurna con le maniche della camicia arrotolate o come un semplice abito a trapezio per la sera; sia stravagante che senza tempo in egual misura. Questo braccialetto fa parte della famiglia Mesmera, disegnata dal Direttore Creativo Giovanna Engelbert per la Collezione I. Come chiuderlo e aprirlo(): posiziona la bacchetta arrotondata nel punto pi u largo del foro opposto e falla scorrere fino al punto pi u basso. Una volta in posizione, abbassare il fermo di sicurezza con anello a D sulla parte superiore per garantire il fissaggio. Per aprire, sollevare il fermo di sicurezza con anello a D e far scorrere il bastone verso il punto pi u largo per rilasciare. Questo bracciale fa parte della collezione Mesmera, con cristalli e placcatura in rodio"
 
@@ -64,9 +56,6 @@ def Mesmera_necklace():
 
 def Millenia_cocktail_ring():
     return "Indossato da solo o impilato, questo anello da cocktail Millenia catturer a sicuramente l attenzione. Abbagliante con un unica pietra taglio pera,  e incastonato su una fascia rodiata impreziosita da pave e per uno stile disinvolto e chic. Questo anello fa parte della collezione Millenia, con zirconi e placcatura in rodio"
-
-#def Millenia_necklace():
-#    return "Delicata e splendidamente raffinata, questa collana di cristalli grigi diventer a il tuo nuovo punto di riferimento. Presentando cristalli a taglio quadrato racchiusi in un elegante montatura placcata in rutenio nero, la sua silhouette fluida e lunga  e perfetta da abbinare ad altri pezzi o da avvolgere due volte attorno al collo per un doppio effetto. Indossalo per compensare una semplice maglietta bianca o una camicia su misura. Questa collana fa parte della famiglia Millenia, disegnata dal Direttore Creativo Giovanna Engelbert per la Collezione II. Come chiuderlo e aprirlo(): far scorrere i ganci nei fori corrispondenti alla base della pietra terminale e spingere per farli scattare in posizione. Fissare la catena di sicurezza utilizzando la piccola chiusura a leva. Per aprire, slacciare la catena di sicurezza e premere contemporaneamente i pulsanti su entrambi i lati della pietra per rilasciare i ganci. Questa collana fa parte della collezione Millenia, con cristalli e placcatura in rutenio"
 
 def Stella_drop_earrings():
     return "Sei nato per brillare. Prova questi squisiti orecchini pendenti ispirati alle stelle della famiglia Stella. Impreziositi da pietre taglio aquilone in raffinate montature a griffe, questi eleganti modelli sono rifiniti con placcatura nella tonalit a oro rosa. Abbinali ad altri meravigliosi design per creare un look unico come te. Questi orecchini fanno parte della collezione Stella, con zirconi e placcatura color oro rosa"
@@ -171,8 +160,8 @@ def Gema_necklace():
 #fine descrizione dei prodotto
 
 def analizza_genere(frase):
-    parole_chiave_maschili = ["maschio","fratello", "papà", "padre", "nonno", "amico","figlio", "fratello,", "papà,", "padre,", "nonno,", "amico,","figlio,", "fratello.", "papà.", "padre.", "nonno.", "amico.","figlio."]
-    parole_chiave_femminili = ["femmina","sorella", "mamma", "madre", "nonna", "amica", "sorella,", "mamma,", "madre,", "nonna,", "amica,", "sorella.", "mamma.", "madre.", "nonna.", "amica.","figlia","figlia,","figlia."]
+    parole_chiave_maschili = ["marito","maschio","fratello", "papà", "padre", "nonno", "amico","figlio", "fratello,", "papà,", "padre,", "nonno,", "amico,","figlio,", "fratello.", "papà.", "padre.", "nonno.", "amico.","figlio."]
+    parole_chiave_femminili = ["moglie","femmina","sorella", "mamma", "madre", "nonna", "amica", "sorella,", "mamma,", "madre,", "nonna,", "amica,", "sorella.", "mamma.", "madre.", "nonna.", "amica.","figlia","figlia,","figlia."]
 
     # Tokenizza la frase in parole
     parole = frase.lower().split()  # Converto tutto in minuscolo per rendere la ricerca case-insensitive
@@ -222,6 +211,7 @@ def estrai_categoria(frase):
     parole_chiave_bracelet = ["bracciale","bracciali", "braccialetto", "braccialetti", "bracciale,","bracciali,", "braccialetto,", "braccialetti,", "bracciale.","bracciali.", "braccialetto.", "braccialetti."]               
     parole_chiave_earring = ["orecchino","orecchini", "orecchino,","orecchini,", "orecchino.","orecchini."]
     parole_chiave_watch = ["orologio","orologio,","orologio.","orologi","orologi,","orologi."]
+    parole_chiave_regalo = ["regalo","regalo,","regalo."]
     
     category = ["necklace","ring","bracelet","earrings"]
     parola_chiave=["uguale","indifferente"]
@@ -239,6 +229,8 @@ def estrai_categoria(frase):
         return "earrings"
     elif any(parola in parole for parola in parole_chiave_watch):
         return "watch"
+    elif any(parola in parole for parola in parole_chiave_regalo):
+        return "regalo"
     
     elif any(parola in parole for parola in parola_chiave):
         random_category = random.choice(category)
@@ -600,7 +592,6 @@ def morphcast(emozioni):
     angry = int(emozioni['angry'] * 100)
     disgust = int(emozioni['disgust'] * 100)
     happy = int(emozioni['happy'] * 100)
-    #neutral = int(emozioni['neutral'] * 100)
     sad = int(emozioni['sad'] * 100)
     surprise = int(emozioni['surprise'] * 100)
     attention = int(emozioni['attention'] * 100)
@@ -636,7 +627,7 @@ if __name__ == '__main__':
         {'id': 19, 'name': 'mesmera cocktail ring', 'category': 'ring', 'storage': 5}, 
         {'id': 20, 'name': 'mesmera necklace', 'category': 'necklace', 'storage': 5}, 
         {'id': 21, 'name': 'millenia cocktail ring', 'category': 'ring', 'storage': 5}, 
-        {'id': 22, 'name': 'crystalline delight watch', 'category': 'watch', 'storage': 5}, #
+        {'id': 22, 'name': 'crystalline delight watch', 'category': 'watch', 'storage': 5}, 
         {'id': 23, 'name': 'stella drop earrings', 'category': 'earrings', 'storage': 5}, 
         {'id': 24, 'name': 'stella necklace', 'category': 'necklace', 'storage': 5}, 
         {'id': 25, 'name': 'stella stud earrings', 'category': 'earrings', 'storage': 5}, 
@@ -661,30 +652,30 @@ if __name__ == '__main__':
         
     ]
 
-    emozioni =  {'angry': 0.2, 'disgust': 0.3, 'happy': 0.9, 'neutral': 0.5, 'sad': 0.1, 'surprise': 0.6, 'attention': 0.8} #preso da morphcast il porf lo sistema
+    emozioni =  {'gender': 'female','age': 19,'angry': 0.2, 'disgust': 0.3, 'happy': 0.9, 'neutral': 0.5, 'sad': 0.1, 'surprise': 0.6, 'attention': 0.8} #preso da morphcast il porf lo sistema
 
     #dialogo
     
     print("Buon pomeriggio")
     carrello = []
-    print("Hai bisogno di qualcosa")
+    print("Come posso aiutarti?")
     risposta1 = str(input())
-
-    if risposta1 == "per me":
-        #usa morphcast
-        budget  = int(estrai_budget(risposta1))
-        category= str(estrai_categoria(risposta1))
-        
-    else:
+    regalo = estrai_categoria(risposta1)
+    
+    if regalo == "regalo":
         gender  = str(analizza_genere(risposta1))
         age     = int(estrai_eta(risposta1))
         budget  = int(estrai_budget(risposta1))
         category= str(estrai_categoria(risposta1))
+    else:
+        gender = emozioni['gender']
+        age = emozioni['age']
+        budget  = int(estrai_budget(risposta1))
+        category= str(estrai_categoria(risposta1))
 
     profilo_utente = [gender, age, budget, category]
-                    
+    
     posizioni_vuote = [pos for pos, val in enumerate(profilo_utente) if val == "" or val == 0]
-    print(posizioni_vuote)
     
     user_input = True
     while user_input == True:
@@ -726,9 +717,6 @@ if __name__ == '__main__':
                 funzione_prodotto = product_name.capitalize().replace(' ', '_')
                 descrizione = Descrizione_prodotto(funzione_prodotto)
                 print(descrizione)
-
-                #print("Che ne pensi?")
-                #risposta_a1 = str(input())
                 risposta_a1_ = morphcast(emozioni)
                             
                 if risposta_a1_ == "si":
@@ -739,16 +727,12 @@ if __name__ == '__main__':
                     risposta__= estrai_si_no(risposta_.lower())
                                     
                     if risposta__ == "si":
-                        #print(type(product_name))
                         abbinamento = funzione_abbinamento(product_name)
                         
                         print("Ti consiglio di prendere:", abbinamento,"con", product_name)
                         funzione_prodotto2 = abbinamento.capitalize().replace(' ', '_')
                         descrizione2 = Descrizione_prodotto(funzione_prodotto2)
                         print(descrizione2)
-                                    
-                        #print("Ti piace?")
-                        #risposta3 = input()
                         risposta3 = morphcast(emozioni)
                                         
                         if risposta3 == "si":
@@ -788,7 +772,7 @@ if __name__ == '__main__':
             
     print(carrello)        
     print("Grazie per aver acquistato da swarovski")
-
+    sys.exit()
 
 
 
