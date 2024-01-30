@@ -658,7 +658,7 @@ if __name__ == '__main__':
         
     ]
 
-    emozioni =  {'gender': 'female','age': 19,'angry': 0.2, 'disgust': 0.3, 'happy': 0.9, 'neutral': 0.5, 'sad': 0.1, 'surprise': 0.6, 'attention': 0.8} #preso da morphcast il porf lo sistema
+    emozioni =  {'gender': 'female','age': 21,'angry': 0.2, 'disgust': 0.3, 'happy': 0.9, 'neutral': 0.5, 'sad': 0.1, 'surprise': 0.6, 'attention': 0.8} #preso da morphcast il porf lo sistema
 
     #dialogo
     
