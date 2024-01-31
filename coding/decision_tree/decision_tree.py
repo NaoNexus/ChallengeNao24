@@ -962,7 +962,8 @@ if __name__ == '__main__':
             user_input = True
             risposta1 = ""
             
-    print(carrello)        
+    print(carrello)
+    print("i tuoi gioielli ti aspettano in cassa :)")
     print("Spero di averti aiutato al meglio delle mie possibilita, grazie per aver acquistato da svaroschi utilizzando la tecnologia naonecsus!")
 
 
