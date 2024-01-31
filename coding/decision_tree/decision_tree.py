@@ -2,7 +2,6 @@
 
 import re
 import random
-import sys
 
 
 __DATABASE__ = False
@@ -199,7 +198,6 @@ def estrai_categoria(frase):
     parole_chiave_bracelet  = ["bracciale","bracciali", "braccialetto", "braccialetti", "bracciale,","bracciali,", "braccialetto,", "braccialetti,", "bracciale.","bracciali.", "braccialetto.", "braccialetti."]               
     parole_chiave_earring   = ["orecchino","orecchini", "orecchino,","orecchini,", "orecchino.","orecchini."]
     parole_chiave_watch     = ["orologio","orologio,","orologio.","orologi","orologi,","orologi."]
-    parole_chiave_regalo    = ["regalo","regalo","regalo."]
     
     category                = ["necklace","ring","bracelet","earrings"]
     parola_chiave           = ["uguale","indifferente"]
@@ -217,14 +215,21 @@ def estrai_categoria(frase):
         return "earrings"
     elif any(parola in parole for parola in parole_chiave_watch):
         return "watch"
-    elif any(parola in parole for parola in parole_chiave_regalo):
-        return "regalo"
     
     elif any(parola in parole for parola in parola_chiave):
         random_category = random.choice(category)
         return random_category
     else:
         return ""
+
+def estrai_regalo(frase):
+    parole = frase.lower().split()
+    parole_chiave_regalo = ["regalo","regalo,","regalo."]
+    if any(parola in parole for parola in parole_chiave_regalo):
+        return "regalo"
+    else:
+        return ""
+
 
 #decision tree
 def recommend_jewelry(customer_info, product_info):
@@ -835,12 +840,14 @@ if __name__ == '__main__':
     else:
     '''
     #preso da morphcast il porf lo sistema
-    emozioni =  {'gender': 'male','age': 19,'angry': 0.2, 'disgust': 0.3, 'happy': 0.9, 'neutral': 0.5, 'sad': 0.1, 'surprise': 0.6, 'attention': 0.8} 
+    emozioni =  {'gender': 'female','age': 21,'angry': 0.2, 'disgust': 0.3, 'happy': 0.9, 'neutral': 0.5, 'sad': 0.1, 'surprise': 0.6, 'attention': 0.8} 
     print(emozioni)
-
+    nome_utente = {'nome': 'Giacomo','cognome': 'Santi'}
+    
     #dialogo
     carrello = []
-    print("Buongiorno, sono peara, il nao del team naonecsus.")
+    print("Buongiorno"+nome_utente['nome']+nome_utente['cognome']+", sono peara, il nao del team naonecsus.")
+
     print("Come posso aiutarti? Anche se sono un robot di gioielli ne so un bel po")
     risposta1 = raw_input()
     regalo = estrai_categoria(risposta1)
@@ -896,10 +903,15 @@ if __name__ == '__main__':
                 descrizione = Descrizione_prodotto(funzione_prodotto)
                 print(descrizione)
                 risposta_a1_ = morphcast(emozioni)
-                            
-                if risposta_a1_ == "si":
+
+                #richiesta al cliente se vuole aggiungere il prodotto al carrello
+                print("vuoi aggiungere" + product_name + "al carrello?")
+                aggiungi=estrai_si_no(raw_input())
+                #---
+
+                if risposta_a1_ == "si" and aggiungi == "si":
                     carrello.append(product_name)
-                                    
+                    
                     print("Vuoi che ti consigli qualche abbinamento da fare?")                       
                     risposta_= raw_input()
                     risposta__= estrai_si_no(risposta_.lower())
@@ -912,8 +924,11 @@ if __name__ == '__main__':
                         descrizione2 = Descrizione_prodotto(funzione_prodotto2)
                         print(descrizione2)
                         risposta3 = morphcast(emozioni)
-                                        
-                        if risposta3 == "si":
+
+                        print("vuoi aggiungere" + abbinamento + "al carrello?")
+                        aggiungi1=estrai_si_no(raw_input())
+                        
+                        if risposta3 == "si" and aggiungi1 == "si":
                             carrello.append(abbinamento)
                             user_input = False
                             break
@@ -935,7 +950,7 @@ if __name__ == '__main__':
             user_input = False
             break
 
-        print("Vuoi che ti consigli qualche altro prodotto?")
+        print("Vuoi acquistare qualche altro prodotto?")
         user_input   = raw_input()
         user_input_1 = estrai_si_no(user_input)
 
@@ -949,17 +964,16 @@ if __name__ == '__main__':
             
     print(carrello)        
     print("Spero di averti aiutato al meglio delle mie possibilita, grazie per aver acquistato da svaroschi utilizzando la tecnologia naonecsus!")
-    sys.exit()
 
 
 '''
 TO DO
--salutare il cliente con nome e cognome (arrivano dall'app)
+-salutare il cliente con nome e cognome (arrivano dall'app) #fatto
 -considerare numero elementi scaffale e in magazzino
 -considerare prodotti in sconto???
 
 -rilevare con morphcast
 
--chiedere al cliente se aggiungere elemento al carrello
+-chiedere al cliente se aggiungere elemento al carrello     #fatto
 -chiedere al cliente se ha terminato la scelta e se sì invitare il cliente ad andare in cassa dall'altro nao
 '''
