@@ -11,10 +11,8 @@ def carenza(where, product_name):
     else:
         return ""
 
-print("Dove: ")
-dove = input()
 
-print("Cosa: ")
+dove = input()
 cosa = input()
 
 dialogo = carenza(dove, cosa)
