@@ -846,7 +846,7 @@ if __name__ == '__main__':
     
     #dialogo
     carrello = []
-    print("Buongiorno"+nome_utente['nome']+nome_utente['cognome']+", sono peara, il nao del team naonecsus.")
+    print("Buongiorno "+nome_utente['nome']+" "+nome_utente['cognome']+", sono peara, il nao del team naonecsus.")
 
     print("Come posso aiutarti? Anche se sono un robot di gioielli ne so un bel po")
     risposta1 = raw_input()
