@@ -839,14 +839,14 @@ if __name__ == '__main__':
         emozioni = {}
     else:
     '''
-    #preso da morphcast il porf lo sistema
+    #preso da morphcast il prof lo sistema
     emozioni =  {'gender': 'female','age': 21,'angry': 0.2, 'disgust': 0.3, 'happy': 0.9, 'neutral': 0.5, 'sad': 0.1, 'surprise': 0.6, 'attention': 0.8} 
     print(emozioni)
     nome_utente = {'nome': 'Giacomo','cognome': 'Santi'}
     
     #dialogo
     carrello = []
-    print("Buongiorno"+nome_utente['nome']+nome_utente['cognome']+", sono peara, il nao del team naonecsus.")
+    print("Buongiorno "+nome_utente['nome']+" "+nome_utente['cognome']+", sono peara, il nao del team naonecsus.")
 
     print("Come posso aiutarti? Anche se sono un robot di gioielli ne so un bel po")
     risposta1 = raw_input()
@@ -865,7 +865,9 @@ if __name__ == '__main__':
 
     profilo_utente  = [gender, age, budget, category]
     posizioni_vuote = [pos for pos, val in enumerate(profilo_utente) if val == "" or val == 0]
-    
+
+    print(posizioni_vuote)
+
     user_input = True
     while user_input == True:
         while len(posizioni_vuote) != 0:
@@ -971,9 +973,9 @@ if __name__ == '__main__':
 TO DO
 -salutare il cliente con nome e cognome (arrivano dall'app) #fatto
 -considerare numero elementi scaffale e in magazzino
--considerare prodotti in sconto???
+-considerare prodotti in sconto
 
--rilevare con morphcast
+-rilevare con morphcast                                     #fatto
 
 -chiedere al cliente se aggiungere elemento al carrello     #fatto
 -chiedere al cliente se ha terminato la scelta e se sì invitare il cliente ad andare in cassa dall'altro nao
