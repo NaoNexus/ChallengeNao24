@@ -923,7 +923,7 @@ if __name__ == '__main__':
                     if risposta__ == "si":
                         abbinamento = funzione_abbinamento(product_name)
                         
-                        print("Perfetto, allora ti consiglierei di abbinarci " + abbinamento + "con" + product_name)
+                        print("Perfetto, allora ti consiglierei di abbinarci " + abbinamento + " con " + product_name)
                         funzione_prodotto2 = abbinamento.capitalize().replace(' ', '_')
                         descrizione2 = Descrizione_prodotto(funzione_prodotto2)
                         print(descrizione2)
