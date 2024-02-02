@@ -788,48 +788,48 @@ if __name__ == '__main__':
         product_info = db_helper.dt_get_oggetto()
     else:
         product_info = [
-            {'category': 'bracelet', 'prezzo': 155.0, 'qta_magazzino': 4, 'sconto': 10, 'name': 'angelic bracelet', 'gender': 'F', 'qta_scaffale': 0, 'age': 22, 'id': 1}, 
-            {'category': 'necklace', 'prezzo': 230.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'angelic necklace', 'gender': 'F', 'qta_scaffale': 1, 'age': 30, 'id': 2}, 
-            {'category': 'ring', 'prezzo': 135.0, 'qta_magazzino': 2, 'sconto': 10, 'name': 'constella cocktail ring', 'gender': 'F', 'qta_scaffale': 0, 'age': 50, 'id': 3}, 
-            {'category': 'bracelet', 'prezzo': 145.0, 'qta_magazzino': 5, 'sconto': 10, 'name': 'dad bracelet', 'gender': 'M', 'qta_scaffale': 1, 'age': 88, 'id': 4}, 
-            {'category': 'necklace', 'prezzo': 155.0, 'qta_magazzino': 7, 'sconto': 10, 'name': 'dancing swan necklace', 'gender': 'F', 'qta_scaffale': 0, 'age': 20, 'id': 5}, 
-            {'category': 'bracelet', 'prezzo': 155.0, 'qta_magazzino': 9, 'sconto': 10, 'name': 'dextera bracelet', 'gender': 'M', 'qta_scaffale': 1, 'age': 20, 'id': 6}, 
-            {'category': 'earrings', 'prezzo': 155.0, 'qta_magazzino': 6, 'sconto': 10, 'name': 'dextera hoop earrings', 'gender': 'F', 'qta_scaffale': 1, 'age': 20, 'id': 7}, 
-            {'category': 'necklace', 'prezzo': 175.0, 'qta_magazzino': 7, 'sconto': 10, 'name': 'dextera necklace', 'gender': 'M', 'qta_scaffale': 1, 'age': 20, 'id': 8}, 
-            {'category': 'necklace', 'prezzo': 175.0, 'qta_magazzino': 4, 'sconto': 10, 'name': 'florere necklace', 'gender': 'F', 'qta_scaffale': 0, 'age': 17, 'id': 9}, 
-            {'category': 'earrings', 'prezzo': 195.0, 'qta_magazzino': 5, 'sconto': 10, 'name': 'florere stud earrings', 'gender': 'F', 'qta_scaffale': 1, 'age': 56, 'id': 10}, 
-            {'category': 'bracelet', 'prezzo': 195.0, 'qta_magazzino': 8, 'sconto': 10, 'name': 'gema bracelet', 'gender': 'F', 'qta_scaffale': 1, 'age': 65, 'id': 11}, 
-            {'category': 'earrings', 'prezzo': 195.0, 'qta_magazzino': 5, 'sconto': 10, 'name': 'gema drop earrings', 'gender': 'F', 'qta_scaffale': 0, 'age': 77, 'id': 12}, 
-            {'category': 'necklace', 'prezzo': 195.0, 'qta_magazzino': 4, 'sconto': 10, 'name': 'gema necklace', 'gender': 'F', 'qta_scaffale': 1, 'age': 84, 'id': 13}, 
-            {'category': 'necklace', 'prezzo': 250.0, 'qta_magazzino': 1, 'sconto': 10, 'name': 'matrix tennis necklace', 'gender': 'F', 'qta_scaffale': 1, 'age': 54, 'id': 14}, 
-            {'category': 'earrings', 'prezzo': 195.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'matrix drop earrings', 'gender': 'F', 'qta_scaffale': 0, 'age': 82, 'id': 15}, 
-            {'category': 'ring', 'prezzo': 125.0, 'qta_magazzino': 7, 'sconto': 10, 'name': 'matrix ring', 'gender': 'F', 'qta_scaffale': 0, 'age': 34, 'id': 16}, 
-            {'category': 'earrings', 'prezzo': 95.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'matrix stud earrings', 'gender': 'F', 'qta_scaffale': 1, 'age': 49, 'id': 17}, 
-            {'category': 'bracelet', 'prezzo': 400.0, 'qta_magazzino': 6, 'sconto': 10, 'name': 'mesmera bracelet', 'gender': 'F', 'qta_scaffale': 0, 'age': 38, 'id': 18}, 
-            {'category': 'ring', 'prezzo': 135.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'mesmera cocktail ring', 'gender': 'F', 'qta_scaffale': 1, 'age': 29, 'id': 19}, 
-            {'category': 'necklace', 'prezzo': 950.0, 'qta_magazzino': 4, 'sconto': 10, 'name': 'mesmera necklace', 'gender': 'F', 'qta_scaffale': 1, 'age': 38, 'id': 20}, 
-            {'category': 'ring', 'prezzo': 135.0, 'qta_magazzino': 8, 'sconto': 10, 'name': 'millenia cocktail ring', 'gender': 'F', 'qta_scaffale': 0, 'age': 47, 'id': 21}, 
-            {'category': 'watch', 'prezzo': 300.0, 'qta_magazzino': 8, 'sconto': 10, 'name': 'crystalline delight watch', 'gender': 'F', 'qta_scaffale': 0, 'age': 37, 'id': 22}, 
-            {'category': 'earrings', 'prezzo': 135.0, 'qta_magazzino': 7, 'sconto': 10, 'name': 'stella drop earrings', 'gender': 'F', 'qta_scaffale': 1, 'age': 63, 'id': 23}, 
-            {'category': 'necklace', 'prezzo': 175.0, 'qta_magazzino': 4, 'sconto': 10, 'name': 'stella necklace', 'gender': 'F', 'qta_scaffale': 1, 'age': 23, 'id': 24}, 
-            {'category': 'earrings', 'prezzo': 125.0, 'qta_magazzino': 7, 'sconto': 10, 'name': 'stella stud earrings', 'gender': 'F', 'qta_scaffale': 0, 'age': 62, 'id': 25}, 
-            {'category': 'earrings', 'prezzo': 125.0, 'qta_magazzino': 4, 'sconto': 10, 'name': 'stone hoop earrings', 'gender': 'F', 'qta_scaffale': 1, 'age': 37, 'id': 26}, 
-            {'category': 'earrings', 'prezzo': 125.0, 'qta_magazzino': 9, 'sconto': 10, 'name': 'swarovski iconic swan earring jackets', 'gender': 'F', 'qta_scaffale': 0, 'age': 39, 'id': 27}, 
-            {'category': 'necklace', 'prezzo': 115.0, 'qta_magazzino': 6, 'sconto': 10, 'name': 'swarovski iconic swan pendant', 'gender': 'F', 'qta_scaffale': 0, 'age': 79, 'id': 28}, 
-            {'category': 'earrings', 'prezzo': 129.0, 'qta_magazzino': 5, 'sconto': 10, 'name': 'swarovski swan stud earrings', 'gender': 'F', 'qta_scaffale': 1, 'age': 35, 'id': 29}, 
-            {'category': 'ring', 'prezzo': 75.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'vittore ring', 'gender': 'F', 'qta_scaffale': 0, 'age': 84, 'id': 30}, 
-            {'category': 'necklace', 'prezzo': 125.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'disney mickey mouse pendant', 'gender': 'F', 'qta_scaffale': 0, 'age': 84, 'id': 31}, 
-            {'category': 'bracelet', 'prezzo': 215.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'lucent bangle', 'gender': 'F', 'qta_scaffale': 0, 'age': 84, 'id': 32}, 
-            {'category': 'earrings', 'prezzo': 300.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'lucent hoop earrings', 'gender': 'F', 'qta_scaffale': 0, 'age': 84, 'id': 33}, 
-            {'category': 'earrings', 'prezzo': 89.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'meteora drop earrings', 'gender': 'F', 'qta_scaffale': 0, 'age': 84, 'id': 34}, 
-            {'category': 'necklace', 'prezzo': 175.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'stilla necklace', 'gender': 'F', 'qta_scaffale': 0, 'age': 84, 'id': 35}, 
-            {'category': 'necklace', 'prezzo': 75.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'creativity pendant', 'gender': 'F', 'qta_scaffale': 0, 'age': 84, 'id': 36}, 
-            {'category': 'necklace', 'prezzo': 550.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'millenia necklace', 'gender': 'F', 'qta_scaffale': 0, 'age': 84, 'id': 37}, 
-            {'category': 'earrings', 'prezzo': 175.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'luna drop earrings', 'gender': 'F', 'qta_scaffale': 0, 'age': 84, 'id': 38}, 
-            {'category': 'earrings', 'prezzo': 230.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'hyperbola drop earrings', 'gender': 'F', 'qta_scaffale': 0, 'age': 84, 'id': 39}, 
-            {'category': 'ring', 'prezzo': 250.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'lucent cocktail ring', 'gender': 'F', 'qta_scaffale': 0, 'age': 84, 'id': 40}, 
-            {'category': 'ring', 'prezzo': 175.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'luna cocktail ring', 'gender': 'F', 'qta_scaffale': 0, 'age': 84, 'id': 41}, 
-            {'category': 'ring', 'prezzo': 400.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'florere cocktail ring', 'gender': 'F', 'qta_scaffale': 0, 'age': 84, 'id': 42}
+            {'category': 'bracelet', 'prezzo': 155.0, 'qta_magazzino': 4, 'sconto': 10, 'name': 'angelic bracelet', 'gender': 'F', 'qta_scaffale': 0, 'age': 15, 'id': 1}, 
+            {'category': 'necklace', 'prezzo': 230.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'angelic necklace', 'gender': 'F', 'qta_scaffale': 1, 'age': 15, 'id': 2}, 
+            {'category': 'ring', 'prezzo': 135.0, 'qta_magazzino': 2, 'sconto': 10, 'name': 'constella cocktail ring', 'gender': 'F', 'qta_scaffale': 0, 'age': 45, 'id': 3}, 
+            {'category': 'bracelet', 'prezzo': 145.0, 'qta_magazzino': 5, 'sconto': 10, 'name': 'dad bracelet', 'gender': 'M', 'qta_scaffale': 1, 'age': 30, 'id': 4}, 
+            {'category': 'necklace', 'prezzo': 155.0, 'qta_magazzino': 7, 'sconto': 10, 'name': 'dancing swan necklace', 'gender': 'F', 'qta_scaffale': 0, 'age': 15, 'id': 5}, 
+            {'category': 'bracelet', 'prezzo': 155.0, 'qta_magazzino': 9, 'sconto': 10, 'name': 'dextera bracelet', 'gender': 'M', 'qta_scaffale': 1, 'age': 40, 'id': 6}, 
+            {'category': 'earrings', 'prezzo': 155.0, 'qta_magazzino': 6, 'sconto': 10, 'name': 'dextera hoop earrings', 'gender': 'F', 'qta_scaffale': 1, 'age': 15, 'id': 7}, 
+            {'category': 'necklace', 'prezzo': 175.0, 'qta_magazzino': 7, 'sconto': 10, 'name': 'dextera necklace', 'gender': 'M', 'qta_scaffale': 1, 'age': 40, 'id': 8}, 
+            {'category': 'necklace', 'prezzo': 175.0, 'qta_magazzino': 4, 'sconto': 10, 'name': 'florere necklace', 'gender': 'F', 'qta_scaffale': 0, 'age': 50, 'id': 9}, 
+            {'category': 'earrings', 'prezzo': 195.0, 'qta_magazzino': 5, 'sconto': 10, 'name': 'florere stud earrings', 'gender': 'F', 'qta_scaffale': 1, 'age': 50, 'id': 10}, 
+            {'category': 'bracelet', 'prezzo': 195.0, 'qta_magazzino': 8, 'sconto': 10, 'name': 'gema bracelet', 'gender': 'F', 'qta_scaffale': 1, 'age': 30, 'id': 11}, 
+            {'category': 'earrings', 'prezzo': 195.0, 'qta_magazzino': 5, 'sconto': 10, 'name': 'gema drop earrings', 'gender': 'F', 'qta_scaffale': 0, 'age': 30, 'id': 12}, 
+            {'category': 'necklace', 'prezzo': 195.0, 'qta_magazzino': 4, 'sconto': 10, 'name': 'gema necklace', 'gender': 'F', 'qta_scaffale': 1, 'age': 30, 'id': 13}, 
+            {'category': 'necklace', 'prezzo': 250.0, 'qta_magazzino': 1, 'sconto': 10, 'name': 'matrix tennis necklace', 'gender': 'F', 'qta_scaffale': 1, 'age': 50, 'id': 14}, 
+            {'category': 'earrings', 'prezzo': 195.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'matrix drop earrings', 'gender': 'F', 'qta_scaffale': 0, 'age': 50, 'id': 15}, 
+            {'category': 'ring', 'prezzo': 125.0, 'qta_magazzino': 7, 'sconto': 10, 'name': 'matrix ring', 'gender': 'F', 'qta_scaffale': 0, 'age': 50, 'id': 16}, 
+            {'category': 'earrings', 'prezzo': 95.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'matrix stud earrings', 'gender': 'F', 'qta_scaffale': 1, 'age': 50, 'id': 17}, 
+            {'category': 'bracelet', 'prezzo': 400.0, 'qta_magazzino': 6, 'sconto': 10, 'name': 'mesmera bracelet', 'gender': 'F', 'qta_scaffale': 0, 'age': 80, 'id': 18}, 
+            {'category': 'ring', 'prezzo': 135.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'mesmera cocktail ring', 'gender': 'F', 'qta_scaffale': 1, 'age': 80, 'id': 19}, 
+            {'category': 'necklace', 'prezzo': 950.0, 'qta_magazzino': 4, 'sconto': 10, 'name': 'mesmera necklace', 'gender': 'F', 'qta_scaffale': 1, 'age': 80, 'id': 20}, 
+            {'category': 'ring', 'prezzo': 135.0, 'qta_magazzino': 8, 'sconto': 10, 'name': 'millenia cocktail ring', 'gender': 'F', 'qta_scaffale': 0, 'age': 80, 'id': 21}, 
+            {'category': 'watch', 'prezzo': 300.0, 'qta_magazzino': 8, 'sconto': 10, 'name': 'crystalline delight watch', 'gender': 'F', 'qta_scaffale': 0, 'age': 30, 'id': 22}, 
+            {'category': 'earrings', 'prezzo': 135.0, 'qta_magazzino': 7, 'sconto': 10, 'name': 'stella drop earrings', 'gender': 'F', 'qta_scaffale': 1, 'age': 15, 'id': 23}, 
+            {'category': 'necklace', 'prezzo': 175.0, 'qta_magazzino': 4, 'sconto': 10, 'name': 'stella necklace', 'gender': 'F', 'qta_scaffale': 1, 'age': 15, 'id': 24}, 
+            {'category': 'earrings', 'prezzo': 125.0, 'qta_magazzino': 7, 'sconto': 10, 'name': 'stella stud earrings', 'gender': 'F', 'qta_scaffale': 0, 'age': 15, 'id': 25}, 
+            {'category': 'earrings', 'prezzo': 125.0, 'qta_magazzino': 4, 'sconto': 10, 'name': 'stone hoop earrings', 'gender': 'F', 'qta_scaffale': 1, 'age': 15, 'id': 26}, 
+            {'category': 'earrings', 'prezzo': 125.0, 'qta_magazzino': 9, 'sconto': 10, 'name': 'swarovski iconic swan earring jackets', 'gender': 'F', 'qta_scaffale': 0, 'age': 30, 'id': 27}, 
+            {'category': 'necklace', 'prezzo': 115.0, 'qta_magazzino': 6, 'sconto': 10, 'name': 'swarovski iconic swan pendant', 'gender': 'F', 'qta_scaffale': 0, 'age': 30, 'id': 28}, 
+            {'category': 'earrings', 'prezzo': 129.0, 'qta_magazzino': 5, 'sconto': 10, 'name': 'swarovski swan stud earrings', 'gender': 'F', 'qta_scaffale': 1, 'age': 30, 'id': 29}, 
+            {'category': 'ring', 'prezzo': 75.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'vittore ring', 'gender': 'F', 'qta_scaffale': 0, 'age': 50, 'id': 30}, 
+            {'category': 'necklace', 'prezzo': 125.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'disney mickey mouse pendant', 'gender': 'F', 'qta_scaffale': 0, 'age': 15, 'id': 31}, 
+            {'category': 'bracelet', 'prezzo': 215.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'lucent bangle', 'gender': 'F', 'qta_scaffale': 0, 'age': 30, 'id': 32}, 
+            {'category': 'earrings', 'prezzo': 300.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'lucent hoop earrings', 'gender': 'F', 'qta_scaffale': 0, 'age': 30, 'id': 33}, 
+            {'category': 'earrings', 'prezzo': 89.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'meteora drop earrings', 'gender': 'F', 'qta_scaffale': 0, 'age': 30, 'id': 34}, 
+            {'category': 'necklace', 'prezzo': 175.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'stilla necklace', 'gender': 'F', 'qta_scaffale': 0, 'age': 30, 'id': 35}, 
+            {'category': 'necklace', 'prezzo': 75.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'creativity pendant', 'gender': 'F', 'qta_scaffale': 0, 'age': 30, 'id': 36}, 
+            {'category': 'necklace', 'prezzo': 550.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'millenia necklace', 'gender': 'F', 'qta_scaffale': 0, 'age': 50, 'id': 37}, 
+            {'category': 'earrings', 'prezzo': 175.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'luna drop earrings', 'gender': 'F', 'qta_scaffale': 0, 'age': 50, 'id': 38}, 
+            {'category': 'earrings', 'prezzo': 230.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'hyperbola drop earrings', 'gender': 'F', 'qta_scaffale': 0, 'age': 50, 'id': 39}, 
+            {'category': 'ring', 'prezzo': 250.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'lucent cocktail ring', 'gender': 'F', 'qta_scaffale': 0, 'age': 50, 'id': 40}, 
+            {'category': 'ring', 'prezzo': 175.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'luna cocktail ring', 'gender': 'F', 'qta_scaffale': 0, 'age': 50, 'id': 41}, 
+            {'category': 'ring', 'prezzo': 400.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'florere cocktail ring', 'gender': 'F', 'qta_scaffale': 0, 'age': 50, 'id': 42}
         ]
     
     print(product_info)
@@ -849,7 +849,7 @@ if __name__ == '__main__':
     print("Buongiorno "+nome_utente['nome']+" "+nome_utente['cognome']+", sono peara, il nao del team naonecsus.")
 
     print("Come posso aiutarti? Anche se sono un robot di gioielli ne so un bel po")
-    risposta1 = raw_input()
+    risposta1 = input()
     regalo = estrai_regalo(risposta1)
     
     if regalo == "regalo":
@@ -875,27 +875,27 @@ if __name__ == '__main__':
             for i in range(len(posizioni_vuote)):
                 if posizioni_vuote[i] == 0:
                     print("posso chiederti per chi è il gioiello? Se e per te ho gia delle proposte, ma se non e per te devo chiederti alcuni dettagli per consigliare lacquisto migliore")
-                    risposta2 = raw_input()
+                    risposta2 = input()
                     gender = str(analizza_genere(risposta2))          
                 elif posizioni_vuote[i] == 1:
                     print("Quanti anni ha la persone che ricevera questo meraviglioso regalo?")
-                    risposta3 = raw_input()
+                    risposta3 = input()
                     age = int(estrai_eta(risposta3))
                 elif posizioni_vuote[i] == 2:
                     print("Hai un bagget per lacquisto del gioiello?")
-                    risposta4 = raw_input()
+                    risposta4 = input()
                     prezzo = int(estrai_budget(risposta4))
                 elif posizioni_vuote[i] == 3:
                     print("A questa persona che gioielli piacciono? O quale tra questi tipi vuoi acquistare? Collane, bracciali, orecchini, anelli o orologi?")
-                    risposta5 = raw_input()
+                    risposta5 = input()
                     category = str(estrai_categoria(risposta5))
                         
             profilo_utente = [gender, age, prezzo, category]
             posizioni_vuote = [pos for pos, val in enumerate(profilo_utente) if val == "" or val == 0]
 
-        #print(profilo_utente)
+        print(profilo_utente)
         id_gioiello_consigliato = recommend_jewelry(profilo_utente, product_info)
-        #print(id_gioiello_consigliato)
+        print(id_gioiello_consigliato)
 
         if len(id_gioiello_consigliato) > 0:
             i = 0
@@ -910,14 +910,14 @@ if __name__ == '__main__':
 
                 #richiesta al cliente se vuole aggiungere il prodotto al carrello
                 print("vuoi aggiungere " + product_name + " al carrello?")
-                aggiungi=estrai_si_no(raw_input())
+                aggiungi=estrai_si_no(input())
                 #---
 
                 if risposta_a1_ == "si" and aggiungi == "si":
                     carrello.append(product_name)
                     
                     print("Vuoi che ti consigli qualche abbinamento da fare?")                       
-                    risposta_= raw_input()
+                    risposta_= input()
                     risposta__= estrai_si_no(risposta_.lower())
                                     
                     if risposta__ == "si":
@@ -930,7 +930,7 @@ if __name__ == '__main__':
                         risposta3 = morphcast(emozioni)
 
                         print("vuoi aggiungere " + abbinamento + " al carrello?")
-                        aggiungi1=estrai_si_no(raw_input())
+                        aggiungi1=estrai_si_no(input())
                         
                         if risposta3 == "si" and aggiungi1 == "si":
                             carrello.append(abbinamento)
@@ -955,7 +955,7 @@ if __name__ == '__main__':
             break
 
         print("Vuoi acquistare qualche altro prodotto?")
-        user_input   = raw_input()
+        user_input   = input()
         user_input_1 = estrai_si_no(user_input)
 
         if user_input_1 == "no":
