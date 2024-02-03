@@ -594,7 +594,7 @@ def recommend_jewelry(customer_info, product_info):
                     #return  gioielli_consigliati
                 else:
                     for item in product_info:
-                        if item['gender'] == 'F' and 40 <= item['age'] < 60 and item['category'] == 'earrings' and item['prezzo'] > 230:
+                        if item['gender'] == 'F' and 40 <= item['age'] < 60 and item['category'] == 'earrings' and item['prezzo'] >= 230:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
                     #gioielli_consigliati = [17,38,10,15,39]
@@ -902,6 +902,8 @@ if __name__ == '__main__':
             while i < len(id_gioiello_consigliato):
                 product_name = get_product_name_by_id(product_info, id_gioiello_consigliato[i])
 
+                
+                
                 print("Fammi pensare... io ti consiglierei: " + product_name)
                 funzione_prodotto = product_name.capitalize().replace(' ', '_')
                 descrizione = Descrizione_prodotto(funzione_prodotto)
