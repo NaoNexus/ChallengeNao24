@@ -874,19 +874,19 @@ if __name__ == '__main__':
         while len(posizioni_vuote) != 0:
             for i in range(len(posizioni_vuote)):
                 if posizioni_vuote[i] == 0:
-                    print("posso chiederti per chi è il gioiello? Se e per te ho gia delle proposte, ma se non e per te devo chiederti alcuni dettagli per consigliare lacquisto migliore")
+                    print("posso chiederti per chi è il gioiello?")
                     risposta2 = input()
                     gender = str(analizza_genere(risposta2))          
                 elif posizioni_vuote[i] == 1:
-                    print("Quanti anni ha la persone che ricevera questo meraviglioso regalo?")
+                    print("E quanti anni ha?")
                     risposta3 = input()
                     age = int(estrai_eta(risposta3))
                 elif posizioni_vuote[i] == 2:
-                    print("Hai un bagget per lacquisto del gioiello?")
+                    print("Hai un bugget per lacquisto del gioiello?")
                     risposta4 = input()
                     prezzo = int(estrai_budget(risposta4))
                 elif posizioni_vuote[i] == 3:
-                    print("A questa persona che gioielli piacciono? O quale tra questi tipi vuoi acquistare? Collane, bracciali, orecchini, anelli o orologi?")
+                    print("A quale tipologia di gioielli pensavi? Collane, bracciali, orecchini, anelli o orologi?")
                     risposta5 = input()
                     category = str(estrai_categoria(risposta5))
                         
@@ -906,6 +906,7 @@ if __name__ == '__main__':
                 funzione_prodotto = product_name.capitalize().replace(' ', '_')
                 descrizione = Descrizione_prodotto(funzione_prodotto)
                 print(descrizione)
+                
                 risposta_a1_ = morphcast(emozioni)
 
                 #richiesta al cliente se vuole aggiungere il prodotto al carrello
@@ -940,7 +941,7 @@ if __name__ == '__main__':
                             
                             break
                         else:
-                            print("non so che prodotto consigliarti")
+                            print("Ok mi dispiace")
                             user_input = False
                             break            
                     else:
