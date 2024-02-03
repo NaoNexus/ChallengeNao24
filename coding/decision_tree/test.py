@@ -934,7 +934,10 @@ if __name__ == '__main__':
                         
                         if risposta3 == "si" and aggiungi1 == "si":
                             carrello.append(abbinamento)
+                            print("Controlla e conferma il tuo ordine nell'app")
+                            print("i tuoi gioielli ti aspettano in cassa :)")
                             user_input = False
+                            
                             break
                         else:
                             print("non so che prodotto consigliarti")
@@ -967,10 +970,10 @@ if __name__ == '__main__':
             risposta1 = ""
             
     #print(carrello)
-    print("Controlla e conferma il tuo ordine nell'app")
-    print("i tuoi gioielli ti aspettano in cassa :)")
+    #print("Controlla e conferma il tuo ordine nell'app")
+    #print("i tuoi gioielli ti aspettano in cassa :)")
     print("Spero di averti aiutato al meglio delle mie possibilita, grazie per aver acquistato da svaroschi utilizzando la tecnologia naonecsus!")
-
+    
 
 '''
 TO DO
