@@ -594,7 +594,7 @@ def recommend_jewelry(customer_info, product_info):
                     #return  gioielli_consigliati
                 else:
                     for item in product_info:
-                        if item['gender'] == 'F' and 40 <= item['age'] < 60 and item['category'] == 'earrings' and item['prezzo'] > 230:
+                        if item['gender'] == 'F' and 40 <= item['age'] < 60 and item['category'] == 'earrings' and item['prezzo'] >= 230:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
                     #gioielli_consigliati = [17,38,10,15,39]
