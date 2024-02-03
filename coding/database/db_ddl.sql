@@ -28,6 +28,7 @@ CREATE TABLE Oggetto (
 	sconto				INT,
 	eta_consigliata		INT,
 	sesso_consigliato	CHAR,
+	qr_code				VARCHAR,
 	
 	PRIMARY KEY(id)
 );
