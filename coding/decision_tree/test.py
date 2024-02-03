@@ -3,7 +3,6 @@
 import re
 import random
 
-
 __DATABASE__ = False
 
 if __DATABASE__:
@@ -839,6 +838,7 @@ if __name__ == '__main__':
         emozioni = {}
     else:
     '''
+    
     #preso da morphcast il porf lo sistema
     emozioni =  {'gender': 'female','age': 21,'angry': 0.2, 'disgust': 0.3, 'happy': 0.9, 'neutral': 0.5, 'sad': 0.1, 'surprise': 0.6, 'attention': 0.8} 
     print(emozioni)
@@ -978,7 +978,7 @@ TO DO
 -considerare numero elementi scaffale e in magazzino
 -considerare prodotti in sconto???
 
--rilevare con morphcast
+-rilevare con morphcast #prof
 
 -chiedere al cliente se aggiungere elemento al carrello     #fatto
 -chiedere al cliente se ha terminato la scelta e se sì invitare il cliente ad andare in cassa dall'altro nao
