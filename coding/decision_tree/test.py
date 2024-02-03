@@ -901,23 +901,48 @@ if __name__ == '__main__':
             i = 0
             while i < len(id_gioiello_consigliato):
                 product_name = get_product_name_by_id(product_info, id_gioiello_consigliato[i])
-
-                
                 
                 print("Fammi pensare... io ti consiglierei: " + product_name)
                 funzione_prodotto = product_name.capitalize().replace(' ', '_')
                 descrizione = Descrizione_prodotto(funzione_prodotto)
                 print(descrizione)
-                
                 risposta_a1_ = morphcast(emozioni)
 
-                #richiesta al cliente se vuole aggiungere il prodotto al carrello
-                print("vuoi aggiungere " + product_name + " al carrello?")
-                aggiungi=estrai_si_no(input())
-                #---
+                '''
+                for a in product_info:
+                    if a['name']== product_name:
+                        magazzino=a['qta_magazzino']
+                        print(magazzino)
+                        if magazzino > 0:
+                            print("vuoi aggiungere " + product_name + " al carrello?")
+                            aggiungi=estrai_si_no(input())
+                            carrello.append(product_name)
+                        else:
+                            print("Abbiamo terminato il prodotto richiesto, prova ad andare in un altro store o ripassa settimana prossima")
 
-                if risposta_a1_ == "si" and aggiungi == "si":
-                    carrello.append(product_name)
+                #richiesta al cliente se vuole aggiungere il prodotto al carrello
+                #print("vuoi aggiungere " + product_name + " al carrello?")
+                #aggiungi=estrai_si_no(input())
+                '''
+                
+                if risposta_a1_ == "si": #and aggiungi == "si":
+                    #carrello.append(product_name)
+                    for a in product_info:
+                        if a['name']== product_name:
+                            magazzino=a['qta_magazzino']
+                            #print(magazzino)
+                            if magazzino > 0:
+                                print("vuoi aggiungere " + product_name + " al carrello?")
+                                aggiungi=estrai_si_no(input())
+                                if aggiungi == "si":
+                                    carrello.append(product_name)
+                                    
+                            else:
+                                print("Abbiamo terminato il prodotto richiesto, prova ad andare in un altro store o ripassa settimana prossima")
+
+                        #richiesta al cliente se vuole aggiungere il prodotto al carrello
+                        #print("vuoi aggiungere " + product_name + " al carrello?")
+                        #aggiungi=estrai_si_no(input())
                     
                     print("Vuoi che ti consigli qualche abbinamento da fare?")                       
                     risposta_= input()
@@ -932,11 +957,24 @@ if __name__ == '__main__':
                         print(descrizione2)
                         risposta3 = morphcast(emozioni)
 
-                        print("vuoi aggiungere " + abbinamento + " al carrello?")
-                        aggiungi1=estrai_si_no(input())
+                        for b in product_info:
+                            if b['name']== abbinamento:
+                                magazzino_=b['qta_magazzino']
+                                #print(magazzino)
+                                if magazzino_ > 0:
+                                    print("vuoi aggiungere " + abbinamento + " al carrello?")
+                                    aggiungi_=estrai_si_no(input())
+                                    if aggiungi_ == "si":
+                                        carrello.append(abbinamento)
+                                        
+                                else:
+                                    print("Abbiamo terminato il prodotto richiesto, prova ad andare in un altro store o ripassa settimana prossima")
+        
+                        #print("vuoi aggiungere " + abbinamento + " al carrello?")
+                        #aggiungi1=estrai_si_no(input())
                         
-                        if risposta3 == "si" and aggiungi1 == "si":
-                            carrello.append(abbinamento)
+                        if risposta3 == "si": #and aggiungi1 == "si":
+                            #carrello.append(abbinamento)
                             print("Controlla e conferma il tuo ordine nell'app")
                             print("i tuoi gioielli ti aspettano in cassa :)")
                             user_input = False
