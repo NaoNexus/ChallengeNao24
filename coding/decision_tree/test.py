@@ -902,6 +902,8 @@ if __name__ == '__main__':
             while i < len(id_gioiello_consigliato):
                 product_name = get_product_name_by_id(product_info, id_gioiello_consigliato[i])
 
+                
+                
                 print("Fammi pensare... io ti consiglierei: " + product_name)
                 funzione_prodotto = product_name.capitalize().replace(' ', '_')
                 descrizione = Descrizione_prodotto(funzione_prodotto)
