@@ -9,7 +9,6 @@ if __DATABASE__:
     import db_helper
     db_helper = db_helper.DB()
 
-#descrizione prodotti
 def Angelic_bracelet():
     return "L Angelic_bracelet  e un classico intramontabile. Il braccialetto rodiato propone una fila di Clear Crystal a taglio circolare, ognuno incorniciato dal pave e di Clear Crystal. Il gioiello si abbina perfettamente agli altri accessori della collezione Angelic. Il bracciale appartiene alla collezione Angelic, con cristalli e placcato in rodio"
 
@@ -88,8 +87,6 @@ def Swarovski_swan_stud_earrings():
 def Vittore_ring():
     return "Questo anello Vittore  e ideale per un sottile tocco di glitter. Combina il classico abbinamento di cristalli Cry dal taglio Round con una finitura color oro e ti conferir a un look raffinato e lussuoso. Realizzato per brillare su tutti i lati, potrai indossare questo gioiello con altri stili, come, ad esempio, un affascinante anello cocktail, per un contrasto efficace. Questo anello fa parte della collezione Vittore, con zirconi"
 
-#---
-
 def Luna_drop_earrings():
     return "Gli orecchini Luna combinano ispirazione lunare e stile sfavillante. Placcati in rodio, presentano eleganti mezzelune impreziosite da cristalli di cinque dimensioni, creando un sofisticato effetto pavé. Parte della famiglia Luna, questi gioielli sono adatti per ogni occasione, offrendo una scelta disinvolta. Il placcaggio rodio garantisce una lucentezza duratura e il design versatile si adatta a diversi outfit, rappresentando un elegante dichiarazione di stile."
 
@@ -144,20 +141,18 @@ def Crystalline_delight_watch():
 def Gema_necklace():
     return "La collana Gema offre uno stile unico con una varieta di tagli e colori vivaci. Realizzata con una catena placcata rodio, presenta cristalli di dimensioni e tagli straordinari, creando un affascinante armonia. Aggiungi gioia prismatica al tuo look indossando questa collana e abbinala ad altri gioielli Gema per un look irresistibile, offrendo un mix di colore vivace e stile distintivo."
 
-#fine descrizione dei prodotto
-
 def analizza_genere(frase):
-    parole_chiave_maschili  = ["marito","maschio","fratello", "papà", "padre", "nonno", "amico","figlio", "fratello,", "papà,", "padre,", "nonno,", "amico,","figlio,", "fratello.", "papà.", "padre.", "nonno.", "amico.","figlio."]
-    parole_chiave_femminili = ["moglie","femmina","sorella", "mamma", "madre", "nonna", "amica", "sorella,", "mamma,", "madre,", "nonna,", "amica,", "sorella.", "mamma.", "madre.", "nonna.", "amica.","figlia","figlia,","figlia."]
+    parole_chiave_maschili  = ["zio","marito","maschio","fratello", "papà", "padre", "nonno", "amico","figlio", "fratello,", "papà,", "padre,", "nonno,", "amico,","figlio,", "fratello.", "papà.", "padre.", "nonno.", "amico.","figlio."]
+    parole_chiave_femminili = ["zia","moglie","femmina","sorella", "mamma", "madre", "nonna", "amica", "sorella,", "mamma,", "madre,", "nonna,", "amica,", "sorella.", "mamma.", "madre.", "nonna.", "amica.","figlia","figlia,","figlia."]
 
-    # Tokenizza la frase in parole
-    parole = frase.lower().split()  # Converto tutto in minuscolo per rendere la ricerca case-insensitive
+    
+    parole = frase.lower().split() 
 
-    # Verifica la presenza di parole chiave maschili e femminili
+    
     genere_maschile = any(parola in parole for parola in parole_chiave_maschili)
     genere_femminile = any(parola in parole for parola in parole_chiave_femminili)
 
-    # Determina il risultato in base alla presenza di parole chiave
+    
     if genere_maschile and not genere_femminile:
         return "male"
     elif genere_femminile and not genere_maschile:
@@ -166,7 +161,7 @@ def analizza_genere(frase):
         return ""
 
 def estrai_eta(frase):
-    # Utilizza un'espressione regolare per trovare un numero nella frase
+    
     risposta = frase
     matches = re.findall(r'\b\d+\b', risposta)
     lista_numeri = len(matches)
@@ -179,7 +174,7 @@ def estrai_eta(frase):
         return 0
 
 def estrai_budget(frase):
-    # Utilizza un'espressione regolare per trovare un numero nella frase
+    
     risposta = frase
     matches = re.findall(r'\b\d+\b', risposta)
     lista_numeri = len(matches)
@@ -201,10 +196,10 @@ def estrai_categoria(frase):
     category                = ["necklace","ring","bracelet","earrings"]
     parola_chiave           = ["uguale","indifferente"]
     
-    # Tokenizza la frase in parole
-    parole = frase.lower().split()  # Converto tutto in minuscolo per rendere la ricerca case-insensitive
+    
+    parole = frase.lower().split()  
 
-    if any(parola in parole for parola in parole_chiave_necklace):             #parola è una variabile temporanea
+    if any(parola in parole for parola in parole_chiave_necklace):             
         return "necklace"
     elif any(parola in parole for parola in parole_chiave_ring):
         return "ring"
@@ -224,8 +219,12 @@ def estrai_categoria(frase):
 def estrai_regalo(frase):
     parole = frase.lower().split()
     parole_chiave_regalo = ["regalo","regalo,","regalo."]
+    parole_chiave_me = ["me"]
+    
     if any(parola in parole for parola in parole_chiave_regalo):
         return "regalo"
+    elif any(parola in parole for parola in parole_chiave_me):
+        return "me"
     else:
         return ""
 
@@ -245,13 +244,9 @@ def recommend_jewelry(customer_info, product_info):
     
     gioielli_consigliati = []
     
-    # -- male
+    
     if gender == 'male': 
         if age > 60:
-            #for item in product_info:
-            #    if item['gender'] == 'M' and item['age'] > 60:
-            #        gioielli_consigliati.append(item['id'])
-            #return gioielli_consigliati
             return []
         elif age < 20: 
             if category == 'bracelet':
@@ -260,77 +255,54 @@ def recommend_jewelry(customer_info, product_info):
                         if item['gender'] == 'M' and item['age'] < 20 and item['category'] == 'bracelet' and item['prezzo'] >= 155:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [6]
-                    #return gioielli_consigliati
+                    
                 else:
-                    #for item in product_info:
-                    #    if item['gender'] == 'M' and item['age'] < 20 and item['category'] == 'bracelet' and item['prezzo'] < 155:
-                    #        gioielli_consigliati.append(item['id'])
-                    #return gioielli_consigliati
+                    
                     return []
             elif category == 'necklace':
                 if budget < 175:
-                    #for item in product_info:
-                    #    if item['gender'] == 'M' and item['age'] < 20 and item['category'] == 'necklace' and item['prezzo'] < 175:
-                    #        gioielli_consigliati.append(item['id'])
-                    #return gioielli_consigliati
+                    
                     return []
                 else:
                     for item in product_info:
                         if item['gender'] == 'M' and item['age'] < 20 and item['category'] == 'necklace' and item['prezzo'] >= 175:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [8]
-                    #return  gioielli_consigliati
+                    
             else:
-                #for item in product_info:
-                #    if item['gender'] == 'M' and item['age'] < 20 and item['prezzo'] < budget:
-                #        gioielli_consigliati.append(item['id'])
-                #return gioielli_consigliati
+                
                 return []
         elif 20 <= age <= 60:
             if category == 'bracelet':
                 if budget < 145:
-                    #for item in product_info:
-                    #    if item['gender'] == 'M' and 20 <= item['age'] <= 60 and item['category'] == 'bracelet' and item['prezzo'] < 145:
-                    #        gioielli_consigliati.append(item['id'])
-                    #return gioielli_consigliati
+                    
                     return []
                 elif 145 <= budget < 155:
                     for item in product_info:
                         if item['gender'] == 'M' and 20 <= item['age'] <= 60 and item['category'] == 'bracelet' and 145 <= item['prezzo'] < 155:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliti = [4]
-                    #return gioielli_consigliati
-                else: #(budget >= 155:)
+                    
+                else: 
                     for item in product_info:
                         if item['gender'] == 'M' and 20 <= item['age'] <= 60 and item['category'] == 'bracelet' and item['prezzo'] >= 155:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [4, 6]
-                    #return gioielli_consigliati
+                    
             elif category == 'necklace':
                 if budget < 175:
-                    #for item in product_info:
-                    #    if item['gender'] == 'M' and 20 <= item['age'] <= 60 and item['category'] == 'necklace' and item['prezzo'] < 175:
-                    #        gioielli_consigliati.append(item['id'])
-                    #return gioielli_consigliati
+                   
                     return []
                 else:
                     for item in product_info:
                         if item['gender'] == 'M' and 20 <= item['age'] <= 60 and item['category'] == 'necklace' and item['prezzo'] >= 175:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [8]
-                    #return gioielli_consigliati
+                    
             else:
-                #for item in product_info:
-                #    if item['gender'] == 'M' and 20 <= item['age'] <= 60 and item['prezzo'] < budget:
-                #        gioielli_consigliati.append(item['id'])
-                #return gioielli_consigliati
+                
                 return []
-    # -- female
+    
     elif gender == 'female':
         if 0 < age < 20:
             if category == 'bracelet':
@@ -339,369 +311,282 @@ def recommend_jewelry(customer_info, product_info):
                         if item['gender'] == 'F' and 0 < item['age'] < 20 and item['category'] == 'bracelet' and item['prezzo'] >= 155:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [1]
-                    #return gioielli_consigliati
+                    
                 else:
-                    #for item in product_info:
-                    #    if item['gender'] == 'F' and 0 < item['age'] < 20 and item['category'] == 'bracelet' and item['prezzo'] < 155:
-                    #        gioielli_consigliati.append(item['id'])
-                    #return gioielli_consigliati
+                    
                     return []
             elif category == 'necklace':
                 if budget < 125:
-                    #for item in product_info:
-                    #    if item['gender'] == 'F' and 0 < item['age'] < 20 and item['category'] == 'necklace' and item['prezzo'] < 125:
-                    #        gioielli_consigliati.append(item['id'])
-                    #return gioielli_consigliati
+                    
                     return []
                 elif 125 <= budget < 155:
                     for item in product_info:
                         if item['gender'] == 'F' and 0 < item['age'] < 20 and item['category'] == 'necklace' and 125 <= item['prezzo'] < 155:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [31]
-                    #return gioielli_consigliati
+                    
                 elif 155 <= budget < 175:
                     for item in product_info:
                         if item['gender'] == 'F' and 0 < item['age'] < 20 and item['category'] == 'necklace' and 155 <= item['prezzo'] < 175:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [5,31]
-                    #return  gioielli_consigliati
+                    
                 elif 175 <= budget < 230:
                     for item in product_info:
                         if item['gender'] == 'F' and 0 < item['age'] < 20 and item['category'] == 'necklace' and 175 <= item['prezzo'] < 230:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [5,24,31]
-                    #return  gioielli_consigliati
+                    
                 elif budget >= 230:
                     for item in product_info:
                         if item['gender'] == 'F' and 0 < item['age'] < 20 and item['category'] == 'necklace' and item['prezzo'] >= 230:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [2,5,24,31]
-                    #return  gioielli_consigliati
+                   
             elif category == 'earrings':
                 if budget < 125:
-                    #for item in product_info:
-                    #    if item['gender'] == 'F' and 0 < item['age'] < 20 and item['category'] == 'earrings' and item['prezzo'] < 125:
-                    #        gioielli_consigliati.append(item['id'])
-                    #return gioielli_consigliati
+                    
                     return []
                 elif 125 <= budget < 135:
                     for item in product_info:
                         if item['gender'] == 'F' and 0 < item['age'] < 20 and item['category'] == 'earrings' and 125 <= item['prezzo'] < 135:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [25,26]
-                    #return  gioielli_consigliati
+                    
                 elif 135 <= budget < 155:
                     for item in product_info:
                         if item['gender'] == 'F' and 0 < item['age'] < 20 and item['category'] == 'earrings' and 135 <= item['prezzo'] < 155:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [23, 25, 26]
-                    #return  gioielli_consigliati
+                   
                 else:
                     for item in product_info:
                         if item['gender'] == 'F' and 0 < item['age'] < 20 and item['category'] == 'earrings' and item['prezzo'] >= 155:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [23,7,25,26]
-                    #return  gioielli_consigliati
+                    
             else:
-                #for item in product_info:
-                #    if item['gender'] == 'F' and 0 < item['age'] < 20 and item['prezzo'] < budget:
-                #        gioielli_consigliati.append(item['id'])
-                #return gioielli_consigliati
+                
                 return []
         elif 20 <= age < 40:
             if category == 'bracelet':
                 if budget < 195:
-                    #for item in product_info:
-                    #    if item['gender'] == 'F' and 20 <= item['age'] < 40 and item['category'] == 'bracelet' and item['prezzo'] < 195:
-                    #        gioielli_consigliati.append(item['id'])
-                    #return gioielli_consigliati
+                    
                     return []
                 elif 195 <= budget < 215:
                     for item in product_info:
                         if item['gender'] == 'F' and 20 <= item['age'] < 40 and item['category'] == 'bracelet' and 195 <= item['prezzo'] < 215:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [11]
-                    #return  gioielli_consigliati
+                    
                 else:
                     for item in product_info:
                         if item['gender'] == 'F' and 20 <= item['age'] < 40 and item['category'] == 'bracelet' and item['prezzo'] >= 215:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [11,32]
-                    #return  gioielli_consigliati
+                    
             elif category == 'necklace':
                 if budget < 75:
-                    #for item in product_info:
-                    #    if item['gender'] == 'F' and 20 <= item['age'] < 40 and item['category'] == 'necklace' and item['prezzo'] < 75:
-                    #        gioielli_consigliati.append(item['id'])
-                    #return gioielli_consigliati
+                    
                     return []
                 elif 75 <= budget < 115:
                     for item in product_info:
                         if item['gender'] == 'F' and 20 <= item['age'] < 40 and item['category'] == 'necklace' and 75 <= item['prezzo'] < 115:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [36]
-                    #return  gioielli_consigliati
+                   
                 elif 115 <= budget < 175:
                     for item in product_info:
                         if item['gender'] == 'F' and 20 <= item['age'] < 40 and item['category'] == 'necklace' and 115 <= item['prezzo'] < 175:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [36,28]
-                    #return  gioielli_consigliati
+                   
                 elif 175 <= budget < 195:
                     for item in product_info:
                         if item['gender'] == 'F' and 20 <= item['age'] < 40 and item['category'] == 'necklace' and 175 <= item['prezzo'] < 195:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [36,28,35]
-                    #return  gioielli_consigliati
+                    
                 else:
                     for item in product_info:
                         if item['gender'] == 'F' and 20 <= item['age'] < 40 and item['category'] == 'necklace' and item['prezzo'] >= 195:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [36,28,35,13]
-                    #return  gioielli_consigliati
+                    
             elif category == 'earrings':
                 if budget < 89:
-                    #for item in product_info:
-                    #    if item['gender'] == 'F' and 20 <= item['age'] < 40 and item['category'] == 'earrings' and item['prezzo'] < 89:
-                    #        gioielli_consigliati.append(item['id'])
-                    #return gioielli_consigliati
+                    
                     return []
                 elif 89 <= budget < 125:
                     for item in product_info:
                         if item['gender'] == 'F' and 20 <= item['age'] < 40 and item['category'] == 'earrings' and 89 <= item['prezzo'] < 125:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [34]
-                    #return gioielli_consigliati
+                    
                 elif 125 <= budget < 129:
                     for item in product_info:
                         if item['gender'] == 'F' and 20 <= item['age'] < 40 and item['category'] == 'earrings' and 125 <= item['prezzo'] < 129:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [34,27]
-                    #return  gioielli_consigliati
+                    
                 elif 129 <= budget < 195:
                     for item in product_info:
                         if item['gender'] == 'F' and 20 <= item['age'] < 40 and item['category'] == 'earrings' and 129 <= item['prezzo'] < 195:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [34,27,29]
-                    #return  gioielli_consigliati
+                    
                 elif 195 <= budget < 300:
                     for item in product_info:
                         if item['gender'] == 'F' and 20 <= item['age'] < 40 and item['category'] == 'earrings' and 195 <= item['prezzo'] < 300:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [34,27,29,12]
-                    #return  gioielli_consigliati
+                   
                 else:
                     for item in product_info:
                         if item['gender'] == 'F' and 20 <= item['age'] < 40 and item['category'] == 'earrings' and item['prezzo'] > 300:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [34,27,29,12,33]
-                    #return  gioielli_consigliati
+                    
             elif category == 'watch':
                 if budget >= 300:
                     for item in product_info:
                         if item['gender'] == 'F' and 20 <= item['age'] < 40 and item['category'] == 'watch' and item['prezzo'] >= 300:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [22]
-                    #return gioielli_consigliati
+                   
                 else:
-                    #for item in product_info:
-                    #    if item['gender'] == 'F' and 20 <= item['age'] < 40 and item['category'] == 'watch' and item['prezzo'] < 300:
-                    #        gioielli_consigliati.append(item['id'])
-                    #return gioielli_consigliati
+                    
                     return []
-            else:                                                                                                                                               #---
-                #for item in product_info:
-                #    if item['gender'] == 'F' and 20 <= item['age'] < 40 and item['prezzo'] < budget:
-                #        gioielli_consigliati.append(item['id'])
-                #return gioielli_consigliati
+            else:                                                                                                                                               
+                
                 return []
         elif 40 <= age < 60:
             if category == 'necklace':
                 if budget < 175:
-                    #for item in product_info:
-                    #    if item['gender'] == 'F' and 40 <= item['age'] < 60 and item['category'] == 'necklace' and item['prezzo'] < 175:
-                    #        gioielli_consigliati.append(item['id'])
-                    #return gioielli_consigliati
+                    
                     return []
                 elif 175 <= budget < 250:
                     for item in product_info:
                         if item['gender'] == 'F' and 40 <= item['age'] < 60 and item['category'] == 'necklace' and 175 <= item['prezzo'] < 250:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [9]
-                    #return  gioielli_consigliati
+                    
                 elif 250 <= budget < 550:
                     for item in product_info:
                         if item['gender'] == 'F' and 40 <= item['age'] < 60 and item['category'] == 'necklace' and 250 <= item['prezzo'] < 550:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [9,14]
-                    #return  gioielli_consigliati
+                    
                 else:
                     for item in product_info:
                         if item['gender'] == 'F' and 40 <= item['age'] < 60 and item['category'] == 'necklace' and item['prezzo'] >= 550:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [9,14,37]
-                    #return  gioielli_consigliati
+                   
             elif category == 'earrings':
                 if budget < 95:
-                    #for item in product_info:
-                    #    if item['gender'] == 'F' and 40 <= item['age'] < 60 and item['category'] == 'earrings' and item['prezzo'] < 95:
-                    #        gioielli_consigliati.append(item['id'])
-                    #return gioielli_consigliati
+                    
                     return []
                 elif 95 <= budget < 175:
                     for item in product_info:
                         if item['gender'] == 'F' and 40 <= item['age'] < 60 and item['category'] == 'earrings' and 95 <= item['prezzo'] < 175:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [17]
-                    #return  gioielli_consigliati
+                    
                 elif 175 <= budget < 195:
                     for item in product_info:
                         if item['gender'] == 'F' and 40 <= item['age'] < 60 and item['category'] == 'earrings' and 175 <= item['prezzo'] < 195:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [17,38]
-                    #return  gioielli_consigliati
+                    
                 elif 195 <= budget < 230:
                     for item in product_info:
                         if item['gender'] == 'F' and 40 <= item['age'] < 60 and item['category'] == 'earrings' and 195 <= item['prezzo'] < 230:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [17,38,10,15]
-                    #return  gioielli_consigliati
+                   
                 else:
                     for item in product_info:
                         if item['gender'] == 'F' and 40 <= item['age'] < 60 and item['category'] == 'earrings' and item['prezzo'] >= 230:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [17,38,10,15,39]
-                    #return  gioielli_consigliati
+                    
             elif category == 'ring':
                 if budget < 75:
-                    #for item in product_info:
-                    #    if item['gender'] == 'F' and 40 <= item['age'] < 60 and item['category'] == 'ring' and item['prezzo'] < 75:
-                    #        gioielli_consigliati.append(item['id'])
-                    #return gioielli_consigliati
+                    
                     return []
                 elif 75 <= budget < 125:
                     for item in product_info:
                         if item['gender'] == 'F' and 40 <= item['age'] < 60 and item['category'] == 'ring' and 75 <= item['prezzo'] < 125:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [30]
-                    #return  gioielli_consigliati
+                    
                 elif 125 <= budget < 135:
                     for item in product_info:
                         if item['gender'] == 'F' and 40 <= item['age'] < 60 and item['category'] == 'ring' and 125 <= item['prezzo'] < 135:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [16,30]
-                    #return  gioielli_consigliati
+                    
                 elif 135 <= budget < 175:
                     for item in product_info:
                         if item['gender'] == 'F' and 40 <= item['age'] < 60 and item['category'] == 'ring' and 135 <= item['prezzo'] < 175:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [16,30,3]
-                    #return  gioielli_consigliati
+                    
                 elif 175 <= budget < 250:
                     for item in product_info:
                         if item['gender'] == 'F' and 40 <= item['age'] < 60 and item['category'] == 'ring' and 175 <= item['prezzo'] < 250:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [16,30,3,41]
-                    #return  gioielli_consigliati
+                    
                 elif 250 <= budget < 400:
                     for item in product_info:
                         if item['gender'] == 'F' and 40 <= item['age'] < 60 and item['category'] == 'ring' and 250 <= item['prezzo'] < 400:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [16,30,3,41,40]
-                    #return  gioielli_consigliati
+                   
                 else:
                     for item in product_info:
                         if item['gender'] == 'F' and 40 <= item['age'] < 60 and item['category'] == 'ring' and item['prezzo'] > 400:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [16,30,3,41,40,42]
-                    #return  gioielli_consigliati
+                    
             else:
-                #for item in product_info:
-                #    if item['gender'] == 'F' and 20 <= item['age'] < 40 and item['prezzo'] < budget:
-                #        gioielli_consigliati.append(item['id'])
-                #return gioielli_consigliati
+               
                 return []
         elif age >= 60:
             if category == 'bracelet':
                 if budget < 400:
-                    #for item in product_info:
-                    #    if item['gender'] == 'F' and item['age'] >= 60 and item['category'] == 'bracelet' and item['prezzo'] < 400:
-                    #        gioielli_consigliati.append(item['id'])
-                    #return gioielli_consigliati
+                    
                     return []
                 else:
                     for item in product_info:
                         if item['gender'] == 'F' and item['age'] >= 60 and item['category'] == 'bracelet' and item['prezzo'] >= 400:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [18]
-                    #return  gioielli_consigliati
+                    
             elif category == 'necklace':
                 if budget < 950:
-                    #for item in product_info:
-                    #    if item['gender'] == 'F' and item['age'] >= 60 and item['category'] == 'necklace' and item['prezzo'] < 950:
-                    #        gioielli_consigliati.append(item['id'])
-                    #return gioielli_consigliati
+                    
                     return []
                 else:
                     for item in product_info:
                         if item['gender'] == 'F' and item['age'] >= 60 and item['category'] == 'necklace' and item['prezzo'] >= 950:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [20]
-                    #return  gioielli_consigliati
+                    
             elif category == 'ring':
                 if budget < 135:
-                    #for item in product_info:
-                    #    if item['gender'] == 'F' and item['age'] >= 60 and item['category'] == 'ring' and item['prezzo'] < 135:
-                    #        gioielli_consigliati.append(item['id'])
-                    #return gioielli_consigliati
+                    
                     return []
                 else:
                     for item in product_info:
                         if item['gender'] == 'F' and item['age'] >= 60 and item['category'] == 'ring' and item['prezzo'] >= 135:
                             gioielli_consigliati.append(item['id'])
                     return gioielli_consigliati
-                    #gioielli_consigliati = [19,21]
-                    #return  gioielli_consigliati
+                    
             else:
-                #for item in product_info:
-                #    if item['gender'] == 'F' and item['age'] >= 60 and item['prezzo'] < budget:
-                #        gioielli_consigliati.append(item['id'])
-                #return gioielli_consigliati
+                
                 return []
 
 def get_product_name_by_id(product_info, target_product_id):
@@ -711,12 +596,12 @@ def get_product_name_by_id(product_info, target_product_id):
 
 def Descrizione_prodotto(funzione_prodotto):
     if funzione_prodotto in globals() and callable(globals()[funzione_prodotto]):
-        # Richiama la funzione
+        
         result = globals()[funzione_prodotto]()
         return result
 
 def estrai_si_no(frase):
-    parole_chiave_no = ["no", "non mi piace", "non mi ispira", "no grazie","a posto cosi"] #chiedere se mettono le accentate
+    parole_chiave_no = ["no", "non mi piace", "non mi ispira", "no grazie","a posto cosi"] 
     parole_chiave_si = ["si", "mi piace", "si grazie"]      
     frase = frase.lower()
     
@@ -797,7 +682,7 @@ if __name__ == '__main__':
             {'category': 'necklace',    'prezzo': 175.0, 'qta_magazzino': 7, 'sconto': 10, 'name': 'dextera necklace',                      'gender': 'M', 'qta_scaffale': 1, 'age': 40, 'id': 8}, 
             {'category': 'necklace',    'prezzo': 175.0, 'qta_magazzino': 4, 'sconto': 10, 'name': 'florere necklace',                      'gender': 'F', 'qta_scaffale': 0, 'age': 50, 'id': 9}, 
             {'category': 'earrings',    'prezzo': 195.0, 'qta_magazzino': 5, 'sconto': 10, 'name': 'florere stud earrings',                 'gender': 'F', 'qta_scaffale': 1, 'age': 50, 'id': 10}, 
-            {'category': 'bracelet',    'prezzo': 195.0, 'qta_magazzino': 8, 'sconto': 10, 'name': 'gema bracelet',                         'gender': 'F', 'qta_scaffale': 1, 'age': 30, 'id': 11}, 
+            {'category': 'bracelet',    'prezzo': 195.0, 'qta_magazzino': 0, 'sconto': 10, 'name': 'gema bracelet',                         'gender': 'F', 'qta_scaffale': 1, 'age': 30, 'id': 11}, 
             {'category': 'earrings',    'prezzo': 195.0, 'qta_magazzino': 5, 'sconto': 10, 'name': 'gema drop earrings',                    'gender': 'F', 'qta_scaffale': 0, 'age': 30, 'id': 12}, 
             {'category': 'necklace',    'prezzo': 195.0, 'qta_magazzino': 0, 'sconto': 10, 'name': 'gema necklace',                         'gender': 'F', 'qta_scaffale': 1, 'age': 30, 'id': 13}, 
             {'category': 'necklace',    'prezzo': 250.0, 'qta_magazzino': 1, 'sconto': 10, 'name': 'matrix tennis necklace',                'gender': 'F', 'qta_scaffale': 1, 'age': 50, 'id': 14}, 
@@ -830,18 +715,8 @@ if __name__ == '__main__':
             {'category': 'ring',        'prezzo': 175.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'luna cocktail ring',                    'gender': 'F', 'qta_scaffale': 0, 'age': 50, 'id': 41}, 
             {'category': 'ring',        'prezzo': 400.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'florere cocktail ring',                 'gender': 'F', 'qta_scaffale': 0, 'age': 50, 'id': 42}
         ]
-    
-    print(product_info)
 
-    '''
-    if __DATABASE__:
-        emozioni = {}
-    else:
-    '''
-    
-    #preso da morphcast il porf lo sistema
-    emozioni =  {'gender': 'female','age': 21,'angry': 0.2, 'disgust': 0.3, 'happy': 0.9, 'neutral': 0.5, 'sad': 0.1, 'surprise': 0.6, 'attention': 0.8} 
-    print(emozioni)
+    emozioni =  {'gender': 'female','age': 50,'angry': 0.2, 'disgust': 0.3, 'happy': 0.9, 'neutral': 0.5, 'sad': 0.1, 'surprise': 0.6, 'attention': 0.8} 
     nome_utente = {'nome': 'Giacomo','cognome': 'Santi'}
     
     #dialogo
@@ -865,12 +740,10 @@ if __name__ == '__main__':
 
     profilo_utente  = [gender, age, prezzo, category]
     posizioni_vuote = [pos for pos, val in enumerate(profilo_utente) if val == "" or val == 0]
-
-    #print(profilo_utente)
-    #wprint(posizioni_vuote)
     
     user_input = True
     while user_input == True:
+        
         while len(posizioni_vuote) != 0:
             for i in range(len(posizioni_vuote)):
                 if posizioni_vuote[i] == 0:
@@ -892,11 +765,8 @@ if __name__ == '__main__':
                         
             profilo_utente = [gender, age, prezzo, category]
             posizioni_vuote = [pos for pos, val in enumerate(profilo_utente) if val == "" or val == 0]
-
-        print(profilo_utente)
+ 
         id_gioiello_consigliato = recommend_jewelry(profilo_utente, product_info)
-        print(id_gioiello_consigliato)
-
         if len(id_gioiello_consigliato) > 0:
             i = 0
             while i < len(id_gioiello_consigliato):
@@ -907,53 +777,31 @@ if __name__ == '__main__':
                 descrizione = Descrizione_prodotto(funzione_prodotto)
                 print(descrizione)
                 risposta_a1_ = morphcast(emozioni)
-
-                '''
-                for a in product_info:
-                    if a['name']== product_name:
-                        magazzino=a['qta_magazzino']
-                        print(magazzino)
-                        if magazzino > 0:
-                            print("vuoi aggiungere " + product_name + " al carrello?")
-                            aggiungi=estrai_si_no(input())
-                            carrello.append(product_name)
-                        else:
-                            print("Abbiamo terminato il prodotto richiesto, prova ad andare in un altro store o ripassa settimana prossima")
-
-                #richiesta al cliente se vuole aggiungere il prodotto al carrello
-                #print("vuoi aggiungere " + product_name + " al carrello?")
-                #aggiungi=estrai_si_no(input())
-                '''
                 
-                if risposta_a1_ == "si": #and aggiungi == "si":
-                    #carrello.append(product_name)
+                if risposta_a1_ == "si":
                     for a in product_info:
                         if a['name']== product_name:
                             magazzino=a['qta_magazzino']
-                            #print(magazzino)
-                            if magazzino > 0:
-                                print("vuoi aggiungere " + product_name + " al carrello?")
-                                aggiungi=estrai_si_no(input())
-                                if aggiungi == "si":
+                            print("vuoi aggiungere " + product_name + " al carrello?")
+                            aggiungi=estrai_si_no(input())
+                            if aggiungi == "si":
+                                if magazzino > 0:
                                     carrello.append(product_name)
-
                                     for b in product_info:
                                         if b['name']== product_name:
                                             if b['sconto']>0:
                                                 prezzo_scontato = b['prezzo'] - ( b['prezzo'] * b['sconto'] /100 )
                                                 print('Il prodotto scelto è in sconto e da ', b['prezzo'], 'viene ', prezzo_scontato)
                                     
-                            else:
-                                print("Abbiamo terminato il prodotto richiesto, prova ad andare in un altro store o ripassa settimana prossima")
-
-                        #richiesta al cliente se vuole aggiungere il prodotto al carrello
-                        #print("vuoi aggiungere " + product_name + " al carrello?")
-                        #aggiungi=estrai_si_no(input())
-                    
-                    print("Vuoi che ti consigli qualche abbinamento da fare?")                       
-                    risposta_= input()
-                    risposta__= estrai_si_no(risposta_.lower())
-                                    
+                                else:
+                                    print("Abbiamo terminato il prodotto richiesto, prova ad andare in un altro store o ripassa settimana prossima")
+                    if aggiungi == "si":
+                        print("Vuoi che ti consigli qualche abbinamento da fare?")                       
+                        risposta_= input()
+                        risposta__= estrai_si_no(risposta_)
+                    else:
+                         risposta__= "no"
+                         
                     if risposta__ == "si":
                         abbinamento = funzione_abbinamento(product_name)
                         
@@ -966,11 +814,10 @@ if __name__ == '__main__':
                         for b in product_info:
                             if b['name']== abbinamento:
                                 magazzino_=b['qta_magazzino']
-                                #print(magazzino)
-                                if magazzino_ > 0:
-                                    print("vuoi aggiungere " + abbinamento + " al carrello?")
-                                    aggiungi_=estrai_si_no(input())
-                                    if aggiungi_ == "si":
+                                print("vuoi aggiungere " + abbinamento + " al carrello?")
+                                aggiungi_=estrai_si_no(input())
+                                if aggiungi_ == "si":
+                                    if magazzino_ > 0:
                                         carrello.append(abbinamento)
 
                                         for b in product_info:
@@ -978,17 +825,13 @@ if __name__ == '__main__':
                                                 if b['sconto']>0:
                                                     prezzo_scontato = b['prezzo'] - ( b['prezzo'] * b['sconto'] /100 )
                                                     print('Il prodotto scelto è in sconto e da ', b['prezzo'], 'viene ', prezzo_scontato)
-                                        
+                                    
+                                    else:
+                                        print("Abbiamo terminato il prodotto richiesto, prova ad andare in un altro store o ripassa settimana prossima")
                                 else:
-                                    print("Abbiamo terminato il prodotto richiesto, prova ad andare in un altro store o ripassa settimana prossima")
-        
-                        #print("vuoi aggiungere " + abbinamento + " al carrello?")
-                        #aggiungi1=estrai_si_no(input())
-                        
-                        if risposta3 == "si": #and aggiungi1 == "si":
-                            #carrello.append(abbinamento)
-                            print("Controlla e conferma il tuo ordine nell'app")
-                            print("i tuoi gioielli ti aspettano in cassa :)")
+                                    print("ok")
+                       
+                        if risposta3 == "si":
                             user_input = False
                             
                             break
@@ -1010,32 +853,36 @@ if __name__ == '__main__':
             user_input = False
             break
 
+
+        
         print("Vuoi acquistare qualche altro prodotto?")
         user_input   = input()
         user_input_1 = estrai_si_no(user_input)
 
         if user_input_1 == "no":
+            print("Controlla e conferma il tuo ordine nell'app")
+            print("i tuoi gioielli ti aspettano in cassa :)")            
             user_input=False
             break
         else:
-            posizioni_vuote = [0,1,2,3]
-            user_input = True
-            risposta1 = ""
-            
-    #print(carrello)
-    #print("Controlla e conferma il tuo ordine nell'app")
-    #print("i tuoi gioielli ti aspettano in cassa :)")
+            print("posso chiederti per chi è il gioiello?")
+            risposta1_ = input()
+            regalo = estrai_regalo(risposta1_)
+            if regalo == "me":
+                gender  = emozioni['gender']
+                age     = emozioni['age']
+                prezzo  = int(estrai_budget(risposta1_))
+                category= str(estrai_categoria(risposta1_))
+                profilo_utente = [gender, age, prezzo, category]
+                posizioni_vuote = [pos for pos, val in enumerate(profilo_utente) if val == "" or val == 0]
+                user_input = True
+            else:
+                gender  = str(analizza_genere(risposta1_))
+                age     = int(estrai_eta(risposta1_))
+                prezzo  = int(estrai_budget(risposta1_))
+                category= str(estrai_categoria(risposta1_))
+                profilo_utente = [gender, age, prezzo, category]
+                posizioni_vuote = [pos for pos, val in enumerate(profilo_utente) if val == "" or val == 0]
+                user_input = True
+
     print("Spero di averti aiutato al meglio delle mie possibilita, grazie per aver acquistato da svaroschi utilizzando la tecnologia naonecsus!")
-    
-
-'''
-TO DO
--salutare il cliente con nome e cognome (arrivano dall'app) #fatto
--considerare numero elementi scaffale e in magazzino
--considerare prodotti in sconto???
-
--rilevare con morphcast #prof
-
--chiedere al cliente se aggiungere elemento al carrello     #fatto
--chiedere al cliente se ha terminato la scelta e se sì invitare il cliente ad andare in cassa dall'altro nao
-'''
