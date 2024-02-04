@@ -28,6 +28,7 @@ CREATE TABLE Oggetto (
 	sconto				INT,
 	eta_consigliata		INT,
 	sesso_consigliato	CHAR,
+	qr_code				VARCHAR,
 	
 	PRIMARY KEY(id)
 );
@@ -49,7 +50,6 @@ CREATE TABLE Ordine (
 	data_acquisto		DATE,
 	ora_acquisto		TIME,
 	modalita_pagamento	VARCHAR,
-	qr_code				VARCHAR,
 	
 	PRIMARY KEY(id),
 	FOREIGN KEY(id_cliente) REFERENCES Cliente(id) ON UPDATE CASCADE ON DELETE SET NULL
