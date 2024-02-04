@@ -799,7 +799,7 @@ if __name__ == '__main__':
             {'category': 'earrings',    'prezzo': 195.0, 'qta_magazzino': 5, 'sconto': 10, 'name': 'florere stud earrings',                 'gender': 'F', 'qta_scaffale': 1, 'age': 50, 'id': 10}, 
             {'category': 'bracelet',    'prezzo': 195.0, 'qta_magazzino': 8, 'sconto': 10, 'name': 'gema bracelet',                         'gender': 'F', 'qta_scaffale': 1, 'age': 30, 'id': 11}, 
             {'category': 'earrings',    'prezzo': 195.0, 'qta_magazzino': 5, 'sconto': 10, 'name': 'gema drop earrings',                    'gender': 'F', 'qta_scaffale': 0, 'age': 30, 'id': 12}, 
-            {'category': 'necklace',    'prezzo': 195.0, 'qta_magazzino': 4, 'sconto': 10, 'name': 'gema necklace',                         'gender': 'F', 'qta_scaffale': 1, 'age': 30, 'id': 13}, 
+            {'category': 'necklace',    'prezzo': 195.0, 'qta_magazzino': 0, 'sconto': 10, 'name': 'gema necklace',                         'gender': 'F', 'qta_scaffale': 1, 'age': 30, 'id': 13}, 
             {'category': 'necklace',    'prezzo': 250.0, 'qta_magazzino': 1, 'sconto': 10, 'name': 'matrix tennis necklace',                'gender': 'F', 'qta_scaffale': 1, 'age': 50, 'id': 14}, 
             {'category': 'earrings',    'prezzo': 195.0, 'qta_magazzino': 3, 'sconto': 10, 'name': 'matrix drop earrings',                  'gender': 'F', 'qta_scaffale': 0, 'age': 50, 'id': 15}, 
             {'category': 'ring',        'prezzo': 125.0, 'qta_magazzino': 7, 'sconto': 10, 'name': 'matrix ring',                           'gender': 'F', 'qta_scaffale': 0, 'age': 50, 'id': 16}, 
@@ -936,6 +936,12 @@ if __name__ == '__main__':
                                 aggiungi=estrai_si_no(input())
                                 if aggiungi == "si":
                                     carrello.append(product_name)
+
+                                    for b in product_info:
+                                        if b['name']== product_name:
+                                            if b['sconto']>0:
+                                                prezzo_scontato = b['prezzo'] - ( b['prezzo'] * b['sconto'] /100 )
+                                                print('Il prodotto scelto è in sconto e da ', b['prezzo'], 'viene ', prezzo_scontato)
                                     
                             else:
                                 print("Abbiamo terminato il prodotto richiesto, prova ad andare in un altro store o ripassa settimana prossima")
@@ -966,6 +972,12 @@ if __name__ == '__main__':
                                     aggiungi_=estrai_si_no(input())
                                     if aggiungi_ == "si":
                                         carrello.append(abbinamento)
+
+                                        for b in product_info:
+                                            if b['name']== product_name:
+                                                if b['sconto']>0:
+                                                    prezzo_scontato = b['prezzo'] - ( b['prezzo'] * b['sconto'] /100 )
+                                                    print('Il prodotto scelto è in sconto e da ', b['prezzo'], 'viene ', prezzo_scontato)
                                         
                                 else:
                                     print("Abbiamo terminato il prodotto richiesto, prova ad andare in un altro store o ripassa settimana prossima")
