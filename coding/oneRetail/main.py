@@ -1,7 +1,9 @@
+# -*- coding: utf-8 -*-
+
 '''
 python2 64 bit
-pip install -r requirements.txt
-python main.py
+pip2 install -r requirements.txt
+python2 main.py
 ''' 
 
 # Modules
@@ -9,6 +11,7 @@ from naoqi import ALProxy
 from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
 from flask import Flask, render_template, Response, jsonify, request, redirect, url_for
 from hashlib import md5, sha256
+from datetime import datetime
 import cv2
 import time
 import numpy as np
@@ -16,6 +19,7 @@ import random
 from selenium import webdriver
 import paramiko
 import os
+import json
 
 import utilities
 import config_helper
@@ -32,8 +36,12 @@ nao_port       = config_helper.nao_port
 nao_user       = config_helper.nao_user
 nao_password   = config_helper.nao_password
 
-path_drivers   = config_helper.srv_drivers
+nao_ip_2       = config_helper.nao_ip_2
+nao_port_2     = config_helper.nao_port_2
+nao_user_2     = config_helper.nao_user_2
+nao_password_2 = config_helper.nao_password_2
 
+path_drivers   = config_helper.srv_drivers
 
 face_detection = True
 face_tracker   = True
@@ -57,8 +65,21 @@ def make_md5(s):
 
 
 def make_sha256(s):
-        encoding = 'utf-8'
-        return sha256(s.encode(encoding)).hexdigest()
+    encoding = 'utf-8'
+    return sha256(s.encode(encoding)).hexdigest()
+
+
+def carenza(where, product_name):
+    if (where == "scaffale"):
+        return "È terminato " + product_name + " sullo scaffale."
+    elif (where == "magazzino"):
+        return "Il " + product_name + " è quasi terminato in magazzino."
+    else:
+        return ""
+    
+
+def prepara_ordine(product_name, nome, cognome):
+    return "Il cliente " + nome + " " + cognome + " ha ordinato " + product_name + ". Arriverà in cassa per ritirarlo!"
 
 
 def nao_speech_to_text(sec_sleep):
@@ -293,13 +314,6 @@ def webcam():
     return Response(nao_generate_frames(face_detection), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
-@app.route("/prodotti", methods=['GET'])
-@login_required
-def prodotti():
-    ordine_oggetto = db_helper.get_ordine_oggetto()
-    return render_template("prodotti.html", ordine_oggetto=ordine_oggetto)
-
-
 @app.route("/abbinamenti", methods=['GET'])
 @login_required
 def abbinamenti():
@@ -333,10 +347,53 @@ def nuovo_prodotto():
     return render_template('gestione_prodotto.html', prodotto=prodotto)
 
 
+@app.route("/prodotti", methods=['GET'])
+@login_required
+def prodotti():
+    ordine_oggetto = db_helper.get_ordine_oggetto()
+    oggetti = db_helper.get_oggetto()
+    ordini = db_helper.get_ordine()
+
+    vendite = {}
+    for oggetto in oggetti:
+        id_oggetto  = oggetto['id']
+        titolo      = oggetto['titolo']
+        vendite[id_oggetto] =  { 'id_oggetto'    : id_oggetto,
+                                 'titolo'        : titolo,
+                                 'data_acquisto' : []
+                                }
+        for item in ordine_oggetto:
+            if (id_oggetto == item['id_oggetto']):
+                id_ordine  = item['id_ordine']
+                for ordine in ordini:
+                    if(id_ordine == ordine['id']):
+                        data_acquisto = ordine['data_acquisto']
+                        data_acquisto = data_acquisto.strftime('%d/%m/%Y')
+                        vendite[id_oggetto]['data_acquisto'].append(data_acquisto)
+    
+    return render_template("prodotti.html", vendite=vendite)
+
+
 @app.route("/vendite")
 @login_required
 def vendite():
-    return render_template("vendite.html")
+    ordine_oggetto_cliente = db_helper.get_ordine_oggetto_cliente()
+    vendite = {}
+    for item in ordine_oggetto_cliente:
+        oggetto = item['oggetto']
+        data_acquisto = item['ordine']['data_acquisto']
+        data_acquisto = data_acquisto.strftime('%d/%m/%Y')
+        if(data_acquisto not in vendite):
+            vendite[data_acquisto] = []
+        vendite[data_acquisto].append(oggetto)
+    data_prezzo = {}
+    for k, v in vendite.items():
+        if (k not in data_prezzo):
+            data_prezzo[k] = 0
+        for item in v:
+            data_prezzo[k] += float(item['prezzo'])
+
+    return render_template("vendite.html", data_prezzo=data_prezzo)
 
 
 @app.route("/utenti")
@@ -483,6 +540,7 @@ def api_utente(id):
                 return redirect("/utenti")  #return jsonify({'code': 500, 'message': str(e)}), 500
         elif request.method == 'DELETE':
             try:
+                data = db_helper.delete_carrello(id)
                 return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.delete_cliente(id)}), 200
             except Exception as e:
                 logger.error(str(e))
@@ -500,7 +558,8 @@ def api_nuovo_utente():
             nome     = request.form["nome"]
             cognome  = request.form["cognome"]
             password = make_md5(request.form["password"])
-            data     = db_helper.set_cliente(username,nome,cognome,password)
+            data, id = db_helper.set_cliente(username,nome,cognome,password)
+            data     = db_helper.set_carrello(id)
             return redirect("/utenti")      #return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.set_cliente(username,nome,cognome,password)}), 200
         except Exception as e:
             logger.error(str(e))
@@ -508,10 +567,26 @@ def api_nuovo_utente():
     return redirect("/utenti")
 
 
-@app.route('/api/prodotto/<id>', methods=['POST', 'DELETE'])
+@app.route('/api/catalogo', methods=['GET'])
+def api_catalogo():
+    if request.method == 'GET':
+        try:
+            return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.get_oggetto()}), 200
+        except Exception as e:
+            logger.error(str(e))
+            return jsonify({'code': 500, 'message': str(e)}), 500
+
+
+@app.route('/api/prodotto/<id>', methods=['GET', 'POST', 'DELETE'])
 def api_prodotto(id):
     if (id != None and id != ''):
-        if request.method == 'POST':
+        if request.method == 'GET':
+            try:
+                return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.get_id_oggetto(id)}), 200
+            except Exception as e:
+                logger.error(str(e))
+                return jsonify({'code': 500, 'message': str(e)}), 500
+        elif request.method == 'POST':
             try:
                 titolo              = request.form["titolo"]
                 categoria           = request.form["categoria"]
@@ -627,6 +702,167 @@ def api_delete_abbinamenti(id):
     return redirect("/abbinamenti")
 
 
+@app.route('/api/scaffale', methods=['GET'])
+def api_scaffale():
+    oggetto = db_helper.get_oggetto()
+    count_scaffale = 0
+    for item in oggetto:
+        count_scaffale = item['qta_scaffale']
+        
+        #inviare al nao oggetti da ripopolare
+        if (count_scaffale < 1):
+            print(carenza("scaffale", item['titolo']))
+    
+    return redirect("/scaffale")
+
+
+@app.route('/api/magazzino', methods=['GET'])
+def api_magazzino():
+    oggetto = db_helper.get_oggetto()
+    count_magazzino = 0
+    for item in oggetto:
+        count_magazzino = item['qta_magazzino']
+
+        #inviare al nao oggetti da ripopolare
+        if (count_magazzino < 5):
+            print(carenza("magazzino", item['titolo']))
+    print("Siamo stati il più ecosostenibile possibile! L'ordine tiene conto anche di questo!")
+    
+    return redirect("/magazzino")
+
+
+@app.route('/api/carrello/<data>', methods=['GET', 'POST', 'DELETE'])
+def api_carrello(data):
+    if (id != None and id != ''):
+        if request.method == 'GET':
+            try:
+                #/api/carrello/{"id_cliente":value}
+                json = request.json
+                id_cliente = json['id_cliente']
+                id_carrello = db_helper.get_id_carrello(id_cliente)
+                return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.get_id_carrello_oggetto(id_carrello['id'])}), 200
+            except Exception as e:
+                logger.error(str(e))
+                return jsonify({'code': 500, 'message': str(e)}), 500
+        elif request.method == 'POST':
+            try:
+                #{"id_carrello":value, "id_oggetto":value}
+                json = request.json
+                id_carrello = json['id_carrello']
+                id_oggetto  = json['id_oggetto']
+                return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.set_carrellooggetto(id_carrello,id_oggetto)}), 200
+            except Exception as e:
+                logger.error(str(e))
+                return jsonify({'code': 500, 'message': str(e)}), 500
+        elif request.method == 'DELETE':
+            try:
+                #{"id_carrello":value, "id_oggetto":value}
+                json = request.json
+                id_carrello = json['id_carrello']
+                id_oggetto  = json['id_oggetto']
+                return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.delete_carrellooggetto(id_carrello,id_oggetto)}), 200
+            except Exception as e:
+                logger.error(str(e))
+                return jsonify({'code': 500, 'message': str(e)}), 500
+    else:
+        logger.error('No id argument passed')
+        return jsonify({'code': 500, 'message': 'No id was passed'}), 500
+
+
+@app.route('/api/ordine/<data>', methods=['GET', 'POST'])
+def api_ordine(data):
+    if (id != None and id != ''):
+        if request.method == 'GET':
+            try:
+                #{"id_cliente":value}
+                json = request.json
+                id_cliente  = json['id_cliente']
+                return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.get_id_ordine(id_cliente)}), 200
+            except Exception as e:
+                logger.error(str(e))
+                return jsonify({'code': 500, 'message': str(e)}), 500
+        elif request.method == 'POST':
+            try:
+                #{"id_cliente":value, "modalita_pagamento":value}
+                json = request.json
+                id_cliente         = json['id_cliente']
+                modalita_pagamento = json['modalita_pagamento']
+                cliente            = db_helper.get_id_cliente(id_cliente)
+                id_carrello        = db_helper.get_id_carrello(id_cliente)
+                id_carrello        = id_carrello['id']
+                carrello           = db_helper.get_id_carrello_oggetto(id_carrello)
+                prezzo_totale = 0
+                for item in carrello:
+                    prezzo_totale += float(item['oggetto']['prezzo'])
+                data_acquisto = datetime.now().date()
+                ora_acquisto  = datetime.now().strftime("%H:%M:%S")
+                id_ordine = db_helper.set_ordine(id_cliente, prezzo_totale, data_acquisto, ora_acquisto, modalita_pagamento)
+                for item in carrello:
+                    id_oggetto = item['oggetto']['id']
+                    id_ordineoggetto = db_helper.set_ordineoggetto(id_ordine, id_oggetto)
+                
+                #eseguito l'ordine elimino il contenuto del carrello
+                for item in carrello:
+                    id_oggetto = item['oggetto']['id']
+                    data = db_helper.delete_carrellooggetto(id_carrello, id_oggetto)
+                    
+                    # il nao2 avvisa il commesso di preparare l'ordine e toglie l'oggetto dallo scaffale
+                    print(prepara_ordine(item['oggetto']['titolo'], cliente['nome'], cliente['cognome']))
+                    data = db_helper.set_qta_scaffale_minus(id_oggetto)
+                    print(carenza("scaffale", item['oggetto']['titolo']))
+                
+                return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.get_id_ordine(id_cliente)}), 200
+            except Exception as e:
+                logger.error(str(e))
+                return jsonify({'code': 500, 'message': str(e)}), 500
+    else:
+        logger.error('No id argument passed')
+        return jsonify({'code': 500, 'message': 'No id was passed'}), 500
+    
+
+@app.route('/api/utente/app/<id>', methods=['POST'])
+def api_utente_app(id):
+    if (id != None and id != ''):
+        if request.method == 'POST':
+            try:
+                #{"username":value, "password":value}
+                json = request.json
+                username = json["username"]
+                password = make_md5(json["password"])
+                data = db_helper.get_account_cliente(username, password)
+                return jsonify({'code': 200, 'message': 'OK', 'data': data}), 200
+            except Exception as e:
+                logger.error(str(e))
+                return jsonify({'code': 500, 'message': str(e)}), 500
+    else:
+        logger.error('No id argument passed')
+        return jsonify({'code': 500, 'message': 'No id was passed'}), 500
+    
+
+@app.route('/api/utente/dialogo/<id>', methods=['POST'])
+def api_utente_dialogo(id):
+    if (id != None and id != ''):
+        if request.method == 'POST':
+            try:
+                #{"id_cliente":value, "nome":value, "cognome":value}
+                json = request.json
+                id_cliente  = json["id_cliente"]
+                nome        = json["nome"]
+                cognome     = json["cognome"]
+                id_carrello = db_helper.get_id_carrello(id_cliente)
+
+                import dialogo_decision_tree
+                dialogo = dialogo_decision_tree.Dialogo(db_helper, id_cliente, nome, cognome, id_carrello)
+
+                return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.get_id_carrello_oggetto(id_carrello['id'])}), 200
+            except Exception as e:
+                logger.error(str(e))
+                return jsonify({'code': 500, 'message': str(e)}), 500
+    else:
+        logger.error('No id argument passed')
+        return jsonify({'code': 500, 'message': 'No id was passed'}), 500
+
+
 
 
 # SERVICES
@@ -699,9 +935,8 @@ if __name__ == "__main__":
 
 '''
 TO DO
--creare/cancellare carrello quando si crea/cancella utente
--decision tree: manca abbinamento + db
--report nao x scaffale e magazzino sotto una certa soglia (con dialogo nao)
+-decision tree: emozioni db
 
--relazione: architettura MCV
+-le print devono diventare say
+-gli input devono diventare speech_to_text
 '''

@@ -2,7 +2,7 @@ server:
   debug: false
   host: "0.0.0.0" # Current machine ip
   port: 5010
-  drivers: 'drivers/chromedriver_x64.exe'
+  drivers: 'drivers/chromedriver_mac'
 
 database:
   host: "localhost"
@@ -15,3 +15,9 @@ nao:
   port: 9559
   user: "nao"
   password: "nao"
+
+nao2:
+  ip: "192.168.0.104"
+  port: 9559
+  user: "nao"
+  password: "KarlTarNAO6."

@@ -62,6 +62,13 @@
         .logout-button:hover {
             background-color: #D39C20;
         }
+
+        label {
+            color: #000000;
+            font-weight: bold;
+            font-size: 18px;
+            margin-right: 10px;
+        }
     </style>
 </head>
 
@@ -69,25 +76,27 @@
     <a href="/dashboard" class="logo-link"><img src="{{url_for('static', filename='logo.png')}}" alt="Logo" width="100%" height="100%"></a>
     <a href="/logout" class="logout-button">Logout</a>
     <h1 class="swarovski">Swarovski</h1>
+
+    <div>
+        <label for="gioielli">Vendite</label>
+        <button id="gioielli" name="gioielli" onclick="updateChart()" value="{{data_prezzo}}" class="flex flex-row space-x-2 mt-10 mx-auto px-4 py-2 w-fit rounded-md font-medium text-white tracking-wider bg-green-500">Calcola</button>
+    </div>
     
     <canvas id="myChart"></canvas>
 
     <script>
-        
         var salesData = {
-            labels: ["Giorno 1", "Giorno 2", "Giorno 3", "Giorno 4", "Giorno 5"],
+            labels: [],
             datasets: [{
                 label: "Vendite totali della giornata",
-                data: [20, 15, 20, 25, 10], 
+                data: [0, 0, 0, 0, 0],
                 backgroundColor: 'rgba(245, 185, 44, 0.2)', 
                 borderColor: 'rgba(245, 185, 44, 1)', 
                 borderWidth: 2 
             }]
         };
 
-        
         var ctx = document.getElementById('myChart').getContext('2d');
-
         
         var myChart = new Chart(ctx, {
             type: 'bar', // 'bar', 'line', 'pie'
@@ -100,6 +109,28 @@
                 }
             }
         });
+
+        function updateChart() {
+            var date_acquisto = document.getElementById('gioielli').value;
+            date_acquisto = date_acquisto.replace(/'/g, '"');
+            date_acquisto = JSON.parse(date_acquisto)
+
+            var newData = {
+                //labels: ["1/01", "2/01", "3/01", "4/01", "5/01"],
+                labels: Object.keys(date_acquisto),
+                datasets: [{
+                    label: "Vendite Gioiello",
+                    //data: [15, 10, 18, 22, 12],
+                    data: Object.values(date_acquisto),
+                    backgroundColor: 'rgba(245, 185, 44, 0.2)',
+                    borderColor: 'rgba(245, 185, 44, 1)',
+                    borderWidth: 2
+                }]
+            };
+
+            myChart.data = newData;
+            myChart.update();
+        }
     </script>
 </body>
 

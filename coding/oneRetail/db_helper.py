@@ -3,7 +3,6 @@ import psycopg2
 from logging_helper import logger
 from datetime import datetime
 
-
 class DB:
 
     def __init__(self):
@@ -61,15 +60,32 @@ class DB:
                                 'cognome' : tupla[3], 
                                 'password': tupla[4]
                             }
+                
+    def get_account_cliente(self, username, password):
+        with self.connection:
+            with self.connection.cursor() as cur:
+                cur.execute('''
+                            SELECT * 
+                            FROM Cliente
+                            WHERE username::text = %s AND password::text = %s;
+                            ''', (str(username),str(password)))
+
+                if (cur.rowcount == 0):
+                    return 0
+                else:
+                    for tupla in cur:
+                        return  {'id_cliente': tupla[0], 'nome': tupla[2], 'cognome': tupla[3]}
 
     def set_cliente(self, username, nome, cognome, password):
         with self.connection:
             with self.connection.cursor() as cur:
                 cur.execute('''
                             INSERT INTO Cliente(username,nome,cognome,password)
-                            VALUES (%s, %s, %s, %s);
+                            VALUES (%s, %s, %s, %s)
+                            RETURNING id;
                             ''', (username, nome, cognome, password))
-                return cur.statusmessage
+                nuovo_id = cur.fetchone()[0]
+                return cur.statusmessage, nuovo_id
 
     def set_id_cliente(self, id, username, nome, cognome, password):
         with self.connection:
@@ -106,6 +122,25 @@ class DB:
                             WHERE id::text = %s;
                             ''', (str(id),))
                 return id
+            
+    def set_carrello(self, id_cliente):
+        with self.connection:
+            with self.connection.cursor() as cur:
+                cur.execute('''
+                            INSERT INTO Carrello(id_cliente)
+                            VALUES (%s);
+                            ''', (str(id_cliente),))
+                return cur.statusmessage
+            
+    def delete_carrello(self, id_cliente):
+        with self.connection:
+            with self.connection.cursor() as cur:
+                cur.execute('''
+                            DELETE
+                            FROM Carrello
+                            WHERE id_cliente::text = %s;
+                            ''', (str(id_cliente),))
+                return id_cliente
 
     def get_oggetto(self):
         with self.connection:
@@ -124,7 +159,7 @@ class DB:
                                 'id'                : tupla[0], 
                                 'titolo'            : tupla[1], 
                                 'categoria'         : tupla[2], 
-                                'prezzo'            : tupla[3], 
+                                'prezzo'            : float(tupla[3]), 
                                 'descrizione'       : tupla[4].decode('utf-8'),
                                 'foto'              : tupla[5], 
                                 'qta_magazzino'     : tupla[6], 
@@ -143,6 +178,32 @@ class DB:
                             FROM Oggetto
                             WHERE id::text = %s;
                             ''', (str(id),))
+
+                if (cur.rowcount == 0):
+                    return {}
+                for tupla in cur:
+                    return {
+                                'id'                : tupla[0], 
+                                'titolo'            : tupla[1], 
+                                'categoria'         : tupla[2], 
+                                'prezzo'            : float(tupla[3]), 
+                                'descrizione'       : tupla[4].decode('utf-8'),
+                                'foto'              : tupla[5], 
+                                'qta_magazzino'     : tupla[6], 
+                                'qta_scaffale'      : tupla[7], 
+                                'sconto'            : tupla[8], 
+                                'eta_consigliata'   : tupla[9], 
+                                'sesso_consigliato' : tupla[10] 
+                            }
+                
+    def get_titolo_oggetto(self, titolo):
+        with self.connection:
+            with self.connection.cursor() as cur:
+                cur.execute('''
+                            SELECT * 
+                            FROM Oggetto
+                            WHERE titolo::text = %s;
+                            ''', (str(titolo),))
 
                 if (cur.rowcount == 0):
                     return {}
@@ -198,8 +259,25 @@ class DB:
                             WHERE id::text = %s;
                             ''', (str(id),))
                 return id
-
+            
     def get_ordine_oggetto(self):
+        with self.connection:
+            with self.connection.cursor() as cur:
+                cur.execute('''
+                            SELECT * 
+                            FROM OrdineOggetto;
+                            ''')
+                if (cur.rowcount == 0):
+                    return {}
+                data = []
+                for tupla in cur:
+                    data.append({'id'           : tupla[0],
+                                 'id_ordine'    : tupla[1],
+                                 'id_oggetto'   : tupla[2]
+                    })
+                return data
+            
+    def get_ordine_oggetto_cliente(self):
         with self.connection:
             with self.connection.cursor() as cur:
                 cur.execute('''
@@ -211,10 +289,10 @@ class DB:
 
                 if (cur.rowcount == 0):
                     return {}
-                '''
+                """
                 for tupla in cur.description:
                     print tupla[0]
-                '''
+                """
                 data = []
                 for tupla in cur:
                     data.append({
@@ -233,20 +311,61 @@ class DB:
                                     'sesso_consigliato' : tupla[13] 
                                 },
                                 'ordine': {
-                                    'id'                : tupla[14],
-                                    'prezzo_totale'     : tupla[16],
-                                    'data_acquisto'     : tupla[17],
-                                    'ora_acquisto'      : tupla[18],
-                                    'modalita_pagamento': tupla[19]
+                                    'id'                : tupla[15],
+                                    'prezzo_totale'     : tupla[17],
+                                    'data_acquisto'     : tupla[18],
+                                    'ora_acquisto'      : tupla[19],
+                                    'modalita_pagamento': tupla[20]
                                 },
                                 'cliente': {
-                                    'id'                : tupla[20],
-                                    'username'          : tupla[21],
-                                    'nome'              : tupla[22],
-                                    'cognome'           : tupla[23],
-                                    'password'          : tupla[24]
+                                    'id'                : tupla[21],
+                                    'username'          : tupla[22],
+                                    'nome'              : tupla[23],
+                                    'cognome'           : tupla[24],
+                                    'password'          : tupla[25]
                                 }
                             })
+                return data
+            
+    def get_ordine(self):
+        with self.connection:
+            with self.connection.cursor() as cur:
+                cur.execute('''
+                            SELECT * 
+                            FROM Ordine;
+                            ''')
+                if (cur.rowcount == 0):
+                    return {}
+                data = []
+                for tupla in cur:
+                    data.append({'id'                   : tupla[0],
+                                 'id_cliente'           : tupla[1],
+                                 'prezzo_totale'        : tupla[2],
+                                 'data_acquisto'        : tupla[3],
+                                 'ora_acquisto'         : tupla[4],
+                                 'modalita_pagamento'   : tupla[5]
+                    })
+                return data
+            
+    def get_id_ordine(self, id_cliente):
+        with self.connection:
+            with self.connection.cursor() as cur:
+                cur.execute('''
+                            SELECT * 
+                            FROM Ordine
+                            WHERE id_cliente::text = %s;
+                            ''', (str(id_cliente),))
+                if (cur.rowcount == 0):
+                    return {}
+                data = []
+                for tupla in cur:
+                    data.append({'id'                   : tupla[0],
+                                 'id_cliente'           : tupla[1],
+                                 'prezzo_totale'        : float(tupla[2]),
+                                 'data_acquisto'        : str(tupla[3]),
+                                 'ora_acquisto'         : str(tupla[4]),
+                                 'modalita_pagamento'   : tupla[5]
+                    })
                 return data
 
     def get_carrello_oggetto(self):
@@ -313,6 +432,20 @@ class DB:
                                 'id_cliente': tupla[1]
                             })
                 return data
+            
+    def get_id_carrello(self, id_cliente):
+        with self.connection:
+            with self.connection.cursor() as cur:
+                cur.execute('''
+                            SELECT * 
+                            FROM Carrello
+                            WHERE id_cliente::text = %s;
+                            ''', (str(id_cliente),))
+
+                if (cur.rowcount == 0):
+                    return {}
+                for tupla in cur:
+                    return {'id': tupla[0]}
 
     def set_qta_scaffale_plus(self, id):
         with self.connection:
@@ -397,65 +530,108 @@ class DB:
                             WHERE id::text = %s;
                             ''', (str(id),))
                 return id
-
-
-
-    """
-    def save_report(self, report):
-        with self.connection:
-            with self.connection.cursor() as cur:
-                if (report.get('date', '') == ''):
-                    report['date'] = datetime.now().isoformat()
-
-                if (report.get('id', '') == ''):
-                    cur.execute('''
-                        INSERT INTO Reports(date, temperature, co2, humidity, "nPeople", "internalLight", "externalLight")
-                        VALUES (%s, %s, %s, %s, %s, %s, %s);''',
-                                (report['date'], report['temperature'], report['co2'], report['humidity'], report.get('nPeople', 0), report.get('internalLight', 0), report.get('externalLight', 0),))
-                else:
-                    cur.execute('''
-                        UPDATE Reports
-                        SET date = %s, temperature = %s, co2 = %s, humidity = %s, "nPeople" = %s, "internalLight" = %s, "externalLight" = %s
-                        WHERE id = %s;''',
-                                (report['date'].split('.')[0], report['temperature'], report['co2'], report['humidity'], report['nPeople'], report['internalLight'], report['externalLight'], report['id']))
-
-                return cur.statusmessage
-
-    def get_report(self, id):
+            
+    def set_carrellooggetto(self, id_carrello, id_oggetto):
         with self.connection:
             with self.connection.cursor() as cur:
                 cur.execute('''
-                    SELECT * FROM Reports
-                    WHERE id::text = %s
-                    ORDER BY date;''',
-                            (str(id),))
+                            INSERT INTO Carrellooggetto(id_carrello,id_oggetto)
+                            VALUES (%s, %s)
+                            RETURNING id;
+                            ''', (id_carrello, id_oggetto))
+                nuovo_id = cur.fetchone()[0]
+                return cur.statusmessage, nuovo_id
+            
+    def delete_carrellooggetto(self, id_carrello, id_oggetto):
+        with self.connection:
+            with self.connection.cursor() as cur:
+                cur.execute('''
+                            DELETE
+                            FROM Carrellooggetto
+                            WHERE id_carrello = %s AND id_oggetto = %s;
+                            ''', (id_carrello,id_oggetto))
+                return cur.statusmessage
+            
+    def get_id_carrello_oggetto(self, id_carrello):
+        with self.connection:
+            with self.connection.cursor() as cur:
+                cur.execute('''
+                            SELECT * 
+                            FROM CarrelloOggetto AS CarOgg INNER JOIN Oggetto AS Ogg ON CarOgg.id_oggetto = Ogg.id
+                            WHERE CarOgg.id_carrello = %s;
+                            ''', (id_carrello,))
+                
+                if (cur.rowcount == 0):
+                    return {}
+                '''
+                for tupla in cur.description:
+                    print tupla[0]
+                '''
+                data = []
+                for tupla in cur:
+                    data.append({
+                                'id': tupla[0],
+                                'oggetto': {
+                                    'id'                : tupla[3], 
+                                    'titolo'            : tupla[4], 
+                                    'categoria'         : tupla[5], 
+                                    'prezzo'            : float(tupla[6]), 
+                                    'descrizione'       : tupla[7].decode('utf-8'),
+                                    'foto'              : tupla[8], 
+                                    'qta_magazzino'     : tupla[9], 
+                                    'qta_scaffale'      : tupla[10], 
+                                    'sconto'            : tupla[11], 
+                                    'eta_consigliata'   : tupla[12], 
+                                    'sesso_consigliato' : tupla[13] 
+                                }
+                            })
+                
+                return data
+            
+    def set_ordine(self, id_cliente, prezzo_totale, data_acquisto, ora_acquisto, modalita_pagamento):
+        with self.connection:
+            with self.connection.cursor() as cur:
+                cur.execute('''
+                            INSERT INTO Ordine(id_cliente, prezzo_totale, data_acquisto, ora_acquisto, modalita_pagamento)
+                            VALUES (%s, %s, %s, %s, %s)
+                            RETURNING id;
+                            ''', (id_cliente, prezzo_totale, data_acquisto, ora_acquisto, modalita_pagamento))
+                nuovo_id = cur.fetchone()[0]
+                return nuovo_id
+            
+    def set_ordineoggetto(self, id_ordine, id_oggetto):
+        with self.connection:
+            with self.connection.cursor() as cur:
+                cur.execute('''
+                            INSERT INTO Ordineoggetto(id_ordine, id_oggetto)
+                            VALUES (%s, %s)
+                            RETURNING id;
+                            ''', (id_ordine, id_oggetto))
+                nuovo_id = cur.fetchone()[0]
+                return cur.statusmessage, nuovo_id
+            
+    def dt_get_oggetto(self):
+        with self.connection:
+            with self.connection.cursor() as cur:
+                cur.execute('''
+                            SELECT * 
+                            FROM Oggetto
+                            ORDER BY id;
+                            ''')
 
                 if (cur.rowcount == 0):
                     return {}
-                for tupla in cur:
-                    return {'id': tupla[0], 'date': tupla[1], 'temperature': tupla[2], 'co2': tupla[3], 'humidity': tupla[4], 'nPeople': tupla[5], 'internalLight': tupla[6], 'externalLight': tupla[7]}
-
-    def get_reports(self):
-        with self.connection:
-            with self.connection.cursor() as cur:
                 data = []
-                cur.execute('''
-                    SELECT * FROM Reports
-                    ORDER BY date DESC;''')
-
                 for tupla in cur:
-                    data.append(
-                        {'id': tupla[0], 'date': tupla[1], 'temperature': tupla[2], 'co2': tupla[3], 'humidity': tupla[4], 'nPeople': tupla[5], 'internalLight': tupla[6], 'externalLight': tupla[7]})
-
+                    data.append({
+                                'id'                : tupla[0], 
+                                'name'              : tupla[1], 
+                                'category'          : tupla[2], 
+                                'prezzo'            : float(tupla[3]), 
+                                'qta_magazzino'     : tupla[6], 
+                                'qta_scaffale'      : tupla[7], 
+                                'sconto'            : tupla[8],
+                                'age'               : tupla[9], 
+                                'gender'            : tupla[10]
+                            })
                 return data
-
-    def delete_report(self, id):
-        with self.connection:
-            with self.connection.cursor() as cur:
-                cur.execute('''
-                    DELETE FROM Reports
-                    WHERE id::text = %s;''',
-                            (str(id),))
-
-                return id
-    """

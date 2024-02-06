@@ -106,8 +106,8 @@
     <div>
         <label for="gioielli">Gioielli</label>
         <select id="gioielli" name="gioielli" onchange="updateChart()" class="flex flex-row space-x-2 mt-10 mx-auto px-4 py-2 w-fit rounded-md font-medium text-white tracking-wider bg-green-500">
-            {% for  item in ordine_oggetto %}
-            <option value="{{item['oggetto']['titolo']}}">{{item['oggetto']['titolo']}}</option>
+            {% for k, v in vendite.items() %}
+            <option value="{{v['data_acquisto']}}">{{v['titolo']}}</option>
             {% endfor %}
         </select>
     </div>
@@ -116,9 +116,10 @@
 
     <script>
         var salesData = {
-            labels: ["1/01", "2/01", "3/01", "4/01", "5/01"],
+            //labels: ["1/01", "2/01", "3/01", "4/01", "5/01"],
+            lasels : [],
             datasets: [{
-                label: "Vendite totali della giornata",
+                label: "Vendite Gioiello",
                 data: [0, 0, 0, 0, 0],
                 backgroundColor: 'rgba(245, 185, 44, 0.2)',
                 borderColor: 'rgba(245, 185, 44, 1)',
@@ -141,14 +142,30 @@
         });
 
         function updateChart() {
-            var selectedGioiello = document.getElementById('gioielli').value;
+            var date_acquisto = document.getElementById('gioielli').value;
+            date_acquisto = date_acquisto.replace(/'/g, '"');
+            date_acquisto = JSON.parse(date_acquisto)
 
-            
+            labels = []
+            data   = []
+            for(var i = 0; i < date_acquisto.length; i++){
+                indice = labels.indexOf(date_acquisto[i]);
+                if (indice != -1) {
+                    data[indice] ++;
+                }
+                else{
+                    labels.push(date_acquisto[i])
+                    data.push(1)
+                }
+            }
+
             var newData = {
-                labels: ["1/01", "2/01", "3/01", "4/01", "5/01"],
+                //labels: ["1/01", "2/01", "3/01", "4/01", "5/01"],
+                labels: labels,
                 datasets: [{
-                    label: "Vendite del gioiello - " + selectedGioiello,
-                    data: [15, 10, 18, 22, 12],
+                    label: "Vendite Gioiello",
+                    //data: [15, 10, 18, 22, 12],
+                    data: data,
                     backgroundColor: 'rgba(245, 185, 44, 0.2)',
                     borderColor: 'rgba(245, 185, 44, 1)',
                     borderWidth: 2
