@@ -2,6 +2,7 @@ import psycopg2
 
 from logging_helper import logger
 from datetime import datetime
+from decimal import Decimal
 
 class DB:
 
@@ -633,5 +634,47 @@ class DB:
                                 'sconto'            : tupla[8],
                                 'age'               : tupla[9], 
                                 'gender'            : tupla[10]
+                            })
+                return data
+
+    def set_emozione(self, id_cliente, id_oggetto, eta, sesso, indice_gradimento):
+        with self.connection:
+            with self.connection.cursor() as cur:
+                cur.execute('''
+                            INSERT INTO Emozione(id_cliente, id_oggetto, eta, sesso, indice_gradimento)
+                            VALUES (%s, %s, %s, %s, %s,)
+                            RETURNING id;
+                            ''', (id_cliente, id_oggetto, eta, sesso, indice_gradimento))
+                nuovo_id = cur.fetchone()[0]
+                return cur.statusmessage, nuovo_id
+            
+    def get_emozioni(self):
+        with self.connection:
+            with self.connection.cursor() as cur:
+                cur.execute('''
+                            SELECT *
+                            FROM Emozione AS E INNER JOIN Cliente AS C ON E.id_cliente = C.id
+                                                    INNER JOIN Oggetto AS O ON E.id_oggetto = O.id
+                            ORDER BY O.id;
+                            ''')
+
+                if (cur.rowcount == 0):
+                    return {}
+                
+                # Estrai i nomi delle colonne dal cursore
+                #column_names = [column[0] for column in cur.description]
+                #print column_names
+
+                data = []
+                for tupla in cur:
+                    data.append({
+                                'id'                : tupla[0], 
+                                'username'          : tupla[7], 
+                                'titolo'            : tupla[12], 
+                                'prezzo'            : float(tupla[14]), 
+                                'eta'               : tupla[3], 
+                                'sesso'             : tupla[4], 
+                                'indice_gradimento' : tupla[5],
+                                'foto'              : tupla[16]
                             })
                 return data

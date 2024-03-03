@@ -2,10 +2,14 @@
 
 import re
 import random
+import requests
+import json
+from main import nao_animatedSayText, nao_speech_to_text
 
 class Dialogo:
 
     db_helper = ""
+    dialog = []
 
     def Angelic_bracelet(self):
         return "L Angelic_bracelet  e un classico intramontabile. Il braccialetto rodiato propone una fila di Clear Crystal a taglio circolare, ognuno incorniciato dal pave e di Clear Crystal. Il gioiello si abbina perfettamente agli altri accessori della collezione Angelic. Il bracciale appartiene alla collezione Angelic, con cristalli e placcato in rodio"
@@ -181,10 +185,10 @@ class Dialogo:
 
     def estrai_categoria(self, frase):
         parole_chiave_necklace  = ["collana", "collane", "collana,", "collane,", "collana.", "collane."]
-        parole_chiave_ring      = ["anello","anelli", "anello,","anelli,", "anello.","anelli."]
-        parole_chiave_bracelet  = ["bracciale","bracciali", "braccialetto", "braccialetti", "bracciale,","bracciali,", "braccialetto,", "braccialetti,", "bracciale.","bracciali.", "braccialetto.", "braccialetti."]               
-        parole_chiave_earring   = ["orecchino","orecchini", "orecchino,","orecchini,", "orecchino.","orecchini."]
-        parole_chiave_watch     = ["orologio","orologio,","orologio.","orologi","orologi,","orologi."]
+        parole_chiave_ring      = ["anello", "anelli", "anello,","anelli,", "anello.","anelli."]
+        parole_chiave_bracelet  = ["bracciale", "bracciali", "braccialetto", "braccialetti", "bracciale,", "bracciali,", "braccialetto,", "braccialetti,", "bracciale.","bracciali.", "braccialetto.", "braccialetti."]               
+        parole_chiave_earring   = ["orecchino", "orecchini", "orecchino,","orecchini,", "orecchino.", "orecchini."]
+        parole_chiave_watch     = ["orologio", "orologio,", "orologio.", "orologi", "orologi,", "orologi."]
         
         category                = ["necklace","ring","bracelet","earrings"]
         parola_chiave           = ["uguale","indifferente"]
@@ -558,66 +562,138 @@ class Dialogo:
             abbinamenti[key] = value
         return abbinamenti.get(product_name, None)
 
-    def morphcast(self, emozioni):
-        angry       = int(emozioni['angry'] * 100)
-        disgust     = int(emozioni['disgust'] * 100)
-        happy       = int(emozioni['happy'] * 100)
-        sad         = int(emozioni['sad'] * 100)
-        surprise    = int(emozioni['surprise'] * 100)
-        attention   = int(emozioni['attention'] * 100)
-
+    def morphcast(self, emozioni, id_cliente, id_oggetto):
+        angry     = int(emozioni['emo']['Angry'] * 100)
+        disgust   = int(emozioni['emo']['Disgust'] * 100)
+        happy     = int(emozioni['emo']['Happy'] * 100)
+        sad       = int(emozioni['emo']['Sad'] * 100)
+        surprise  = int(emozioni['emo']['Surprise'] * 100)
+        attention = int(emozioni['att'] * 100)
         indice_gradimento = 50 - angry - disgust + happy - sad + surprise + attention
 
-        if indice_gradimento > 55:
+        nao_animatedSayText("In questo momento sei: " + str(emozioni['emo_dom']) + ". Il tuo indice di gradimento vale " + str(indice_gradimento))
+        
+        # salva indice di gradimento nel db
+        data = self.db_helper.set_emozione(id_cliente, id_oggetto, emozioni['age'], emozioni['gen'], indice_gradimento)
+
+        if indice_gradimento > 40:
             return "si"
         else:
             return "no"
 
-    def main(self, id_cliente, nome, cognome, id_carrello):
+    def main(self, id_cliente, nome, cognome, id_carrello, backup_nao):
         product_info = self.db_helper.dt_get_oggetto()
-        emozioni     = {'gender': 'female','age': 50,'angry': 0.2, 'disgust': 0.3, 'happy': 0.9, 'neutral': 0.5, 'sad': 0.1, 'surprise': 0.6, 'attention': 0.8} 
-        
-        #dialogo
-        print("Buongiorno " + nome + " " + cognome + ", sono peara, il nao del team naonecsus.")
 
-        print("Come posso aiutarti? Anche se sono un robot di gioielli ne so un bel po")
-        risposta1 = raw_input()
-        regalo = self.estrai_regalo(risposta1)
-        
-        if regalo == "regalo":
-            gender  = str(self.analizza_genere(risposta1))
-            age     = int(self.estrai_eta(risposta1))
-            prezzo  = int(self.estrai_budget(risposta1))
-            category= str(self.estrai_categoria(risposta1))
+        #dialogo
+        text_to_say = "Buongiorno " + str(nome) + " " + str(cognome) + ", sono peara, il nao del team naonecsus."
+        nao_animatedSayText(text_to_say)
+        self.dialog.append({"nao":text_to_say})
+        print(text_to_say)
+
+        text_to_say = "Come posso aiutarti? Anche se sono un robot di gioielli ne so un bel po"
+        nao_animatedSayText(text_to_say)
+        self.dialog.append({"nao":text_to_say})
+        print(text_to_say)
+
+        if backup_nao:
+            risposta1 = raw_input()
         else:
-            gender  = emozioni['gender']
-            age     = emozioni['age']
-            prezzo  = int(self.estrai_budget(risposta1))
-            category= str(self.estrai_categoria(risposta1))
+            risposta1 = nao_speech_to_text(5)
+        self.dialog.append({"utente":risposta1})
+        print(risposta1)
+        regalo = self.estrai_regalo(risposta1)
+
+        if backup_nao:
+            emozioni = {'data': {'det': 1, 'gen': 'female', 'age': 50, 'emo': {'Angry': 0.2, 'Disgust': 0.3, 'Happy': 0.9, 'Neutral': 0.5, 'Sad': 0.1, 'Surprise': 0.6}, 'att': 0.8, 'emo_dom':'Happy'} }
+        else:
+            #get api_morphcast
+            url = "http://127.0.0.1:5010/api/morphcast"
+            response = requests.get(url)
+            emozioni = response.json()
+        emozioni = emozioni['data']
+    
+        if regalo == "regalo":
+            gender   = str(self.analizza_genere(risposta1))
+            age      = int(self.estrai_eta(risposta1))
+            prezzo   = int(self.estrai_budget(risposta1))
+            category = str(self.estrai_categoria(risposta1))
+        else:
+            gender   = emozioni['gen']
+            age      = emozioni['age']
+            prezzo   = int(self.estrai_budget(risposta1))
+            category = str(self.estrai_categoria(risposta1))
 
         profilo_utente  = [gender, age, prezzo, category]
         posizioni_vuote = [pos for pos, val in enumerate(profilo_utente) if val == "" or val == 0]
         
         user_input = True
         while user_input == True:
-            
             while len(posizioni_vuote) != 0:
                 for i in range(len(posizioni_vuote)):
                     if posizioni_vuote[i] == 0:
-                        print("posso chiederti per chi è il gioiello?")
-                        risposta2 = raw_input()
+                        text_to_say = "posso chiederti per chi è il gioiello?"
+                        nao_animatedSayText(text_to_say)
+                        self.dialog.append({"nao":text_to_say})
+                        print(text_to_say)
+                        if backup_nao:
+                            risposta2 = raw_input()
+                        else:
+                            risposta2 = nao_speech_to_text(5)
+                        self.dialog.append({"utente":risposta2})
+                        print(risposta2)
                         gender = str(self.analizza_genere(risposta2))          
                     elif posizioni_vuote[i] == 1:
-                        print("E quanti anni ha?")
-                        risposta3 = raw_input()
+                        text_to_say = "E quanti anni ha?"
+                        nao_animatedSayText(text_to_say)
+                        self.dialog.append({"nao":text_to_say})
+                        print(text_to_say)
+                        if backup_nao:
+                            risposta3 = raw_input()
+                        else:
+                            risposta3 = nao_speech_to_text(5)
+                        self.dialog.append({"utente":risposta3})
+                        print(risposta3)
                         age = int(self.estrai_eta(risposta3))
                     elif posizioni_vuote[i] == 2:
-                        print("Hai un bugget per lacquisto del gioiello?")
-                        risposta4 = raw_input()
+                        text_to_say = "Hai un bagget per lacquisto del gioiello?"
+                        nao_animatedSayText(text_to_say)
+                        self.dialog.append({"nao":text_to_say})
+                        print(text_to_say)
+                        if backup_nao:
+                            risposta4 = raw_input()
+                        else:
+                            risposta4 = nao_speech_to_text(5)
+
+                        # controllo presenza simboli
+                        simboli_valute = {
+                                            "USD": "$",     # Dollaro statunitense
+                                            "EUR": "€",     # Euro
+                                            "GBP": "£",     # Sterlina britannica
+                                            "JPY": "¥",     # Yen giapponese
+                                            "CHF": "CHF",   # Franco svizzero
+                                            "CAD": "$",     # Dollaro canadese
+                                            "AUD": "$",     # Dollaro australiano
+                                            "CNY": "¥",     # Yuan cinese
+                                            "RUB": "₽",     # Rublo russo
+                                            "INR": "₹"      # Rupia indiana
+                                        }
+                        for abbreviazione, simbolo in simboli_valute.items():
+                            risposta4 = risposta4.replace(simbolo, abbreviazione)
+                        
+                        self.dialog.append({"utente":risposta4})
+                        print(risposta4)
                         prezzo = int(self.estrai_budget(risposta4))
                     elif posizioni_vuote[i] == 3:
-                        print("A quale tipologia di gioielli pensavi? Collane, bracciali, orecchini, anelli o orologi?")
-                        risposta5 = raw_input()
+                        text_to_say = "A quale tipologia di gioielli pensavi? Collane, bracciali, orecchini, anelli o orologi?"
+                        nao_animatedSayText(text_to_say)
+                        self.dialog.append({"nao":text_to_say})
+                        print(text_to_say)
+                        if backup_nao:
+                            risposta5 = raw_input()
+                        else:
+                            risposta5 = nao_speech_to_text(5)
+                        self.dialog.append({"utente":risposta5})
+                        print(risposta5)
                         category = str(self.estrai_categoria(risposta5))
                             
                 profilo_utente  = [gender, age, prezzo, category]
@@ -629,18 +705,41 @@ class Dialogo:
                 while i < len(id_gioiello_consigliato):
                     product_name = self.get_product_name_by_id(product_info, id_gioiello_consigliato[i])
                     
-                    print("Fammi pensare... io ti consiglierei: " + product_name)
+                    text_to_say = "Fammi pensare... io ti consiglierei: " + str(product_name)
+                    nao_animatedSayText(text_to_say)
+                    self.dialog.append({"nao":text_to_say})
+                    print(text_to_say)
                     funzione_prodotto = product_name.capitalize().replace(' ', '_')
                     descrizione = self.Descrizione_prodotto(funzione_prodotto)
-                    print(descrizione)
-                    risposta_a1_ = self.morphcast(emozioni)
+                    text_to_say = str(descrizione)
+                    nao_animatedSayText(text_to_say)
+                    self.dialog.append({"nao":text_to_say})
+                    print(text_to_say)
+
+                    if backup_nao == False:
+                        #get api_morphcast
+                        url = "http://127.0.0.1:5010/api/morphcast"
+                        response = requests.get(url)
+                        emozioni = response.json()
+                        emozioni = emozioni['data']
+
+                    risposta_a1_ = self.morphcast(emozioni, id_cliente, id_gioiello_consigliato[i])
                     
                     if risposta_a1_ == "si":
                         for a in product_info:
                             if a['name']== product_name:
                                 magazzino=a['qta_magazzino']
-                                print("vuoi aggiungere " + product_name + " al carrello?")
-                                aggiungi=self.estrai_si_no(raw_input())
+                                text_to_say = "vuoi aggiungere " + str(product_name) + " al carrello?"
+                                nao_animatedSayText(text_to_say)
+                                self.dialog.append({"nao":text_to_say})
+                                print(text_to_say)
+                                if backup_nao:
+                                    r1 = raw_input()
+                                else:
+                                    r1 = nao_speech_to_text(5)
+                                self.dialog.append({"utente":r1})
+                                print(r1)
+                                aggiungi = self.estrai_si_no(r1)
                                 if aggiungi == "si":
                                     if magazzino > 0:
                                         #aggiungo oggetto al carrello id_carrello
@@ -650,13 +749,26 @@ class Dialogo:
                                             if b['name']== product_name:
                                                 if b['sconto']>0:
                                                     prezzo_scontato = b['prezzo'] - ( b['prezzo'] * b['sconto'] /100 )
-                                                    print('Il prodotto scelto è in sconto e da ' + str(b['prezzo']) + ' viene ' + str(prezzo_scontato))
-                                        
+                                                    text_to_say = "Il prodotto scelto è in sconto e da " + str(b['prezzo']) + " viene " + str(prezzo_scontato)
+                                                    nao_animatedSayText(text_to_say)
+                                                    self.dialog.append({"nao":text_to_say})
+                                                    print(text_to_say)
                                     else:
-                                        print("Abbiamo terminato il prodotto richiesto, prova ad andare in un altro store o ripassa settimana prossima")
+                                        text_to_say = "Abbiamo terminato il prodotto richiesto, prova ad andare in un altro store o ripassa settimana prossima"
+                                        nao_animatedSayText(text_to_say)
+                                        self.dialog.append({"nao":text_to_say})
+                                        print(text_to_say)
                         if aggiungi == "si":
-                            print("Vuoi che ti consigli qualche abbinamento da fare?")                       
-                            risposta_= raw_input()
+                            text_to_say = "Vuoi che ti consigli qualche abbinamento da fare?"
+                            nao_animatedSayText(text_to_say)
+                            self.dialog.append({"nao":text_to_say})
+                            print(text_to_say)
+                            if backup_nao:
+                                risposta_ = raw_input()
+                            else:
+                                risposta_ = nao_speech_to_text(5)
+                            self.dialog.append({"utente":risposta_})
+                            print(risposta_)
                             risposta__= self.estrai_si_no(risposta_)
                         else:
                             risposta__= "no"
@@ -664,17 +776,31 @@ class Dialogo:
                         if risposta__ == "si":
                             abbinamento = self.funzione_abbinamento(product_name)
                             
-                            print("Perfetto, allora ti consiglierei di abbinarci " + abbinamento + " con " + product_name)
+                            text_to_say = "Perfetto, allora ti consiglierei di abbinarci " + str(abbinamento) + " con " + str(product_name)
+                            nao_animatedSayText(text_to_say)
+                            self.dialog.append({"nao":text_to_say})
+                            print(text_to_say)
                             funzione_prodotto2 = abbinamento.capitalize().replace(' ', '_')
                             descrizione2 = self.Descrizione_prodotto(funzione_prodotto2)
-                            print(descrizione2)
-                            risposta3 = self.morphcast(emozioni)
+                            text_to_say = str(descrizione2)
+                            nao_animatedSayText(text_to_say)
+                            self.dialog.append({"nao":text_to_say})
+                            print(text_to_say)
 
                             for b in product_info:
                                 if b['name'] == abbinamento:
                                     magazzino_ = b['qta_magazzino']
-                                    print("vuoi aggiungere " + abbinamento + " al carrello?")
-                                    aggiungi_ = self.estrai_si_no(raw_input())
+                                    text_to_say = "vuoi aggiungere " + str(abbinamento) + " al carrello?"
+                                    nao_animatedSayText(text_to_say)
+                                    self.dialog.append({"nao":text_to_say})
+                                    print(text_to_say)
+                                    if backup_nao:
+                                        r2 = raw_input()
+                                    else:
+                                        r2 = nao_speech_to_text(5)
+                                    self.dialog.append({"utente":r2})
+                                    print(r2)
+                                    aggiungi_ = self.estrai_si_no(r2)
                                     if aggiungi_ == "si":
                                         if magazzino_ > 0:
                                             #aggiungo oggetto al carrello id_carrello
@@ -685,46 +811,94 @@ class Dialogo:
                                                 if b['name'] == product_name:
                                                     if b['sconto'] > 0:
                                                         prezzo_scontato = b['prezzo'] - ( b['prezzo'] * b['sconto'] /100 )
-                                                        print("Il prodotto scelto è in sconto e da " + str(b['prezzo']) + " viene " + str(prezzo_scontato))
+                                                        text_to_say = "Il prodotto scelto è in sconto e da " + str(b['prezzo']) + " viene " + str(prezzo_scontato)
+                                                        nao_animatedSayText(text_to_say)
+                                                        self.dialog.append({"nao":text_to_say})
+                                                        print(text_to_say)
                                         else:
-                                            print("Abbiamo terminato il prodotto richiesto, prova ad andare in un altro store o ripassa settimana prossima")
+                                            text_to_say = "Abbiamo terminato il prodotto richiesto, prova ad andare in un altro store o ripassa settimana prossima"
+                                            nao_animatedSayText(text_to_say)
+                                            self.dialog.append({"nao":text_to_say})
+                                            print(text_to_say)
                                     else:
-                                        print("ok")
+                                        text_to_say = "ok"
+                                        nao_animatedSayText(text_to_say)
+                                        self.dialog.append({"nao":text_to_say})
+                                        print(text_to_say)
                         
+                            if backup_nao == False:
+                                #get api_morphcast
+                                url = "http://127.0.0.1:5010/api/morphcast"
+                                response = requests.get(url)
+                                emozioni = response.json()
+                                emozioni = emozioni['data']
+                            risposta3 = self.morphcast(emozioni, id_cliente, id_abbinamento)
+
                             if risposta3 == "si":
                                 user_input = False
                                 break
                             else:
-                                print("Ok mi dispiace")
+                                text_to_say = "Ok mi dispiace"
+                                nao_animatedSayText(text_to_say)
+                                self.dialog.append({"nao":text_to_say})
+                                print(text_to_say)
                                 user_input = False
                                 break            
                         else:
                             break
                     i += 1
                     if i == len(id_gioiello_consigliato):
-                        print("Faccio fatica a trovare un prodotto adatto a te, mi dispiace")
+                        text_to_say = "Faccio fatica a trovare un prodotto adatto a te, mi dispiace"
+                        nao_animatedSayText(text_to_say)
+                        self.dialog.append({"nao":text_to_say})
+                        print(text_to_say)
                         user_input=False
                         break     
             else:
-                print("Faccio fatica a trovare un prodotto adatto a te, mi dispiace")
+                text_to_say = "Faccio fatica a trovare un prodotto adatto a te, mi dispiace"
+                nao_animatedSayText(text_to_say)
+                self.dialog.append({"nao":text_to_say})
+                print(text_to_say)
                 user_input = False
                 break
 
-            print("Vuoi acquistare qualche altro prodotto?")
-            user_input   = raw_input()
+            text_to_say = "Vuoi acquistare qualche altro prodotto?"
+            nao_animatedSayText(text_to_say)
+            self.dialog.append({"nao":text_to_say})
+            print(text_to_say)
+            if backup_nao:
+                user_input = raw_input()
+            else:
+                user_input = nao_speech_to_text(5)
+            self.dialog.append({"utente":user_input})
+            print(user_input)
             user_input_1 = self.estrai_si_no(user_input)
 
             if user_input_1 == "no":
-                print("Controlla e conferma il tuo ordine nell'app")
-                print("i tuoi gioielli ti aspettano in cassa :)")            
+                text_to_say = "Controlla e conferma il tuo ordine nell'app"
+                nao_animatedSayText(text_to_say)
+                self.dialog.append({"nao":text_to_say})
+                print(text_to_say)
+                text_to_say = "i tuoi gioielli ti aspettano in cassa"
+                nao_animatedSayText(text_to_say)
+                self.dialog.append({"nao":text_to_say})
+                print(text_to_say)          
                 user_input=False
                 break
             else:
-                print("posso chiederti per chi è il gioiello?")
-                risposta1_ = raw_input()
+                text_to_say = "posso chiederti per chi è il gioiello?"
+                nao_animatedSayText(text_to_say)
+                self.dialog.append({"nao":text_to_say})
+                print(text_to_say)
+                if backup_nao:
+                    risposta1_ = raw_input()
+                else:
+                    risposta1_ = nao_speech_to_text(5)
+                self.dialog.append({"utente":risposta1_})
+                print(risposta1_)
                 regalo = self.estrai_regalo(risposta1_)
                 if regalo == "me":
-                    gender  = emozioni['gender']
+                    gender  = emozioni['gen']
                     age     = emozioni['age']
                     prezzo  = int(self.estrai_budget(risposta1_))
                     category= str(self.estrai_categoria(risposta1_))
@@ -732,17 +906,21 @@ class Dialogo:
                     posizioni_vuote = [pos for pos, val in enumerate(profilo_utente) if val == "" or val == 0]
                     user_input = True
                 else:
-                    gender  = str(self.analizza_genere(risposta1_))
-                    age     = int(self.estrai_eta(risposta1_))
-                    prezzo  = int(self.estrai_budget(risposta1_))
-                    category= str(self.estrai_categoria(risposta1_))
+                    gender   = str(self.analizza_genere(risposta1_))
+                    age      = int(self.estrai_eta(risposta1_))
+                    prezzo   = int(self.estrai_budget(risposta1_))
+                    category = str(self.estrai_categoria(risposta1_))
                     profilo_utente = [gender, age, prezzo, category]
                     posizioni_vuote = [pos for pos, val in enumerate(profilo_utente) if val == "" or val == 0]
                     user_input = True
 
-        print("Spero di averti aiutato al meglio delle mie possibilita, grazie per aver acquistato da svaroschi utilizzando la tecnologia naonecsus!")
+        text_to_say = "Spero di averti aiutato al meglio delle mie possibilita, grazie per aver acquistato da svaroschi utilizzando la tecnologia naonecsus!"
+        nao_animatedSayText(text_to_say)
+        self.dialog.append({"nao":text_to_say})
+        print(text_to_say)
 
 
-    def __init__(self, db_helper, id_cliente, nome, cognome, id_carrello):
+    def __init__(self, db_helper, id_cliente, nome, cognome, id_carrello, backup_nao):
         self.db_helper = db_helper
-        self.main(id_cliente, nome, cognome, id_carrello)
+        self.dialog = []
+        self.main(id_cliente, nome, cognome, id_carrello, backup_nao)

@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Emozioni</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-z9b+7oG5fWeAOeVG2HEoaFPiFjsxxhMbDSFOx6YLLEpAt52D74BlN/C2BZJKPXyBBo5HcAc2rZSXtITc8Unw/A==" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             background-color: #A8D0F0;
-            color: black;
+            color: #000000;
             font-family: 'Arial', sans-serif;
             text-align: center;
             margin: 0;
@@ -36,44 +36,49 @@
             text-decoration: none;
         }
 
-        .menu {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .menu button,
-        .menu select {
-            flex: 1;
-            background-color: #FFF8F8;
-            color: #0A0A0A;
-            border: none;
-            padding: 15px;
-            margin: 0 10px;
-            font-size: 18px;
-            font-weight: bold;
-            text-transform: uppercase;
-            cursor: pointer;
-            border-radius: 10px;
-            transition: background-color 0.3s ease;
-        }
-
-        .menu select {
-            width: 80px;
-            text-align: center; 
-        }
-
-        .menu button:hover,
-        .menu select:hover {
-            background-color: #FF7370;
-        }
-
         .logo-link {
             position: absolute;
             top: 10px;
             left: 10px;
             width: 70px;
             height: 70px;
+        }
+
+        #header-text {
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        #number-container {
+            font-size: 200px;
+            margin-top: 20px;
+            transition: color 0.5s;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 300px; /* Altezza fissa */
+        }
+
+        #report-button {
+            font-size: 40px;
+            width: 150px; /* Larghezza fissa */
+            margin-top: 20px;
+            padding: 15px 20px;
+            border-radius: 10px;
+            background-color: #FFF8F8;
+            transition: background-color 0.5s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #report-button:hover {
+            background-color: #FF7370;
         }
 
         .logout-button {
@@ -120,17 +125,8 @@
             font-size: 20px;
             border-radius: 15px; /* Angoli stondati */
         }
-
-        .sort-container {
-            margin-top: 0px;
-        }
-
-        .sort-label {
-            font-size: 20px;
-            color: #0A0A0A;
-            margin-right: 10px;
-        }
     </style>
+
     <script>
         function sortTable() {
             var table, rows, switching, i, x, y, shouldSwitch;
@@ -170,80 +166,53 @@
             }
         }
     </script>
-    <script type="text/javascript">
-        async function deleteProdotto(url) {
-            await fetch(url, {
-                method: 'DELETE',
-                headers: {
-                    'Content-type': 'application/json'
-                }
-            });
 
-            window.location.reload();
-        }
-    </script>
 </head>
 
 <body>
     <a href="/dashboard" class="logo-link"><img src="{{url_for('static', filename='logo.png')}}" alt="Logo" width="100%" height="100%"></a>
     <a href="/logout" class="logout-button">Logout</a>
     <h1 class="swarovski">Swarovski</h1>
-    <div class="menu">
-        <button onclick="window.location.href='/prodotti'">Prodotti</button>
-        <button onclick="window.location.href='/vendite'">Vendite</button>
-        <button onclick="window.location.href='/utenti'">Utenti</button>
-    </div>
-    <div class="menu">
-        <button onclick="window.location.href='/carrelli'">Carrelli</button>
-        <button onclick="window.location.href='/scaffale'">Scaffale</button>
-        <button onclick="window.location.href='/magazzino'">Magazzino</button>
-    </div>
-    <div class="menu">
-        <button onclick="window.location.href='/abbinamenti'">Abbinamenti</button>
-        <button onclick="window.location.href='/api'">API</button>
-        <button onclick="window.location.href='/services'">Services</button>
-    </div>
-    <div class="menu">
-        <button onclick="window.location.href='/emozioni'">Emozioni</button>
-    </div>
+
+    <div id="header-text">Emozioni:</div>
+
     <br><br>
 
-    <a class="flex flex-row space-x-2 mt-10 mx-auto px-4 py-2 w-fit rounded-md font-medium text-white tracking-wider bg-green-500" 
-            href="/nuovo_prodotto">NUOVO PRODOTTO<span class="mdi mdi-plus ml-1"></span></a>
-    <br>
     <div class="sort-container">
         <label class="sort-label" for="sortSelect">Ordina per:</label>
         <select id="sortSelect" onchange="sortTable()">
             <option value="0">ID</option>
+            <option value="1">Username</option>
             <option value="2">Titolo</option>
-            <option value="3">Categoria</option>
-            <option value="4">Prezzo</option>
+            <option value="3">Prezzo</option>
+            <option value="4">Età</option>
+            <option value="7">Indice Gradimento</option>
         </select>
     </div>
-    <br>
+    <br><br>
 
     <table id="userTable">
         <tr>
             <th>ID</th>
-            <th>Foto</th>
+            <th>Username</th>
             <th>Titolo</th>
-            <th>Categoria</th>
             <th>Prezzo</th>
-            <th>Descrizione</th>
-            <th>Modifica</th>
-            <th>Elimina</th>
+            <th>Età</th>
+            <th>Sesso</th>
+            <th>Foto</th>
+            <th>Indice Gradimento</th>
         </tr>
        
-       {% for item in oggetto %}
+       {% for item in data %}
         <tr>
             <td>{{item['id']}}</td>
-            <td><img src="{{item['foto']}}" width="70px" height="70px"></td>
+            <td>{{item['username']}}</td>
             <td>{{item['titolo']}}</td>
-            <td>{{item['categoria']}}</td>
             <td>{{item['prezzo']}}</td>
-            <td>{{item['descrizione']}}</td>
-            <td><button class="rounded px-4 py-2 bg-sky-500 text-white hover:bg-sky-600 transition-all"><a href="/gestione_prodotto/{{item['id']}}"><span class="mdi mdi-pencil-outline mr-1"></span></a></button></td>
-            <td><button class="rounded px-4 py-2 bg-red-500 text-white hover:bg-red-600 transition-all"><a onclick="deleteProdotto('/api/prodotto/{{item['id']}}')"><span class="mdi mdi-delete-outline mr-1"></span></a></button></td>
+            <td>{{item['eta']}}</td>
+            <td>{{item['sesso']}}</td>
+            <td><img src="{{item['foto']}}" width="70px" height="70px"></td>
+            <td>{{item['indice_gradimento']}}</td>
         </tr>
         {% endfor %}
     
