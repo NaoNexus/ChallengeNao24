@@ -1,0 +1,73 @@
+frame Progetto NaoNexus 2024
+
+participantspacing equal
+entryspacing 0.5
+
+actor CLIENTE
+participant WEB-APP
+participant CATALOGO
+participant NEGOZIO
+participant NAO
+participant CARRELLO
+participant PAGAMENTO
+
+//-------------------------------------------------
+note over CLIENTE,PAGAMENTO: In negozio 
+box over CLIENTE,WEB-APP: Accesso web-app
+
+autonumber 1
+WEB-APP->>NEGOZIO: Selezione prodotto
+activate NEGOZIO
+
+NEGOZIO->>NAO: dialogo
+deactivate NEGOZIO
+
+activate NAO
+NAO->>CARRELLO: prodotto scelto
+
+activate CARRELLO
+
+CARRELLO->>PAGAMENTO:
+activate PAGAMENTO
+PAGAMENTO->>CARRELLO: pagamento
+deactivate PAGAMENTO
+
+
+CARRELLO->>NAO: scontrino digitale
+deactivate CARRELLO
+
+
+NAO->>CLIENTE: prodotto
+deactivate NAO
+destroysilent NAO
+destroysilent NEGOZIO
+
+//-------------------------------------------------
+space 
+autonumber 1
+note over CLIENTE,PAGAMENTO: Online
+box over CLIENTE,WEB-APP: Accesso web-app
+
+
+WEB-APP->>CATALOGO: selezione prodotto
+activate CATALOGO
+CATALOGO->>CARRELLO: acquisto online
+activate CARRELLO
+CARRELLO->>PAGAMENTO:
+activate PAGAMENTO
+PAGAMENTO->>CARRELLO: pagamento
+deactivate PAGAMENTO
+destroysilent PAGAMENTO
+
+CARRELLO->>WEB-APP: prodotti
+deactivate CARRELLO
+deactivate CATALOGO
+
+destroysilent WEB-APP
+destroysilent CATALOGO
+destroysilent CARRELLO
+destroysilent CLIENTE
+
+
+  
+
