@@ -1,18 +1,18 @@
 ![alt text](https://github.com/NaoNexus/ChallengeNao23/blob/main/images/logo_con_scritta.png)
 # ChallengeNao24
 ## Indice
-* [NAO Challenge 2024](https://github.com/NaoNexus/ChallengeNao24/edit/main/README.md#nao-challenge-2024)
-	* [Project](https://github.com/NaoNexus/ChallengeNao24/edit/main/README.md#project)
-		* [Coding](https://github.com/NaoNexus/ChallengeNao24/edit/main/README.md#coding)
-			* [Database](https://github.com/NaoNexus/ChallengeNao24/edit/main/README.md#database)
-			* [Dataset](https://github.com/NaoNexus/ChallengeNao24/edit/main/README.md#dataset)
-			* [Decision Tree](https://github.com/NaoNexus/ChallengeNao24/edit/main/README.md#decision-tree) 
-			* [Nao Magazzino](https://github.com/NaoNexus/ChallengeNao24/edit/main/README.md#nao-magazzino)
-			* [OneRetail](https://github.com/NaoNexus/ChallengeNao24/edit/main/README.md#oneretail)
-			* [Sequence Diagram](https://github.com/NaoNexus/ChallengeNao24/edit/main/README.md#sequence-diagram)
-		* [Social](https://github.com/NaoNexus/ChallengeNao24/edit/main/README.md#social)
-			* [Logos](https://github.com/NaoNexus/ChallengeNao24/edit/main/README.md#logos)
-* [Authors](https://github.com/NaoNexus/ChallengeNao24/edit/main/README.md#authors)
+* [NAO Challenge 2024](#nao-challenge-2024)
+	* [Project](#project)
+		* [Coding](#coding)
+			* [Database](#database)
+			* [Dataset](#dataset)
+			* [Decision Tree](#decision-tree) 
+			* [Nao Magazzino](#nao-magazzino)
+			* [OneRetail](#oneretail)
+			* [Sequence Diagram](#sequence-diagram)
+		* [Social](#social)
+			* [Logos](#logos)
+* [Authors](#authors)
 
 ## NAO Challenge 2024
 
