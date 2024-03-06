@@ -1,34 +1,34 @@
-frame Progetto NaoNexus 2024
+frame#FFFAF0 Progetto NaoNexus 2024
 
 participantspacing equal
 entryspacing 0.5
 
-actor CLIENTE
-participant WEB-APP
-participant CATALOGO
-participant NEGOZIO
-participant NAO
-participant CARRELLO
-participant PAGAMENTO
+actor CLIENTE #F8F8FF
+participant WEB-APP #F8F8FF
+participant CATALOGO #F8F8FF
+participant NEGOZIO #F8F8FF
+participant NAO #F8F8FF
+participant CARRELLO #F8F8FF
+participant PAGAMENTO #F8F8FF
 
 //-------------------------------------------------
-note over CLIENTE,PAGAMENTO: In negozio 
-box over CLIENTE,WEB-APP: Accesso web-app
+box over CLIENTE,PAGAMENTO#B0E0E6: In negozio 
+box over CLIENTE,WEB-APP#F0F8FF: Accesso web-app
 
 autonumber 1
 WEB-APP->>NEGOZIO: Selezione prodotto
-activate NEGOZIO
+activate NEGOZIO#C0C0C0
 
-NEGOZIO->>NAO: dialogo
+NEGOZIO->>NAO: ++**dialogo
 deactivate NEGOZIO
 
-activate NAO
+activate NAO#C0C0C0
 NAO->>CARRELLO: prodotto scelto
 
-activate CARRELLO
+activate CARRELLO#C0C0C0
 
 CARRELLO->>PAGAMENTO:
-activate PAGAMENTO
+activate PAGAMENTO#C0C0C0
 PAGAMENTO->>CARRELLO: pagamento
 deactivate PAGAMENTO
 
@@ -45,16 +45,16 @@ destroysilent NEGOZIO
 //-------------------------------------------------
 space 
 autonumber 1
-note over CLIENTE,PAGAMENTO: Online
-box over CLIENTE,WEB-APP: Accesso web-app
+box over CLIENTE,PAGAMENTO#B0E0E6: Online
+box over CLIENTE,WEB-APP#F0F8FF: Accesso web-app
 
 
 WEB-APP->>CATALOGO: selezione prodotto
-activate CATALOGO
+activate CATALOGO#C0C0C0
 CATALOGO->>CARRELLO: acquisto online
-activate CARRELLO
+activate CARRELLO#C0C0C0
 CARRELLO->>PAGAMENTO:
-activate PAGAMENTO
+activate PAGAMENTO#C0C0C0
 PAGAMENTO->>CARRELLO: pagamento
 deactivate PAGAMENTO
 destroysilent PAGAMENTO
