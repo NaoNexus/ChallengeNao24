@@ -1,5 +1,5 @@
 ![alt text](https://github.com/NaoNexus/ChallengeNao23/blob/main/images/logo_con_scritta.png)
-# ChallengeNao24
+# ONERETAIL
 ## Indice
 * [NAO Challenge 2024](#nao-challenge-2024)
 	* [Project](#project)
