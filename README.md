@@ -4,16 +4,14 @@
 * [NAO Challenge 2024](#nao-challenge-2024)
 	* [Project](#project)
 		* [Coding](#coding)
-			* [Database](#database)
 			* [Dataset](#dataset)
-			* [Decision Tree](#decision-tree) 
-			* [Nao Magazzino](#nao-magazzino)
-			* [OneRetail](#oneretail)
+			* [Server](#server)
+				* [Database](#database)
+				* [Decision Tree](#decision-tree) 
 			* [Sequence Diagram](#sequence-diagram)
 		* [Social](#social)
 			* [Logos](#logos)
 * [Authors](#authors)
-
 ## NAO Challenge 2024
 
 Every year, the theme of the NaoChallenge changes, but its goal remains the same: to use robotics as a means to solve current problems. The NaoNexus team this year has focused on Retail, specifically in-store sales and warehouse management.
@@ -52,7 +50,7 @@ The [dataset](https://github.com/NaoNexus/ChallengeNao24/tree/main/coding/datase
 
 ### Decision Tree:
 
-This folder [decision_tree](https://github.com/NaoNexus/ChallengeNao24/tree/main/coding/decision_tree) contains the Python code where we coded the dialogue and decision tree and 2 possible dialogues.
+[decision_tree](https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/server/dialogo_decision_tree.py) contains the Python code where we coded the dialogue and decision tree and 2 possible dialogues.
 
 - This Python code defines a function called recommend_jewelry that provides personalized jewelry recommendations based on customer information such as gender, age, budget, and the desired jewelry category. The function considers various conditions, including different age and budget ranges for specific jewelry categories like bracelets, necklaces, earrings, rings, and watches. The result of the function is a list of recommended jewelry IDs, and the code is structured with nested conditions to handle different scenarios and offer advice tailored to the customer's preferences.
 ```ruby
@@ -75,25 +73,9 @@ print("Buongiorno "+nome_utente['nome']+" "+nome_utente['cognome']+", sono peara
     risposta1 = input()
     regalo = estrai_regalo(risposta1)
 ```
-### Nao Magazzino:
+### Server:
+The repository in the [Sever](https://github.com/NaoNexus/ChallengeNao24/tree/main/coding/oneRetail) directory serves as the essential core of the project, offering a range of fundamental functionalities. The codebase is centered around a class called DB, which manages the connection to a PostgreSQL database and provides methods for operations such as retrieving information about customers and items, as well as handling carts and orders. Additionally, there is a CustomFormatter class and a configured logger to colorize log messages based on severity levels. The project also features a script that uses the requests library to send HTTP POST requests to a specific endpoint with predefined data. Introducing Flask into the mix, the project leverages this lightweight web framework for elegant web application development. Finally, two utility functions complete the picture, calculating elapsed time from a timestamp and reading a YAML file. In summary, this repository excels not only in database operations, meticulous log management, and adept HTTP communication but also harnesses Flask for powerful web development capabilities.
 
-This folder [nao_magazzino](https://github.com/NaoNexus/ChallengeNao24/tree/main/coding/nao_magazzino) contains the Python code for the second Nao, used for the warehouse management.
-
-- The carenza function takes two arguments, where and product_name, representing the location (shelf or warehouse) and the product name, respectively. Depending on the specified location, the function returns a message indicating whether the product is out on the shelf, nearly depleted in the warehouse, or if there are no availability issues. The user can input the location and product name, obtaining a message about availability that is then printed on the screen.
-```ruby
-def carenza(where, product_name):
-    dove = where
-    cosa = product_name
-
-    if dove == "scaffale":
-        return "È terminato " + product_name + " sullo scaffale"
-```
-
-### oneRetail:
-
-This folder [One Retail](https://github.com/NaoNexus/ChallengeNao24/tree/main/coding/oneRetail)​​ contains the essential server code for running the entire project, including all necessary functionalities.
-
-- The code encompasses a series of Python functionalities. Specifically, a class named DB manages the connection to a PostgreSQL database and provides methods to perform various operations, such as retrieving information about customers and items in the database, handling carts and orders. There is also a CustomFormatter class and a configured logger to colorize log messages based on the severity level. Additionally, there is a script using the requests library to send an HTTP POST request to a specific endpoint with predefined data. Lastly, there are two utility functions: one for calculating the elapsed time from a timestamp and the other for reading a YAML file. Overall, the code appears to address database operations, log management, HTTP communication, and provide utility functionalities.
 ```ruby
 from logging_helper import logger
 from datetime import datetime
