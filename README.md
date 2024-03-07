@@ -44,6 +44,8 @@ CREATE TABLE Ordine (
 	FOREIGN KEY(id_cliente) REFERENCES Cliente(id) ON UPDATE CASCADE ON DELETE SET NULL
 );
 ```
+<img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/database/diagramma%20ER.png" hight="300" width="700"/>
+
 ### Dataset:
 
 The [dataset](https://github.com/NaoNexus/ChallengeNao24/tree/main/coding/dataset) folder encompasses a comprehensive collection of images featuring the jewelry items utilized in constructing the catalog for the application. These images serve as visual representations of the various products available in the app's inventory, providing users with a detailed and aesthetically pleasing showcase of the jewelry selection.
