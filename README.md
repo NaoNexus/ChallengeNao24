@@ -21,8 +21,8 @@ Every year, the theme of the NaoChallenge changes, but its goal remains the same
 For the NAO Challenge 2024, the NaoNexus team has developed the OneRetail app, focusing on both physical and online retail. OneRetail utilizes the NAO robot and the emotional artificial intelligence of MorphCast to recommend products to customers and provide valuable data to retailers. For customers, the app offers a personalized and accessible experience both online and through direct assistance from NAO. For retailers, OneRetail provides a customized inventory and sales management system, along with in-depth analysis of customer interactions, all without additional costs.
 
 - [X] Accessibility
-- [X] ...
-- [X] ...
+- [X] Sustainability
+- [X] Integration
 
 ## Coding
 
@@ -30,7 +30,7 @@ For the NAO Challenge 2024, the NaoNexus team has developed the OneRetail app, f
 
 The folder [database](https://github.com/NaoNexus/ChallengeNao24/tree/main/coding/database) contains the ER diagram, the complete database with defined tables and attributes. 
 
-- This SQL script defines the structure of a database for an e-commerce application, organizing information into different tables to manage data related to customers, products, orders, emotions, and product pairings. The insertion of sample data provides a practical context, illustrating how the tables are interconnected. The queries demonstrate how to retrieve information through join operations, allowing for a thorough analysis of user activity. In summary, the script provides a foundation for managing the online shopping experience, from customer registration to the analysis of preferences and interactions with products.
+- This SQL script defines the structure of a database for an e-commerce application, organizing information into different tables to manage data related to customers, products, orders, emotions. The insertion of sample data provides a practical context, illustrating how the tables are interconnected. The queries retrieve information through join operations, allowing for a thorough analysis of user activity. In summary, the script provides a foundation for managing the online shopping experience, from customer registration to the analysis of preferences and interactions with products.
 ```ruby
 CREATE TABLE Ordine (
 	id					SERIAL,
@@ -101,7 +101,7 @@ This folder [sequence_diagram](https://github.com/NaoNexus/ChallengeNao24/tree/m
 - The NaoNexus 2024 project orchestrates a seamless shopping experience, uniting physical and online interactions. Customers, represented by CLIENTE, can use a web application (WEB-APP) to access a catalog (CATALOGO) and make product selections. In the physical store, NEGOZIO engages in a dialogue with the NAO robot, which adds chosen products to the shopping cart (CARRELLO). Payment is processed through PAGAMENTO, and a digital receipt is generated. Similarly, in the online scenario, clients access WEB-APP, interact with CATALOGO, and select items added to the online CARRELLO. The payment process is handled by PAGAMENTO, and clients receive purchased products and information online. This integrated approach enhances the shopping journey for NaoNexus in 2024.
 - [Diagramma Dialogo](https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/sequence_diagram/Diagramma%20dialogo.svg) illustrates an online shopping [dialogue](https://github.com/NaoNexus/ChallengeNao24/edit/main/README.md#decision-tree) between the customer (CLIENTE) and NAO. Two purchasing scenarios are considered: buying as a gift and personal purchase. Using a decision tree, the assistant suggests compatible jewelry based on the customer's profile. The dialogue involves loops to gather complete information and make product selections. The interaction continues until the customer completes the purchase or decides not to add more items. Subsequently, a courtesy message is sent, and both the customer and the assistant are deactivated, concluding the dialogue. 
 
-  <img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/sequence_diagram/sequence%20diagram.png" hight="400" width="600"/>
+  <img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/sequence_diagram/sequence%20diagram.png" width="500" height="400" /><img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/sequence_diagram/Diagramma%20dialogo.png"  width="250" height="400" >
 
 ## Social
 
@@ -109,9 +109,7 @@ This folder [sequence_diagram](https://github.com/NaoNexus/ChallengeNao24/tree/m
 
 This folder [logos](https://github.com/NaoNexus/ChallengeNao24/tree/main/social/logos) contains the logos of the project
 
-<img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/social/logos/logo/logo.png" width="300"/> 
-
-
+<img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/social/logos/logo/logo.png" width="300"/>
 
 ## Authors
 
