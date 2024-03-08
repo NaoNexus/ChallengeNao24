@@ -121,6 +121,7 @@ This folder [sequence_diagram](https://github.com/NaoNexus/ChallengeNao24/tree/m
 <div align="center">
   <img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/sequence_diagram/sequence%20diagram.png" width="500" height="400" /><img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/sequence_diagram/Diagramma%20dialogo.png"  width="250" height="400" >
 </div>
+
 ## Social
 
 ### Logos
@@ -129,9 +130,7 @@ This folder [logos](https://github.com/NaoNexus/ChallengeNao24/tree/main/social/
 
 <div align="center">
 <img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/social/logos/logo/Logo.jpg" width="300"/><img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/social/logos/logo/logo_diamante_social.png" width="300"/>
-</div>
-<div style="background-color: #000000; padding: 20px; text-align: center;">
-<img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/social/logos/svgs/morphcast.svg">
+<img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/social/logos/logo/morphcast.png" width="600">
 </div>
 
 ## Authors
