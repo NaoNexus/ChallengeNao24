@@ -1,6 +1,6 @@
 ![alt text](https://github.com/NaoNexus/ChallengeNao23/blob/main/images/logo_con_scritta.png)
 # ONERETAIL
-## Indice
+## Contents
 * [NAO Challenge 2024](#nao-challenge-2024)
 	* [Project](#project)
 		* [Coding](#coding)
@@ -24,6 +24,22 @@ For the NAO Challenge 2024, the NaoNexus team has developed the OneRetail app, f
 - [X] Sustainability
 - [X] Integration
 
+##### REQUIREMENTS:
+> [!IMPORTANT]
+> - opencv-python==4.2.0.32 <br>
+> - opencv-python-headless==4.2.0.32 <br>
+> - flask <br>
+> - flask_login <br>
+> - yieldfrom <br>
+> - PyYAML <br>
+> - numpy <br>
+> - requests <br>
+> - selenium <br>
+> - speechRecognition==3.8.1 <br>
+> - paramiko <br>
+> - psycopg2 <br>
+> - psycopg2-binary <br>
+
 ## Coding
 
 ### Database:
@@ -33,8 +49,8 @@ The folder [database](https://github.com/NaoNexus/ChallengeNao24/tree/main/codin
 - This SQL script defines the structure of a database for an e-commerce application, organizing information into different tables to manage data related to customers, products, orders, emotions. The insertion of sample data provides a practical context, illustrating how the tables are interconnected. The queries retrieve information through join operations, allowing for a thorough analysis of user activity. In summary, the script provides a foundation for managing the online shopping experience, from customer registration to the analysis of preferences and interactions with products.
 ```ruby
 CREATE TABLE Ordine (
-	id					SERIAL,
-	id_cliente			INT,
+	id			SERIAL,
+	id_cliente		INT,
 	prezzo_totale		DECIMAL,
 	data_acquisto		DATE,
 	ora_acquisto		TIME,
@@ -44,7 +60,9 @@ CREATE TABLE Ordine (
 	FOREIGN KEY(id_cliente) REFERENCES Cliente(id) ON UPDATE CASCADE ON DELETE SET NULL
 );
 ```
-<img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/database/diagramma%20ER.png" hight="300" width="700"/>
+<div align="center">
+  <img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/database/diagramma%20ER.png" hight="300" width="700"/>
+</div>
 
 ### Dataset:
 
@@ -100,16 +118,21 @@ This folder [sequence_diagram](https://github.com/NaoNexus/ChallengeNao24/tree/m
 
 - The NaoNexus 2024 project orchestrates a seamless shopping experience, uniting physical and online interactions. Customers, represented by CLIENTE, can use a web application (WEB-APP) to access a catalog (CATALOGO) and make product selections. In the physical store, NEGOZIO engages in a dialogue with the NAO robot, which adds chosen products to the shopping cart (CARRELLO). Payment is processed through PAGAMENTO, and a digital receipt is generated. Similarly, in the online scenario, clients access WEB-APP, interact with CATALOGO, and select items added to the online CARRELLO. The payment process is handled by PAGAMENTO, and clients receive purchased products and information online. This integrated approach enhances the shopping journey for NaoNexus in 2024.
 - [Diagramma Dialogo](https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/sequence_diagram/Diagramma%20dialogo.svg) illustrates an online shopping [dialogue](https://github.com/NaoNexus/ChallengeNao24/edit/main/README.md#decision-tree) between the customer (CLIENTE) and NAO. Two purchasing scenarios are considered: buying as a gift and personal purchase. Using a decision tree, the assistant suggests compatible jewelry based on the customer's profile. The dialogue involves loops to gather complete information and make product selections. The interaction continues until the customer completes the purchase or decides not to add more items. Subsequently, a courtesy message is sent, and both the customer and the assistant are deactivated, concluding the dialogue. 
-
+<div align="center">
   <img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/sequence_diagram/sequence%20diagram.png" width="500" height="400" /><img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/sequence_diagram/Diagramma%20dialogo.png"  width="250" height="400" >
-
+</div>
 ## Social
 
 ### Logos
 
 This folder [logos](https://github.com/NaoNexus/ChallengeNao24/tree/main/social/logos) contains the logos of the project
 
-<img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/social/logos/logo/logo.png" width="300"/>
+<div align="center">
+<img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/social/logos/logo/Logo.jpg" width="300"/><img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/social/logos/logo/logo_diamante_social.png" width="300"/>
+</div>
+<div style="background-color: #000000; padding: 20px; text-align: center;">
+<img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/social/logos/svgs/morphcast.svg">
+</div>
 
 ## Authors
 
