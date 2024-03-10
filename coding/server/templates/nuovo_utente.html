@@ -5,12 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inserimento_utente</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-z9b+7oG5fWeAOeVG2HEoaFPiFjsxxhMbDSFOx6YLLEpAt52D74BlN/C2BZJKPXyBBo5HcAc2rZSXtITc8Unw/A==" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #A8D0F0;
+            background-color: #FFF;
             color: #F5B92C;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Readex Pro', sans-serif;
             text-align: center;
             margin: 0;
             padding: 0;
@@ -21,7 +23,7 @@
             font-size: 150px;
             text-align: center;
             margin: 10px 0;
-            font-family: 'Times New Roman', serif;
+            font-family: 'Readex Pro', sans-serif;
         }
 
         .home-link {
@@ -41,7 +43,6 @@
             height: 70px;
         }
 
-   
         .text-border {
             border: 10px solid #0A0A0A;
             border-radius: 15px;
@@ -78,13 +79,13 @@
             padding: 20px;
             margin-bottom: 20px;
             border-radius: 5px;
-            border: none;
+            border: 2px solid #000; /* Aggiunto bordo nero */
         }
 
         input[type="submit"] {
             width: 150px;
             padding: 20px;
-            background-color: #FF7370;
+            background-color: #000; /* Modificato il colore di sfondo */
             color: #FFF8F8;
             border: none;
             border-radius: 5px;
@@ -94,30 +95,49 @@
         input[type="submit"]:hover {
             background-color: #F57267;
         }
+		.logout-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #000;
+            color: #FFF;
+            border: none;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-button:hover {
+            background-color: #D39C20;
+        }
     </style>
 </head>
 
 <body>
     <a href="/index" class="logo-link"><img src="{{url_for('static', filename='logo.png')}}" alt="Logo" width="100%" height="100%"></a>
+	<a href="/logout" class="logout-button">Logout</a>
     <h1>Swarovski</h1>
 
-            <form action="/process_form" method="post">
-                <label class="small-text" for="nome">Nome: </label>
-                <input type="text" id="nome" name="nome" required>
+    <form action="/process_form" method="post">
+        <label class="small-text" for="nome">Nome: </label>
+        <input type="text" id="nome" name="nome" required>
 
-                <label class="small-text" for="cognome">Cognome:</label>
-                <input type="text" id="cognome" name="cognome" required>
+        <label class="small-text" for="cognome">Cognome:</label>
+        <input type="text" id="cognome" name="cognome" required>
 
-                <label class="small-text" for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
+        <label class="small-text" for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
 
-                <label class="small-text" for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+        <label class="small-text" for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
 
-                <input type="submit" value="Invia">
-            </form>
-        
-   
+        <input type="submit" value="Invia">
+    </form>
 </body>
 
 </html>

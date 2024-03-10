@@ -9,31 +9,29 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            background-color: #A8D0F0;
-            color: black;
-            font-family: 'Arial', sans-serif;
+	 body {
+            background-color: #FFF;
+            color: #0A0A0A;
+            font-family: 'Readex Pro', sans-serif;
             text-align: center;
             margin: 0;
             padding: 0;
         }
-
-        .swarovski {
+		.swarovski {
             color: #0A0A0A;
             font-size: 150px;
             text-align: center;
-            margin: 10px 0; /* Ridotto lo spazio sopra la tabella */
-            font-family: 'Times New Roman', serif;
+            margin: 10px 0;
+            font-family: 'Readex Pro', sans-serif;
             font-weight: bold;
         }
 
-        .home-link {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 20px;
-            color: #FFF8F8;
-            text-decoration: none;
+        h1 {
+            color: #0A0A0A;
+            font-size: 150px;
+            text-align: center;
+            margin: 10px 0;
+            font-family: 'Readex Pro', sans-serif;
         }
 
         .logo-link {
@@ -44,6 +42,85 @@
             height: 70px;
         }
 
+        .text-border {
+            border: 10px solid #000; /* Modificato il colore del bordo */
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 0px;
+            display: flex;
+            align-items: flex-start; /* Allinea il contenuto in alto */
+        }
+
+        table {
+            width: 70%;
+            border-collapse: collapse;
+            margin-right: 20px;
+        }
+		.logout-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #000;
+            color: #FFF;
+            border: none;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        th,
+        td {
+            border: 2px solid #0A0A0A;
+            padding: 15px;
+            text-align: center;
+            background-color: #000; /* Modificato il colore di sfondo */
+            color: #FFF; /* Modificato il colore del testo */
+        }
+
+        th {
+            background-color: #FFF;
+			color: #000;
+        }
+
+        .product-list {
+            width: 30%;
+            margin-left: 20px; /* Aggiunto margine sinistro */
+        }
+
+        .product-list select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .product-list button {
+            padding: 20px;
+            background-color: #000;
+            color: #FFF;
+            border: none;
+            border-radius: 20px; /* Angoli arrotondati */
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%; /* Aggiunto larghezza al 100% */
+        }
+       
+
+        .home-link {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 20px;
+            color: #FFF8F8;
+            text-decoration: none;
+        }
+
+       
+
         .text-container {
             display: flex;
             flex-direction: column;
@@ -53,12 +130,7 @@
 			margin-bottom: 0px;
         }
 
-        .text-border {
-            border: 10px solid #0A0A0A; /* Bordo più spesso */
-            border-radius: 15px; 
-            padding: 30px;
-            margin-bottom: 0px; /* Aggiunto margine sotto la tabella */
-        }
+       
 
         .small-text {
             font-size: 18px;
@@ -72,22 +144,6 @@
             text-transform: uppercase;
         }
 
-        .logout-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #F5B92C;
-            color: #0A0A0A;
-            border: none;
-            padding: 15px;
-            font-size: 18px;
-            font-weight: bold;
-            text-transform: uppercase;
-            cursor: pointer;
-            border-radius: 10px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-        }
 
         .logout-button:hover {
             background-color: #D39C20;
@@ -103,18 +159,7 @@
             margin-bottom: 50px; /* Margine di 200px sotto la tabella */
         }
 
-        th, td {
-            border: 3px solid #0A0A0A; /* Bordo più spesso */
-            padding: 10px;
-            text-align: center;
-            font-weight: bold; /* Testo in grassetto */
-        }
-
-        th {
-            background-color: #FFF8F8;
-            font-size: 20px;
-            border-radius: 15px; /* Angoli stondati */
-        }
+       
     </style>
 </head>
 

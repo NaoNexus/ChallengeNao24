@@ -5,12 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Utenti</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-z9b+7oG5fWeAOeVG2HEoaFPiFjsxxhMbDSFOx6YLLEpAt52D74BlN/C2BZJKPXyBBo5HcAc2rZSXtITc8Unw/A==" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #A8D0F0;
+            background-color: #FFF;
             color: #F5B92C;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Readex Pro', sans-serif;
             text-align: center;
             margin: 0;
             padding: 0;
@@ -21,7 +23,7 @@
             font-size: 150px;
             text-align: center;
             margin: 10px 0;
-            font-family: 'Times New Roman', serif;
+            font-family: 'Readex Pro', sans-serif;
         }
 
         .home-link {
@@ -62,12 +64,14 @@
             font-size: 18px;
             font-weight: bold;
             text-transform: uppercase;
+            color: #000; /* Colore del testo nero */
         }
 
         .large-text {
             font-size: 200px;
             font-weight: bold;
             text-transform: uppercase;
+            color: #000; /* Colore del testo nero */
         }
 
         .sort-container {
@@ -84,8 +88,8 @@
             padding: 10px;
             font-size: 18px;
             border: none;
-            background-color: #FFF8F8;
-            color: #0A0A0A;
+            background-color: #000;
+            color: #FFF;
             border-radius: 10px;
             transition: background-color 0.3s ease;
         }
@@ -100,18 +104,40 @@
             margin-top: -150px; /* Mantenuto il margine superiore per evitare sovrapposizioni */
         }
 
-        th, td {
+        th,
+        td {
             border: 3px solid #0A0A0A;
             padding: 10px;
             text-align: center;
             font-weight: bold;
+            color: #000; /* Colore del testo nero */
         }
 
         th {
-            background-color: #FFF8F8;
+            background-color: #FFF;
             font-size: 20px;
             border-radius: 15px;
             cursor: pointer;
+        }
+		.logout-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #000;
+            color: #FFF;
+            border: none;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-button:hover {
+            background-color: #D39C20;
         }
     </style>
 </head>
@@ -120,6 +146,7 @@
     <a href="file:///C:/Users/edoar/Desktop/nao_webapp/codici%20webapp/templates/index.html" class="logo-link">
         <img src="C:\Users\edoar\Desktop\logo.png" alt="Logo" width="100%" height="100%">
     </a>
+	<a href="/logout" class="logout-button">Logout</a>
     <h1>Swarovski</h1>
 
     <div class="text-container">

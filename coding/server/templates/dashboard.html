@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-z9b+7oG5fWeAOeVG2HEoaFPiFjsxxhMbDSFOx6YLLEpAt52D74BlN/C2BZJKPXyBBo5HcAc2rZSXtITc8Unw/A==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.1.96/css/materialdesignicons.min.css" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #A8D0F0;
+            background-color: #FFF;
             color: black;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Readex Pro', sans-serif;
             text-align: center;
             margin: 0;
             padding: 0;
@@ -23,7 +23,7 @@
             font-size: 150px;
             text-align: center;
             margin: 10px 0; /* Ridotto lo spazio sopra la tabella */
-            font-family: 'Times New Roman', serif;
+            font-family: 'Readex Pro', sans-serif;
             font-weight: bold;
         }
 
@@ -32,7 +32,7 @@
             top: 10px;
             left: 10px;
             font-size: 20px;
-            color: #FFF8F8;
+            color: #000;
             text-decoration: none;
         }
 
@@ -45,8 +45,8 @@
         .menu button,
         .menu select {
             flex: 1;
-            background-color: #FFF8F8;
-            color: #0A0A0A;
+            background-color: #000;
+            color: #FFF;
             border: none;
             padding: 15px;
             margin: 0 10px;
@@ -80,8 +80,8 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            background-color: #F5B92C;
-            color: #0A0A0A;
+            background-color: #000;
+            color: #FFF;
             border: none;
             padding: 15px;
             font-size: 18px;
@@ -208,8 +208,8 @@
     </div>
     <br><br>
 
-    <a class="flex flex-row space-x-2 mt-10 mx-auto px-4 py-2 w-fit rounded-md font-medium text-white tracking-wider bg-green-500" 
-            href="/nuovo_prodotto">NUOVO PRODOTTO<span class="mdi mdi-plus ml-1"></span></a>
+   
+          <button href="/nuovo_prodotto">NUOVO PRODOTTO<span class="mdi mdi-plus ml-1"></button>
     <br>
     <div class="sort-container">
         <label class="sort-label" for="sortSelect">Ordina per:</label>
