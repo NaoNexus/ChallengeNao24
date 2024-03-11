@@ -129,7 +129,7 @@ This folder [sequence_diagram](https://github.com/NaoNexus/ChallengeNao24/tree/m
 This folder [logos](https://github.com/NaoNexus/ChallengeNao24/tree/main/social/logos) contains the logos of the project
 
 <div align="center">
-<img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/social/logos/logo/logos.png" width="600" height="350"/>
+<img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/social/logos/logo/logo_comp.jpg" width="600" height="350"/>
 </div>
 
 ## Authors
