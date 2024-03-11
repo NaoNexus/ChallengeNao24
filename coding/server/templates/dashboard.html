@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #FFF;
@@ -16,13 +16,14 @@
             text-align: center;
             margin: 0;
             padding: 0;
+            position: relative; /* Aggiunto per posizionare correttamente gli elementi fissi */
         }
 
         .swarovski {
             color: #0A0A0A;
             font-size: 150px;
             text-align: center;
-            margin: 10px 0; /* Ridotto lo spazio sopra la tabella */
+            margin: 0px 0; /* Ridotto lo spazio sopra la tabella */
             font-family: 'Readex Pro', sans-serif;
             font-weight: bold;
         }
@@ -69,15 +70,16 @@
         }
 
         .logo-link {
-            position: absolute;
+            position: fixed;
             top: 10px;
             left: 10px;
             width: 70px;
             height: 70px;
+            z-index: 1000; /* Assicura che il logo sia sopra gli altri elementi */
         }
 
         .logout-button {
-            position: absolute;
+            position: fixed;
             top: 10px;
             right: 10px;
             background-color: #000;
@@ -91,6 +93,7 @@
             border-radius: 10px;
             text-decoration: none;
             transition: background-color 0.3s ease;
+            z-index: 1000; /* Assicura che il pulsante di logout sia sopra gli altri elementi */
         }
 
         .logout-button:hover {
@@ -130,8 +133,57 @@
             color: #0A0A0A;
             margin-right: 10px;
         }
+		
+		
+		body {margin:0;padding:0;}
+
+		#hero {
+		position:fixed;
+		height:100vh;
+		width:100vw;
+		}
+
+		#hero video {
+		height:100vh;
+		width:100vw;
+		background-position:absolute;
+		z-index:10;
+		object-fit:cover;
+		overflow:hidden;
+		}
+
+		#myVideo {
+			opacity: 1; /* Impostare l'opacità a 1 per iniziare */
+			transition: opacity 1s; /* Definizione della transizione di opacità */
+		}
+
+		.video-hidden {
+			opacity: 0; /* Impostare l'opacità a 0 per nascondere il video */
+		}
+		.new-product-button {
+			background-color: #000;
+			color: #FFF;
+			font-size: 24px; /* Imposta la dimensione del testo a 24px */
+			padding: 20px; /* Aumenta il padding */
+			border-radius: 15px; /* Arrotonda gli angoli */
+		}
+
+		.new-product-button:hover {
+			background-color: #333; /* Cambia il colore di sfondo al passaggio del mouse */
+		}
+
+
     </style>
     <script>
+	    // Ottenere il riferimento all'elemento video
+		var video = document.getElementById("myVideo");
+
+
+		video.addEventListener("ended", function() {
+    
+			video.classList.add("video-hidden");
+		});
+
         function sortTable() {
             var table, rows, switching, i, x, y, shouldSwitch;
             table = document.getElementById("userTable");
@@ -168,9 +220,17 @@
                     switching = true;
                 }
             }
-        }
-    </script>
-    <script type="text/javascript">
+		}
+		
+		function removeVideo() {
+			var video = document.getElementById("myVideo");
+			 
+				video.style.display = "none";
+			
+		}
+ 
+		</script>
+		<script type="text/javascript">
         async function deleteProdotto(url) {
             await fetch(url, {
                 method: 'DELETE',
@@ -185,11 +245,21 @@
 </head>
 
 <body>
+	<div id="hero">
+    <video id = "myVideo" autoplay muted onended=removeVideo()>
+      <source src="C:\Users\edoar\Desktop\server\server\templates\intro_minimal.mp4" type="video/mp4">
+    </source>
+	</video>
+    </div>
+	
+	
+	<div>	
     <a href="/dashboard" class="logo-link"><img src="{{url_for('static', filename='logo.png')}}" alt="Logo" width="100%" height="100%"></a>
     <a href="/logout" class="logout-button">Logout</a>
+	</div>
     <h1 class="swarovski">Swarovski</h1>
     <div class="menu">
-        <button onclick="window.location.href='/prodotti'">Prodotti</button>
+        <button onclick="window.location.href='/prodotti'">Prodotto</button>
         <button onclick="window.location.href='/vendite'">Vendite</button>
         <button onclick="window.location.href='/utenti'">Utenti</button>
     </div>
@@ -203,21 +273,19 @@
         <button onclick="window.location.href='/api'">API</button>
         <button onclick="window.location.href='/services'">Services</button>
     </div>
-    <div class="menu">
-        <button onclick="window.location.href='/emozioni'">Emozioni</button>
-    </div>
     <br><br>
 
-   
-          <button href="/nuovo_prodotto">NUOVO PRODOTTO<span class="mdi mdi-plus ml-1"></button>
+        
+          <button class="menu-button new-product-button" onclick="window.location.href='/nuovo_prodotto'">NUOVO PRODOTTO<span class="mdi mdi-plus ml-1"></span></button>
+
     <br>
     <div class="sort-container">
         <label class="sort-label" for="sortSelect">Ordina per:</label>
         <select id="sortSelect" onchange="sortTable()">
             <option value="0">ID</option>
-            <option value="2">Titolo</option>
-            <option value="3">Categoria</option>
-            <option value="4">Prezzo</option>
+            <option value="1">Titolo</option>
+            <option value="2">Categoria</option>
+            <option value="3">Prezzo</option>
         </select>
     </div>
     <br>
