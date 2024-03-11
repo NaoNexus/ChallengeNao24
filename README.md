@@ -7,7 +7,6 @@
 			* [Dataset](#dataset)
 			* [Server](#server)
 				* [Database](#database)
-				* [Decision Tree](#decision-tree) 
 			* [Sequence Diagram](#sequence-diagram)
 		* [Social](#social)
 			* [Logos](#logos)
@@ -68,8 +67,23 @@ CREATE TABLE Ordine (
 
 The [dataset](https://github.com/NaoNexus/ChallengeNao24/tree/main/coding/dataset) folder encompasses a comprehensive collection of images featuring the jewelry items utilized in constructing the catalog for the application. These images serve as visual representations of the various products available in the app's inventory, providing users with a detailed and aesthetically pleasing showcase of the jewelry selection.
 
-### Decision Tree:
+### Server:
+The repository in the [Sever](https://github.com/NaoNexus/ChallengeNao24/tree/main/coding/oneRetail) directory serves as the essential core of the project, offering a range of fundamental functionalities. The codebase is centered around a class called DB, which manages the connection to a PostgreSQL database and provides methods for operations such as retrieving information about customers and items, as well as handling carts and orders. Additionally, there is a CustomFormatter class and a configured logger to colorize log messages based on severity levels. The project also features a script that uses the requests library to send HTTP POST requests to a specific endpoint with predefined data. Introducing Flask into the mix, the project leverages this lightweight web framework for elegant web application development. Finally, two utility functions complete the picture, calculating elapsed time from a timestamp and reading a YAML file. In summary, this repository excels not only in database operations, meticulous log management, and adept HTTP communication but also harnesses Flask for powerful web development capabilities.
+```ruby
+from logging_helper import logger
+from datetime import datetime
+from decimal import Decimal
+class DB:
+    def __init__(self):
+        import config_helper
+        config_helper = config_helper.Config()
 
+        try:
+            self.connection = psycopg2.connect(host=config_helper.db_host, 
+                                               database=config_helper.db_name,
+                                               user=config_helper.db_user, 
+                                               password=config_helper.db_password)
+```
 [decision_tree](https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/server/dialogo_decision_tree.py) contains the Python code where we coded the dialogue and decision tree and 2 possible dialogues.
 
 - This Python code defines a function called recommend_jewelry that provides personalized jewelry recommendations based on customer information such as gender, age, budget, and the desired jewelry category. The function considers various conditions, including different age and budget ranges for specific jewelry categories like bracelets, necklaces, earrings, rings, and watches. The result of the function is a list of recommended jewelry IDs, and the code is structured with nested conditions to handle different scenarios and offer advice tailored to the customer's preferences.
@@ -93,25 +107,6 @@ print("Buongiorno "+nome_utente['nome']+" "+nome_utente['cognome']+", sono peara
     risposta1 = input()
     regalo = estrai_regalo(risposta1)
 ```
-### Server:
-The repository in the [Sever](https://github.com/NaoNexus/ChallengeNao24/tree/main/coding/oneRetail) directory serves as the essential core of the project, offering a range of fundamental functionalities. The codebase is centered around a class called DB, which manages the connection to a PostgreSQL database and provides methods for operations such as retrieving information about customers and items, as well as handling carts and orders. Additionally, there is a CustomFormatter class and a configured logger to colorize log messages based on severity levels. The project also features a script that uses the requests library to send HTTP POST requests to a specific endpoint with predefined data. Introducing Flask into the mix, the project leverages this lightweight web framework for elegant web application development. Finally, two utility functions complete the picture, calculating elapsed time from a timestamp and reading a YAML file. In summary, this repository excels not only in database operations, meticulous log management, and adept HTTP communication but also harnesses Flask for powerful web development capabilities.
-
-```ruby
-from logging_helper import logger
-from datetime import datetime
-from decimal import Decimal
-class DB:
-    def __init__(self):
-        import config_helper
-        config_helper = config_helper.Config()
-
-        try:
-            self.connection = psycopg2.connect(host=config_helper.db_host, 
-                                               database=config_helper.db_name,
-                                               user=config_helper.db_user, 
-                                               password=config_helper.db_password)
-```
-
 ### Sequence Diagram:
 
 This folder [sequence_diagram](https://github.com/NaoNexus/ChallengeNao24/tree/main/coding/sequence_diagram) contains the flowcharts of the entire project.
@@ -129,7 +124,7 @@ This folder [sequence_diagram](https://github.com/NaoNexus/ChallengeNao24/tree/m
 This folder [logos](https://github.com/NaoNexus/ChallengeNao24/tree/main/social/logos) contains the logos of the project
 
 <div align="center">
-<img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/social/logos/logo/logo_comp.jpg" width="600" height="350"/>
+<img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/social/logos/logo/logo_comp.png" width="600" height="350"/>
 </div>
 
 ## Authors
