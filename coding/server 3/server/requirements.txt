@@ -1,0 +1,13 @@
+opencv-python==4.2.0.32
+opencv-python-headless==4.2.0.32
+flask
+flask_login
+yieldfrom
+PyYAML
+numpy
+requests
+selenium
+SpeechRecognition==3.8.1
+paramiko
+psycopg2
+psycopg2-binary
