@@ -10,6 +10,7 @@
 			* [Sequence Diagram](#sequence-diagram)
 		* [Social](#social)
 			* [Logos](#logos)
+* [Wiki](#wiki)
 * [Authors](#authors)
 ## NAO Challenge 2024
 
@@ -127,6 +128,11 @@ This folder [logos](https://github.com/NaoNexus/ChallengeNao24/tree/main/social/
 <img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/social/logos/logo/logo_comp.png" width="600" height="350"/>
 </div>
 
+## Wiki
+the "[wiki](https://github.com/NaoNexus/ChallengeNao24/tree/main/wiki)" folder contains the .md source files for our wiki
+```
+link wiki
+```
 ## Authors
 
 Suggest us new ideas at:
