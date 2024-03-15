@@ -129,10 +129,13 @@ This folder [logos](https://github.com/NaoNexus/ChallengeNao24/tree/main/social/
 </div>
 
 ## Wiki
-the "[wiki](https://github.com/NaoNexus/ChallengeNao24/tree/main/wiki)" folder contains the .md source files for our wiki
-```
-link wiki
-```
+The "[wiki](https://github.com/NaoNexus/ChallengeNao24/tree/main/wiki)" folder contains the .md source files for our wiki
+
+* [NAO Challenge 2022](https://naonexus.altervista.org/wiki/index.php?title=Nao_CHALLENGE_2022&action=edit&redlink=1)
+* [NAO Challenge 2023](https://naonexus.altervista.org/wiki/index.php?title=NAO_Challenge_2023&action=edit&redlink=1)
+* [EcoTide 2023](https://naonexus.altervista.org/wiki/index.php?title=EcoTide_2023&action=edit&redlink=1)
+* [NAO Challenge 2024](https://naonexus.altervista.org/wiki/index.php?title=NAO_Challenge_2024&action=edit&redlink=1)
+
 ## Authors
 
 Suggest us new ideas at:
