@@ -826,13 +826,13 @@ def api_magazzino():
     return redirect("/magazzino")
 
 
-@app.route('/api/carrello/<data>', methods=['GET', 'POST', 'DELETE'])
-def api_carrello(data):
+@app.route('/api/carrello/<id>', methods=['GET', 'POST', 'DELETE'])
+def api_carrello(id):
     if (id != None and id != ''):
         if request.method == 'GET':
             try:
                 #/api/carrello/{"id_cliente":value}
-                json = request.json
+                json = eval(id)
                 id_cliente = json['id_cliente']
                 id_carrello = db_helper.get_id_carrello(id_cliente)
                 return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.get_id_carrello_oggetto(id_carrello['id'])}), 200
@@ -854,7 +854,8 @@ def api_carrello(data):
         elif request.method == 'DELETE':
             try:
                 #{"id_cliente":value, "id_oggetto":value}
-                json = request.json
+                #json = request.json
+                json = eval(id)
                 id_cliente  = json['id_cliente']
                 id_oggetto  = json['id_oggetto']
                 id_carrello = db_helper.get_id_carrello(id_cliente)
@@ -868,8 +869,8 @@ def api_carrello(data):
         return jsonify({'code': 500, 'message': 'No id was passed'}), 500
 
 
-@app.route('/api/ordine/<data>', methods=['GET', 'POST'])
-def api_ordine(data):
+@app.route('/api/ordine/<id>', methods=['GET', 'POST'])
+def api_ordine(id):
     if (id != None and id != ''):
         if request.method == 'GET':
             try:
@@ -929,8 +930,8 @@ def api_ordine(data):
         return jsonify({'code': 500, 'message': 'No id was passed'}), 500
     
 
-@app.route('/api/ordine_mobile/<data>', methods=['GET', 'POST'])
-def api_ordine_mobile(data):
+@app.route('/api/ordine_mobile/<id>', methods=['GET', 'POST'])
+def api_ordine_mobile(id):
     if (id != None and id != ''):
         if request.method == 'GET':
             try:
@@ -1137,7 +1138,6 @@ CODICI JSON
 
 if __name__ == "__main__":
     startTime     = time.time()
-    
     '''
     nao_volume_sound(80)
     nao_autonomous_life("disabled")
@@ -1157,7 +1157,6 @@ if __name__ == "__main__":
     nao2_animatedSayText("Ciao sono Lesso, benvenuti al mio Riteil ti aiuterò nella gestione dei prodotti")
     nao2_stand()
     '''
-    
     app.secret_key = os.urandom(12)
     app.run(host=config_helper.srv_host, port=config_helper.srv_port, debug=config_helper.srv_debug)
 
