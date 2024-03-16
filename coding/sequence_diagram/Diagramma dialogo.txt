@@ -1,0 +1,86 @@
+frame#FFFAF0 DIALOGO
+
+participantspacing 6
+entryspacing 0.7
+
+participant CLIENTE #F8F8FF
+participant NAO #F8F8FF
+participant DECISION TREE#F8F8FF
+participant CARRELLO#F8F8FF
+
+activate CLIENTE #C0C0C0
+activate NAO #C0C0C0
+rbox over NAO#F8F8FF: Info Cliente\n  age: \n  gender: \n  budget: \n  category:
+
+#------
+group#6495ED #white Acquisto come regalo
+NAO->CLIENTE: Richiesta info cliente
+
+CLIENTE ->NAO: Risposta 
+
+    loop#5F9EA0 #white while info cliente is incomplite
+        NAO->CLIENTE: Richiesta info mancanti
+        CLIENTE->NAO: Risposta 
+    end
+end
+
+group#6495ED #white Acquisto personale
+box over CLIENTE,NAO#F8F8FF: Recupera age e gender da Morphcast
+  loop#5F9EA0 #white while info cliente is incomplite
+        NAO->CLIENTE: Richiesta info mancanti
+        CLIENTE->NAO: Risposta 
+  end
+end
+#------
+NAO->*DECISION TREE: Profilo cliente
+activate DECISION TREE#C0C0C0
+
+loop#2f2e7b #white while tmp is True
+linear 
+DECISION TREE ->NAO: Gioiello compatibile
+NAO ->CLIENTE: Proposta gioiello
+deactivate DECISION TREE
+destroysilent DECISION TREE
+linear off
+
+    alt#6495ED #white Il gioiello piace
+    linear
+    CLIENTE ->NAO: il gioiello piace
+    NAO->*CARRELLO: gioiello scelto
+    destroysilent CARRELLO
+    NAO->CLIENTE: abbinamento?
+    
+    linear off
+
+        alt #5F9EA0 #white Lo vuole
+        NAO->*DECISION TREE: gioiello
+        activate DECISION TREE#C0C0C0
+        DECISION TREE ->NAO: abbinamento
+        deactivate DECISION TREE
+        destroysilent DECISION TREE
+        NAO->CLIENTE: Gioiello da abbinare
+        linear
+        CLIENTE ->NAO:l'abbbinamento piace
+        NAO->*CARRELLO: abbinamento scelto
+        destroysilent CARRELLO
+        box over CLIENTE,NAO#F8F8FF: il loop continua: tmp = True
+        linear off
+        else Non lo vuole
+        box over CLIENTE,NAO#F8F8FF: il loop continua: tmp = True
+        end
+    
+    else il gioiello non piace 
+    box over CLIENTE,NAO#F8F8FF: il loop continua: tmp = True
+    end
+NAO->CLIENTE: Vuole altri prodotti?
+    alt#6495ED SI
+    box over CLIENTE,NAO#F8F8FF: il loop continua: tmp = True
+    else NO
+    box over CLIENTE,NAO#F8F8FF: il loop termina: tmp = False
+    end
+end
+NAO->CLIENTE: Messaggio di cortesia
+deactivate NAO
+deactivate CLIENTE
+destroysilent NAO
+destroysilent CLIENTE
