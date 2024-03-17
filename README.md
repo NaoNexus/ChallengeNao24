@@ -74,7 +74,6 @@ The [dataset](https://github.com/NaoNexus/ChallengeNao24/tree/main/coding/datase
 
 ### App:
 The folder [App/OneRitail](https://github.com/NaoNexus/ChallengeNao24/tree/main/coding/app/one_retail) contains the source code of the app. The app is the way the end user interfaces with the system for inventory control, market analysis, and enhancing business efficiency within the retail sector. Developed in collaboration with Swarovski, this application includes an online shop as well as all the in-store interactions with NAO
-
 ```ruby
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mycompany.oneretail"
@@ -88,9 +87,13 @@ The folder [App/OneRitail](https://github.com/NaoNexus/ChallengeNao24/tree/main/
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true">
 ```
+<div align="center">
+  <img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/app/screen_webapp2.png" hight="300" width="700"/>
+</div>
 
 ### Server:
 The repository in the [Sever](https://github.com/NaoNexus/ChallengeNao24/tree/main/coding/server) directory serves as the essential core of the project, offering a range of fundamental functionalities. The codebase is centered around a class called DB, which manages the connection to a PostgreSQL database and provides methods for operations such as retrieving information about customers and items, as well as handling carts and orders. Additionally, there is a CustomFormatter class and a configured logger to colorize log messages based on severity levels. The project also features a script that uses the requests library to send HTTP POST requests to a specific endpoint with predefined data. Introducing Flask into the mix, the project leverages this lightweight web framework for elegant web application development. Finally, two utility functions complete the picture, calculating elapsed time from a timestamp and reading a YAML file. In summary, this repository excels not only in database operations, meticulous log management, and adept HTTP communication but also harnesses Flask for powerful web development capabilities.
+
 ```ruby
 from logging_helper import logger
 from datetime import datetime
@@ -109,6 +112,7 @@ class DB:
 [decision_tree](https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/server/dialogo_decision_tree.py) contains the Python code where we coded the dialogue and decision tree and 2 possible dialogues.
 
 - This Python code defines a function called recommend_jewelry that provides personalized jewelry recommendations based on customer information such as gender, age, budget, and the desired jewelry category. The function considers various conditions, including different age and budget ranges for specific jewelry categories like bracelets, necklaces, earrings, rings, and watches. The result of the function is a list of recommended jewelry IDs, and the code is structured with nested conditions to handle different scenarios and offer advice tailored to the customer's preferences.
+
 ```ruby
 if gender == 'male': 
         if age > 60:
