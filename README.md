@@ -5,7 +5,7 @@
 	* [Project](#project)
 		* [Coding](#coding)
 			* [Dataset](#dataset)
-    		* [OneRetail](#OneRetail)
+    		* [OneRetail](#oneRetail)
 			* [Server](#server)
 				* [Database](#database)
 			* [Sequence Diagram](#sequence-diagram)
