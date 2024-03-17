@@ -5,12 +5,16 @@
 	* [Project](#project)
 		* [Coding](#coding)
 			* [Dataset](#dataset)
+    		* [OneRetail](OneRetail)
 			* [Server](#server)
 				* [Database](#database)
 			* [Sequence Diagram](#sequence-diagram)
 		* [Social](#social)
 			* [Logos](#logos)
+     		* [Merch](#merch)
+       		* [Website](#website)
 * [Wiki](#wiki)
+* [Time-Table](#time-table)
 * [Authors](#authors)
 ## NAO Challenge 2024
 
@@ -67,6 +71,27 @@ CREATE TABLE Ordine (
 ### Dataset:
 
 The [dataset](https://github.com/NaoNexus/ChallengeNao24/tree/main/coding/dataset) folder encompasses a comprehensive collection of images featuring the jewelry items utilized in constructing the catalog for the application. These images serve as visual representations of the various products available in the app's inventory, providing users with a detailed and aesthetically pleasing showcase of the jewelry selection.
+
+### OneRetail:
+The folder [App/OneRitail](https://github.com/NaoNexus/ChallengeNao24/tree/main/coding/app/one_retail) contains the source code of the app.
+OneRetail offers a comprehensive management system for inventory control, market analysis, and enhancing business efficiency within the retail sector. Developed in collaboration with Swarovski, this application aims to provide an accessible and sustainable solution to optimize retail operations.
+```ruby
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mycompany.oneretail"
+    xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <application
+        android:label="OneRetail"
+        tools:replace="android:label"
+        android:icon="@mipmap/ic_launcher"
+        android:requestLegacyExternalStorage="true">
+```
+<div align="center">
+  <img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/app/screen_webapp2.png" hight="300" width="700"/>
+</div>
+
 
 ### Server:
 The repository in the [Sever](https://github.com/NaoNexus/ChallengeNao24/tree/main/coding/server%201/server) directory serves as the essential core of the project, offering a range of fundamental functionalities. The codebase is centered around a class called DB, which manages the connection to a PostgreSQL database and provides methods for operations such as retrieving information about customers and items, as well as handling carts and orders. Additionally, there is a CustomFormatter class and a configured logger to colorize log messages based on severity levels. The project also features a script that uses the requests library to send HTTP POST requests to a specific endpoint with predefined data. Introducing Flask into the mix, the project leverages this lightweight web framework for elegant web application development. Finally, two utility functions complete the picture, calculating elapsed time from a timestamp and reading a YAML file. In summary, this repository excels not only in database operations, meticulous log management, and adept HTTP communication but also harnesses Flask for powerful web development capabilities.
@@ -128,6 +153,15 @@ This folder [logos](https://github.com/NaoNexus/ChallengeNao24/tree/main/social/
 <img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/social/logos/logo/logo_comp.png" width="600" height="350"/>
 </div>
 
+### Merch
+
+The folder [merch](https://github.com/NaoNexus/ChallengeNao24/tree/main/social/merch/felpa_2024) contains the images specifically curated for the production of the team's merchandise line, ensuring high-quality designs and branding consistency across all products.
+
+### Website
+
+The [website](https://github.com/NaoNexus/ChallengeNao24/tree/main/social/sito/NaoNexus) folder constitutes the central repository of our web project, containing all the necessary source code for the construction and functioning of our site. Here, all files are stored, organized neatly according to development conventions, defining the appearance, behavior, and functionality of our website. Every component of the site, from HTML pages to backend logic, is present and accessible within this folder.
+
+
 ## Wiki
 The "[wiki](https://github.com/NaoNexus/ChallengeNao24/tree/main/wiki)" folder contains the .md source files for our wiki
 
@@ -135,6 +169,12 @@ The "[wiki](https://github.com/NaoNexus/ChallengeNao24/tree/main/wiki)" folder c
 * [NAO Challenge 2023](https://naonexus.altervista.org/wiki/index.php?title=NAO_Challenge_2023&action=edit&redlink=1)
 * [EcoTide 2023](https://naonexus.altervista.org/wiki/index.php?title=EcoTide_2023&action=edit&redlink=1)
 * [NAO Challenge 2024](https://naonexus.altervista.org/wiki/index.php?title=NAO_Challenge_2024&action=edit&redlink=1)
+
+## Time-table
+This [image](https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/NAO_time.png) provides a clear overview of the project timeline table, offering a detailed representation of the start and completion phases for each individual task. This visualization is essential for monitoring the overall project progress and ensuring adherence to established deadlines.
+<div align="center">
+<img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/NAO_time.png" width="600" height="350"/>
+</div>
 
 ## Authors
 
