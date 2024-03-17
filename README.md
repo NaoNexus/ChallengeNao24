@@ -73,8 +73,8 @@ CREATE TABLE Ordine (
 The [dataset](https://github.com/NaoNexus/ChallengeNao24/tree/main/coding/dataset) folder encompasses a comprehensive collection of images featuring the jewelry items utilized in constructing the catalog for the application. These images serve as visual representations of the various products available in the app's inventory, providing users with a detailed and aesthetically pleasing showcase of the jewelry selection.
 
 ### App:
-The folder [App/OneRitail](https://github.com/NaoNexus/ChallengeNao24/tree/main/coding/app/one_retail) contains the source code of the app.
-OneRetail offers a comprehensive management system for inventory control, market analysis, and enhancing business efficiency within the retail sector. Developed in collaboration with Swarovski, this application aims to provide an accessible and sustainable solution to optimize retail operations.
+The folder [App/OneRitail](https://github.com/NaoNexus/ChallengeNao24/tree/main/coding/app/one_retail) contains the source code of the app. The app is the way the end user interfaces with the system for inventory control, market analysis, and enhancing business efficiency within the retail sector. Developed in collaboration with Swarovski, this application includes an online shop as well as all the in-store interactions with NAO
+
 ```ruby
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mycompany.oneretail"
@@ -88,10 +88,6 @@ OneRetail offers a comprehensive management system for inventory control, market
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true">
 ```
-<div align="center">
-  <img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/app/screen_webapp2.png" hight="300" width="700"/>
-</div>
-
 
 ### Server:
 The repository in the [Sever](https://github.com/NaoNexus/ChallengeNao24/tree/main/coding/server) directory serves as the essential core of the project, offering a range of fundamental functionalities. The codebase is centered around a class called DB, which manages the connection to a PostgreSQL database and provides methods for operations such as retrieving information about customers and items, as well as handling carts and orders. Additionally, there is a CustomFormatter class and a configured logger to colorize log messages based on severity levels. The project also features a script that uses the requests library to send HTTP POST requests to a specific endpoint with predefined data. Introducing Flask into the mix, the project leverages this lightweight web framework for elegant web application development. Finally, two utility functions complete the picture, calculating elapsed time from a timestamp and reading a YAML file. In summary, this repository excels not only in database operations, meticulous log management, and adept HTTP communication but also harnesses Flask for powerful web development capabilities.
