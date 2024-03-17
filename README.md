@@ -5,7 +5,7 @@
 	* [Project](#project)
 		* [Coding](#coding)
 			* [Dataset](#dataset)
-    		* [OneRetail](#oneRetail)
+    		* [App/OneRetail](#app/oneRetail)
 			* [Server](#server)
 				* [Database](#database)
 			* [Sequence Diagram](#sequence-diagram)
@@ -72,7 +72,7 @@ CREATE TABLE Ordine (
 
 The [dataset](https://github.com/NaoNexus/ChallengeNao24/tree/main/coding/dataset) folder encompasses a comprehensive collection of images featuring the jewelry items utilized in constructing the catalog for the application. These images serve as visual representations of the various products available in the app's inventory, providing users with a detailed and aesthetically pleasing showcase of the jewelry selection.
 
-### OneRetail:
+### App/OneRetail:
 The folder [App/OneRitail](https://github.com/NaoNexus/ChallengeNao24/tree/main/coding/app/one_retail) contains the source code of the app.
 OneRetail offers a comprehensive management system for inventory control, market analysis, and enhancing business efficiency within the retail sector. Developed in collaboration with Swarovski, this application aims to provide an accessible and sustainable solution to optimize retail operations.
 ```ruby
