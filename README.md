@@ -88,7 +88,7 @@ The folder [App/OneRitail](https://github.com/NaoNexus/ChallengeNao24/tree/main/
         android:requestLegacyExternalStorage="true">
 ```
 <div align="center">
-  <img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/app/screen_webapp2.png" hight="300" width="700"/>
+  <img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/app/screen_app.png" hight="300" width="700"/>
 </div>
 
 ### Server:
