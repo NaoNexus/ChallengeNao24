@@ -65,7 +65,7 @@ CREATE TABLE Ordine (
 );
 ```
 <div align="center">
-  <img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/database/diagrammaER.png" hight="300" width="700"/>
+  <img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/database/diagramma ER.png" hight="300" width="700"/>
 </div>
 
 ### Dataset:
