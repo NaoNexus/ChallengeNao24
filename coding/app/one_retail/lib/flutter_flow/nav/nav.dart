@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+
 import '/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
@@ -82,6 +83,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'SchermataFinale',
           path: '/schermataFinale',
           builder: (context, params) => const SchermataFinaleWidget(),
+        ),
+        FFRoute(
+          name: 'SchedaProdottoNAO',
+          path: '/schedaProdottoNAO',
+          builder: (context, params) => SchedaProdottoNAOWidget(
+            id: params.getParam('id', ParamType.int),
+          ),
+        ),
+        FFRoute(
+          name: 'CarrelloVuoto',
+          path: '/carrelloVuoto',
+          builder: (context, params) => const CarrelloVuotoWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

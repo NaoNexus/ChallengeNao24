@@ -224,6 +224,10 @@ class _SelectExperienceWidgetState extends State<SelectExperienceWidget>
                       child: FFButtonWidget(
                         onPressed: () async {
                           context.pushNamed('NAOstore');
+
+                          setState(() {
+                            FFAppState().ordineMobile = false;
+                          });
                         },
                         text: 'Mi trovo in negozio',
                         options: FFButtonOptions(
@@ -254,6 +258,10 @@ class _SelectExperienceWidgetState extends State<SelectExperienceWidget>
                       child: FFButtonWidget(
                         onPressed: () async {
                           context.pushNamed('Catalogo');
+
+                          setState(() {
+                            FFAppState().ordineMobile = true;
+                          });
                         },
                         text: 'Shop online',
                         options: FFButtonOptions(

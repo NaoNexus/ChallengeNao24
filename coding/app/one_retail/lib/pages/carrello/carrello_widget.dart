@@ -155,249 +155,329 @@ class _CarrelloWidgetState extends State<CarrelloWidget> {
                                       listViewViewCarrelloResponse.jsonBody,
                                       r'''$.data''',
                                     ).toList();
-                                    return ListView.builder(
-                                      padding: EdgeInsets.zero,
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.vertical,
-                                      itemCount: prodottoCarrello.length,
-                                      itemBuilder:
-                                          (context, prodottoCarrelloIndex) {
-                                        final prodottoCarrelloItem =
-                                            prodottoCarrello[
-                                                prodottoCarrelloIndex];
-                                        return Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 12.0),
-                                          child: Container(
-                                            width: MediaQuery.sizeOf(context)
-                                                    .width *
-                                                1.0,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  blurRadius: 0.0,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .alternate,
-                                                  offset: const Offset(0.0, 1.0),
-                                                )
-                                              ],
-                                              borderRadius:
-                                                  BorderRadius.circular(0.0),
-                                            ),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 4.0, 0.0, 12.0),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    1.0,
-                                                                    1.0,
-                                                                    1.0),
-                                                        child: ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      12.0),
-                                                          child: Image.network(
-                                                            functions.uRLmerge(
-                                                                'http://192.168.0.170:5010',
-                                                                valueOrDefault<
-                                                                    String>(
-                                                                  getJsonField(
-                                                                    prodottoCarrelloItem,
-                                                                    r'''$.oggetto.foto''',
-                                                                  )?.toString(),
-                                                                  '\$.oggetto.foto',
-                                                                ))!,
-                                                            width: 70.0,
-                                                            height: 70.0,
-                                                            fit: BoxFit
-                                                                .scaleDown,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        flex: 3,
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      8.0,
-                                                                      0.0,
-                                                                      4.0,
-                                                                      0.0),
-                                                          child: Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Text(
-                                                                valueOrDefault<
-                                                                    String>(
-                                                                  functions
-                                                                      .capitalize(
-                                                                          getJsonField(
-                                                                    prodottoCarrelloItem,
-                                                                    r'''$.oggetto.titolo''',
-                                                                  ).toString()),
-                                                                  'Errore',
-                                                                ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleLarge,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    8.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        child: Text(
-                                                          '€${getJsonField(
-                                                            prodottoCarrelloItem,
-                                                            r'''$.oggetto.prezzo''',
-                                                          ).toString()}',
-                                                          textAlign:
-                                                              TextAlign.end,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .titleLarge,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 0.0, 12.0),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    children: [
-                                                      Icon(
-                                                        Icons.delete_outline,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
-                                                        size: 24.0,
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    12.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        child: InkWell(
-                                                          splashColor: Colors
-                                                              .transparent,
-                                                          focusColor: Colors
-                                                              .transparent,
-                                                          hoverColor: Colors
-                                                              .transparent,
-                                                          highlightColor: Colors
-                                                              .transparent,
-                                                          onTap: () async {
-                                                            _model.rimuoviCarrello =
-                                                                await RimuoviDalCarrelloCall
-                                                                    .call(
-                                                              idCliente:
-                                                                  FFAppState()
-                                                                      .idCliente,
-                                                              idOggetto:
-                                                                  getJsonField(
+                                    return InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        _model.risultato =
+                                            await ViewCarrelloCall.call(
+                                          idCliente: FFAppState().idCliente,
+                                          nome: FFAppState().nome,
+                                          cognome: FFAppState().cognome,
+                                        );
+                                        if ((_model.risultato?.succeeded ??
+                                            true)) {
+                                          await Future.delayed(
+                                              const Duration(milliseconds: 1));
+                                        } else {
+                                          context.pushNamed('CarrelloVuoto');
+                                        }
+
+                                        setState(() {});
+                                      },
+                                      child: ListView.builder(
+                                        padding: EdgeInsets.zero,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.vertical,
+                                        itemCount: prodottoCarrello.length,
+                                        itemBuilder:
+                                            (context, prodottoCarrelloIndex) {
+                                          final prodottoCarrelloItem =
+                                              prodottoCarrello[
+                                                  prodottoCarrelloIndex];
+                                          return Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 12.0),
+                                            child: Container(
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    blurRadius: 0.0,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .alternate,
+                                                    offset: const Offset(0.0, 1.0),
+                                                  )
+                                                ],
+                                                borderRadius:
+                                                    BorderRadius.circular(0.0),
+                                              ),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 4.0,
+                                                                0.0, 12.0),
+                                                    child: InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        context.pushNamed(
+                                                          'SchedaProdotto',
+                                                          queryParameters: {
+                                                            'id':
+                                                                serializeParam(
+                                                              getJsonField(
                                                                 prodottoCarrelloItem,
                                                                 r'''$.oggetto.id''',
                                                               ),
-                                                            );
-                                                            if ((_model
-                                                                    .rimuoviCarrello
-                                                                    ?.succeeded ??
-                                                                true)) {
-                                                              context.pushNamed(
-                                                                  'Carrello');
-                                                            } else {
-                                                              ScaffoldMessenger
-                                                                      .of(context)
-                                                                  .showSnackBar(
-                                                                SnackBar(
-                                                                  content: Text(
-                                                                    'Impossibile rimuovere dal carrello',
-                                                                    style:
-                                                                        TextStyle(
-                                                                      color: FlutterFlowTheme.of(
+                                                              ParamType.int,
+                                                            ),
+                                                          }.withoutNulls,
+                                                        );
+                                                      },
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        1.0,
+                                                                        1.0,
+                                                                        1.0),
+                                                            child: ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          12.0),
+                                                              child:
+                                                                  Image.network(
+                                                                functions.uRLmerge(
+                                                                    'http://192.168.0.170:5010',
+                                                                    valueOrDefault<String>(
+                                                                      getJsonField(
+                                                                        prodottoCarrelloItem,
+                                                                        r'''$.oggetto.foto''',
+                                                                      )?.toString(),
+                                                                      '\$.oggetto.foto',
+                                                                    ))!,
+                                                                width: 70.0,
+                                                                height: 70.0,
+                                                                fit: BoxFit
+                                                                    .scaleDown,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Expanded(
+                                                            flex: 3,
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          8.0,
+                                                                          0.0,
+                                                                          4.0,
+                                                                          0.0),
+                                                              child: Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  InkWell(
+                                                                    splashColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    focusColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    hoverColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    highlightColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    onTap:
+                                                                        () async {
+                                                                      context
+                                                                          .pushNamed(
+                                                                        'SchedaProdotto',
+                                                                        queryParameters:
+                                                                            {
+                                                                          'id':
+                                                                              serializeParam(
+                                                                            getJsonField(
+                                                                              prodottoCarrelloItem,
+                                                                              r'''$.oggetto.id''',
+                                                                            ),
+                                                                            ParamType.int,
+                                                                          ),
+                                                                        }.withoutNulls,
+                                                                      );
+                                                                    },
+                                                                    child: Text(
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                        functions
+                                                                            .capitalize(getJsonField(
+                                                                          prodottoCarrelloItem,
+                                                                          r'''$.oggetto.titolo''',
+                                                                        ).toString()),
+                                                                        'Errore',
+                                                                      ),
+                                                                      style: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .primaryText,
+                                                                          .titleLarge,
                                                                     ),
                                                                   ),
-                                                                  duration: const Duration(
-                                                                      milliseconds:
-                                                                          4000),
-                                                                  backgroundColor:
-                                                                      FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .secondary,
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        8.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0),
+                                                            child: Text(
+                                                              '€${getJsonField(
+                                                                prodottoCarrelloItem,
+                                                                r'''$.oggetto.prezzo''',
+                                                              ).toString()}',
+                                                              textAlign:
+                                                                  TextAlign.end,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .titleLarge,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 12.0),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Icon(
+                                                          Icons.delete_outline,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .error,
+                                                          size: 24.0,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      12.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          child: InkWell(
+                                                            splashColor: Colors
+                                                                .transparent,
+                                                            focusColor: Colors
+                                                                .transparent,
+                                                            hoverColor: Colors
+                                                                .transparent,
+                                                            highlightColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            onTap: () async {
+                                                              _model.rimuoviCarrello =
+                                                                  await RimuoviDalCarrelloCall
+                                                                      .call(
+                                                                idCliente:
+                                                                    FFAppState()
+                                                                        .idCliente,
+                                                                idOggetto:
+                                                                    getJsonField(
+                                                                  prodottoCarrelloItem,
+                                                                  r'''$.oggetto.id''',
                                                                 ),
                                                               );
-                                                            }
+                                                              if ((_model
+                                                                      .rimuoviCarrello
+                                                                      ?.succeeded ??
+                                                                  true)) {
+                                                                context.pushNamed(
+                                                                    'Carrello');
+                                                              } else {
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(
+                                                                  SnackBar(
+                                                                    content:
+                                                                        Text(
+                                                                      'Impossibile rimuovere dal carrello',
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryText,
+                                                                      ),
+                                                                    ),
+                                                                    duration: const Duration(
+                                                                        milliseconds:
+                                                                            4000),
+                                                                    backgroundColor:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .secondary,
+                                                                  ),
+                                                                );
+                                                              }
 
-                                                            setState(() {});
-                                                          },
-                                                          child: Text(
-                                                            'Rimuovi',
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Readex Pro',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .error,
-                                                                ),
+                                                              setState(() {});
+                                                            },
+                                                            child: Text(
+                                                              'Rimuovi',
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Readex Pro',
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .error,
+                                                                  ),
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                      ],
+                                                    ),
                                                   ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                        );
-                                      },
+                                          );
+                                        },
+                                      ),
                                     );
                                   },
                                 );
@@ -465,7 +545,11 @@ class _CarrelloWidgetState extends State<CarrelloWidget> {
                                           ],
                                         ),
                                         FutureBuilder<ApiCallResponse>(
-                                          future: ViewCarrelloCall.call(),
+                                          future: ViewCarrelloCall.call(
+                                            nome: FFAppState().nome,
+                                            cognome: FFAppState().cognome,
+                                            idCliente: FFAppState().idCliente,
+                                          ),
                                           builder: (context, snapshot) {
                                             // Customize what your widget looks like when it's loading.
                                             if (!snapshot.hasData) {
@@ -483,17 +567,12 @@ class _CarrelloWidgetState extends State<CarrelloWidget> {
                                             final textViewCarrelloResponse =
                                                 snapshot.data!;
                                             return Text(
-                                              '€${valueOrDefault<String>(
-                                                functions
-                                                    .totalPrice(getJsonField(
-                                                      textViewCarrelloResponse
-                                                          .jsonBody,
-                                                      r'''$.oggetto.prezzo''',
-                                                      true,
-                                                    ))
-                                                    .toString(),
-                                                '330',
-                                              )}',
+                                              '€${functions.totalPrice(getJsonField(
+                                                    textViewCarrelloResponse
+                                                        .jsonBody,
+                                                    r'''$.data[:].oggetto''',
+                                                    true,
+                                                  )!).toString()}',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .displaySmall,
@@ -508,29 +587,54 @@ class _CarrelloWidgetState extends State<CarrelloWidget> {
                             ),
                             FFButtonWidget(
                               onPressed: () async {
-                                _model.confermaOrdine =
-                                    await ConfermaOrdineCall.call(
-                                  idCliente: FFAppState().idCliente,
-                                );
-                                if ((_model.confermaOrdine?.succeeded ??
-                                    true)) {
-                                  context.pushNamed('SchermataFinale');
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'Impossibile processare ordine',
-                                        style: TextStyle(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                        ),
-                                      ),
-                                      duration: const Duration(milliseconds: 4000),
-                                      backgroundColor:
-                                          FlutterFlowTheme.of(context)
-                                              .secondary,
-                                    ),
+                                if (FFAppState().ordineMobile) {
+                                  _model.ordineMobile =
+                                      await OrdineMobileCall.call(
+                                    idCliente: FFAppState().idCliente,
                                   );
+                                  if ((_model.ordineMobile?.succeeded ??
+                                      true)) {
+                                    context.pushNamed('SchermataFinale');
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'Errore',
+                                          style: TextStyle(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                          ),
+                                        ),
+                                        duration: const Duration(milliseconds: 4000),
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context).error,
+                                      ),
+                                    );
+                                  }
+                                } else {
+                                  _model.ordineNegozio =
+                                      await ConfermaOrdineCall.call(
+                                    idCliente: FFAppState().idCliente,
+                                  );
+                                  if ((_model.ordineNegozio?.succeeded ??
+                                      true)) {
+                                    context.pushNamed('SchermataFinale');
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'Errore',
+                                          style: TextStyle(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                          ),
+                                        ),
+                                        duration: const Duration(milliseconds: 4000),
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context).error,
+                                      ),
+                                    );
+                                  }
                                 }
 
                                 setState(() {});

@@ -37,4 +37,10 @@ class FFAppState extends ChangeNotifier {
   set cognome(String value) {
     _cognome = value;
   }
+
+  bool _ordineMobile = false;
+  bool get ordineMobile => _ordineMobile;
+  set ordineMobile(bool value) {
+    _ordineMobile = value;
+  }
 }

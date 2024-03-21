@@ -114,7 +114,7 @@ class _QRscanWidgetState extends State<QRscanWidget> {
                     );
                     if ((_model.qRresult?.succeeded ?? true)) {
                       context.pushNamed(
-                        'SchedaProdotto',
+                        'SchedaProdottoNAO',
                         queryParameters: {
                           'id': serializeParam(
                             getJsonField(

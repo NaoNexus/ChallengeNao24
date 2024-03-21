@@ -8,6 +8,7 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'lat_lng.dart';
 import 'place.dart';
 import 'uploaded_file.dart';
+import '/backend/schema/structs/index.dart';
 
 String? uRLmerge(
   String? staticstring,
@@ -36,14 +37,13 @@ String? capitalize(String? input) {
   }).join(' ');
 }
 
-double? totalPrice(List<double>? prodotti) {
-  // calculate total sum of list items
-  if (prodotti == null || prodotti.isEmpty) {
-    return null;
-  }
+double totalPrice(List<dynamic> prodotti) {
+  // calculate sum of "prezzo" values from a list of JSON items
   double sum = 0.0;
-  for (double prodotto in prodotti) {
-    sum += prodotto;
+  for (var prodotto in prodotti) {
+    if (prodotto['prezzo'] != null) {
+      sum += prodotto['prezzo'];
+    }
   }
   return sum;
 }

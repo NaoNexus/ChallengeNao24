@@ -6,10 +6,14 @@ import 'package:flutter/material.dart';
 class CarrelloModel extends FlutterFlowModel<CarrelloWidget> {
   ///  State fields for stateful widgets in this page.
 
+  // Stores action output result for [Backend Call - API (view carrello)] action in ListView widget.
+  ApiCallResponse? risultato;
   // Stores action output result for [Backend Call - API (rimuovi dal carrello)] action in Text widget.
   ApiCallResponse? rimuoviCarrello;
+  // Stores action output result for [Backend Call - API (ordine mobile)] action in Button widget.
+  ApiCallResponse? ordineMobile;
   // Stores action output result for [Backend Call - API (conferma ordine)] action in Button widget.
-  ApiCallResponse? confermaOrdine;
+  ApiCallResponse? ordineNegozio;
 
   /// Initialization and disposal methods.
 

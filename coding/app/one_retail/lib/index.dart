@@ -11,3 +11,7 @@ export '/pages/select_experience/select_experience_widget.dart'
 export '/pages/n_a_ostore/n_a_ostore_widget.dart' show NAOstoreWidget;
 export '/pages/schermata_finale/schermata_finale_widget.dart'
     show SchermataFinaleWidget;
+export '/pages/scheda_prodotto_n_a_o/scheda_prodotto_n_a_o_widget.dart'
+    show SchedaProdottoNAOWidget;
+export '/pages/carrello_vuoto/carrello_vuoto_widget.dart'
+    show CarrelloVuotoWidget;
