@@ -688,12 +688,10 @@ def api_descrizione_prodotto(id):
     if (id != None and id != ''):
         if request.method == 'GET':
             try:
-                #/api/descrizione_prodotto/{"id_oggetto":value}
-                json = request.json
-                oggetto = db_helper.get_id_oggetto(json['id_oggetto'])
-                testo = "Il prodotto " + str(oggetto['titolo']) + " è " + str(oggetto['descrizione'] + " e costa " + str(oggetto['prezzo'])) + " euro."
-                #print testo
-                nao_animatedSayText(oggetto['descrizione'])
+                #/api/descrizione_prodotto/id
+                oggetto = db_helper.get_id_oggetto(id)
+                testo = "Il prodotto " + str(oggetto['titolo']) + " è " + str(oggetto['descrizione'].encode('utf-8') + " e costa " + str(oggetto['prezzo'])) + " euro."
+                nao_animatedSayText(testo)
                 return jsonify({'code': 200, 'message': 'OK', 'data': oggetto}), 200
             except Exception as e:
                 logger.error(str(e))
@@ -835,7 +833,11 @@ def api_carrello(id):
                 json = eval(id)
                 id_cliente = json['id_cliente']
                 id_carrello = db_helper.get_id_carrello(id_cliente)
-                return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.get_id_carrello_oggetto(id_carrello['id'])}), 200
+                data = db_helper.get_id_carrello_oggetto(id_carrello['id'])
+                if data:
+                    return jsonify({'code': 200, 'message': 'OK', 'data': data}), 200
+                else:
+                    return jsonify({'code': 200, 'message': 'OK', 'data': 'no_data'}), 200
             except Exception as e:
                 logger.error(str(e))
                 return jsonify({'code': 500, 'message': str(e)}), 500
@@ -876,7 +878,7 @@ def api_ordine(id):
             try:
                 #{"id_cliente":value}
                 json = request.json
-                id_cliente  = json['id_cliente']
+                id_cliente = json['id_cliente']
                 return jsonify({'code': 200, 'message': 'OK', 'data': db_helper.get_id_ordine(id_cliente)}), 200
             except Exception as e:
                 logger.error(str(e))
@@ -945,7 +947,7 @@ def api_ordine_mobile(id):
         elif request.method == 'POST':
             try:
                 #{"id_cliente":value, "modalita_pagamento":value}
-                json = request.json
+                json = eval(id)
                 id_cliente         = json['id_cliente']
                 modalita_pagamento = json['modalita_pagamento']
                 cliente            = db_helper.get_id_cliente(id_cliente)
@@ -1010,6 +1012,7 @@ def api_utente_dialogo(id):
     if (id != None and id != ''):
         if request.method == 'POST':
             try:
+                print("POST /api/utente/dialogo/", id)
                 #{"id_cliente":value, "nome":value, "cognome":value}
                 json = request.json
                 id_cliente  = json["id_cliente"]
@@ -1023,6 +1026,7 @@ def api_utente_dialogo(id):
                 services_start_morphcast()
 
                 # preparazione nao con face tracker
+                '''
                 nao_volume_sound(80)
                 nao_autonomous_life("disabled")
                 nao_eye_white()
@@ -1032,6 +1036,7 @@ def api_utente_dialogo(id):
                     nao_face_tracker()
                 else:
                     nao_stop_face_tracker()
+                '''
 
                 # dialogo con decision tree
                 backup_nao = True
@@ -1051,7 +1056,7 @@ def api_utente_dialogo(id):
         logger.error('No id argument passed')
         return jsonify({'code': 500, 'message': 'No id was passed'}), 500
     
-#DA TESTARE
+
 @app.route('/api/post_gioiello_consigliato/<id>', methods=['POST'])
 def api_post_gioiello_consigliato(id):
     if (id != None and id != ''):
@@ -1083,8 +1088,7 @@ def api_get_gioiello_consigliato():
         except Exception as e:
             logger.error(str(e))
             return jsonify({'code': 500, 'message': str(e)}), 500
-
-
+        
 
 # SERVICES
 @app.route('/services', methods=['GET'])
@@ -1138,25 +1142,30 @@ CODICI JSON
 
 if __name__ == "__main__":
     startTime     = time.time()
-    '''
-    nao_volume_sound(80)
-    nao_autonomous_life("disabled")
-    nao_eye_white()
-    nao_wakeup()
-    nao_animatedSayText("Ciao sono Peara, benvenuti al mio Riteil ti aiuterò con la scelta dei prodotti")
-    nao_stand()
-    if face_tracker:
-        nao_face_tracker()
-    else:
-        nao_stop_face_tracker()
 
-    nao2_volume_sound(80)
-    nao2_autonomous_life("disabled")
-    nao2_eye_white()
-    nao2_wakeup()
-    nao2_animatedSayText("Ciao sono Lesso, benvenuti al mio Riteil ti aiuterò nella gestione dei prodotti")
-    nao2_stand()
-    '''
+    nao  = True
+    nao2 = True
+    
+    if nao:
+        nao_volume_sound(80)
+        nao_autonomous_life("disabled")
+        nao_eye_white()
+        nao_wakeup()
+        nao_animatedSayText("Ciao sono Peara, benvenuti al mio Riteil ti aiuterò con la scelta dei prodotti")
+        nao_stand()
+        if face_tracker:
+            nao_face_tracker()
+        else:
+            nao_stop_face_tracker()
+    
+    if nao2:
+        nao2_volume_sound(80)
+        nao2_autonomous_life("disabled")
+        nao2_eye_white()
+        nao2_wakeup()
+        nao2_animatedSayText("Ciao sono Lesso, benvenuti al mio Riteil ti aiuterò nella gestione dei prodotti")
+        nao2_stand()
+        
     app.secret_key = os.urandom(12)
     app.run(host=config_helper.srv_host, port=config_helper.srv_port, debug=config_helper.srv_debug)
 
