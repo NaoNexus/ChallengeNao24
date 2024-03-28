@@ -190,6 +190,7 @@ class _SelectExperienceWidgetState extends State<SelectExperienceWidget>
                                             fontFamily: 'Outfit',
                                             color: Colors.white,
                                             fontSize: 24.0,
+                                            letterSpacing: 0.0,
                                             fontWeight: FontWeight.w500,
                                           ),
                                     ),
@@ -210,6 +211,7 @@ class _SelectExperienceWidgetState extends State<SelectExperienceWidget>
                                     fontFamily: 'Plus Jakarta Sans',
                                     color: Colors.white,
                                     fontSize: 12.0,
+                                    letterSpacing: 0.0,
                                     fontWeight: FontWeight.normal,
                                   ),
                             ).animateOnPageLoad(
@@ -242,6 +244,7 @@ class _SelectExperienceWidgetState extends State<SelectExperienceWidget>
                               FlutterFlowTheme.of(context).titleSmall.override(
                                     fontFamily: 'Readex Pro',
                                     color: Colors.white,
+                                    letterSpacing: 0.0,
                                   ),
                           elevation: 3.0,
                           borderSide: const BorderSide(
@@ -276,6 +279,7 @@ class _SelectExperienceWidgetState extends State<SelectExperienceWidget>
                               FlutterFlowTheme.of(context).titleSmall.override(
                                     fontFamily: 'Readex Pro',
                                     color: Colors.white,
+                                    letterSpacing: 0.0,
                                   ),
                           elevation: 3.0,
                           borderSide: const BorderSide(

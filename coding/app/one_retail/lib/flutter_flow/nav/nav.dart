@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '/backend/schema/structs/index.dart';
 
 import '/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -56,7 +57,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'SchedaProdotto',
           path: '/schedaProdotto',
           builder: (context, params) => SchedaProdottoWidget(
-            id: params.getParam('id', ParamType.int),
+            id: params.getParam(
+              'id',
+              ParamType.int,
+            ),
           ),
         ),
         FFRoute(
@@ -88,7 +92,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'SchedaProdottoNAO',
           path: '/schedaProdottoNAO',
           builder: (context, params) => SchedaProdottoNAOWidget(
-            id: params.getParam('id', ParamType.int),
+            id: params.getParam(
+              'id',
+              ParamType.int,
+            ),
           ),
         ),
         FFRoute(
@@ -166,6 +173,7 @@ class FFParameters {
     String paramName,
     ParamType type, [
     bool isList = false,
+    StructBuilder<T>? structBuilder,
   ]) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -183,6 +191,7 @@ class FFParameters {
       param,
       type,
       isList,
+      structBuilder: structBuilder,
     );
   }
 }

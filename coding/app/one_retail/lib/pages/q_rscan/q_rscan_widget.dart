@@ -64,6 +64,7 @@ class _QRscanWidgetState extends State<QRscanWidget> {
                   fontFamily: 'Outfit',
                   color: Colors.white,
                   fontSize: 22.0,
+                  letterSpacing: 0.0,
                 ),
           ),
           actions: const [],
@@ -86,7 +87,10 @@ class _QRscanWidgetState extends State<QRscanWidget> {
                     child: Text(
                       'Clicca sull\'icona e scannerizza un prodotto',
                       textAlign: TextAlign.center,
-                      style: FlutterFlowTheme.of(context).bodyMedium,
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Readex Pro',
+                            letterSpacing: 0.0,
+                          ),
                     ),
                   ),
                 ),

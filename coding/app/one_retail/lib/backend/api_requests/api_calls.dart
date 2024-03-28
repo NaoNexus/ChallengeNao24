@@ -217,27 +217,6 @@ class ConfermaOrdineCall {
   }
 }
 
-class GetGioielloConsigliatoCall {
-  static Future<ApiCallResponse> call({
-    int? idCliente,
-    String? nome = '',
-    String? cognome = '',
-  }) async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'get gioiello consigliato',
-      apiUrl: 'http://192.168.0.170:5010/api/get_gioiello_consigliato',
-      callType: ApiCallType.GET,
-      headers: {},
-      params: {},
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-}
-
 class DescrizioneNAOCall {
   static Future<ApiCallResponse> call({
     int? idOggetto,

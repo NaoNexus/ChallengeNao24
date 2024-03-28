@@ -61,11 +61,17 @@ class _SchermataFinaleWidgetState extends State<SchermataFinaleWidget> {
                   children: [
                     Text(
                       'Procedi con il pagamento in cassa.',
-                      style: FlutterFlowTheme.of(context).bodyMedium,
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Readex Pro',
+                            letterSpacing: 0.0,
+                          ),
                     ),
                     Text(
                       'Ti ringraziamo per aver utilizzato OneRetail!',
-                      style: FlutterFlowTheme.of(context).bodyMedium,
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Readex Pro',
+                            letterSpacing: 0.0,
+                          ),
                     ),
                   ],
                 ),
@@ -75,7 +81,10 @@ class _SchermataFinaleWidgetState extends State<SchermataFinaleWidget> {
                   children: [
                     Text(
                       'Com\'è andata? Appreziamo il tuo ',
-                      style: FlutterFlowTheme.of(context).bodyMedium,
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Readex Pro',
+                            letterSpacing: 0.0,
+                          ),
                     ),
                     InkWell(
                       splashColor: Colors.transparent,
@@ -91,13 +100,17 @@ class _SchermataFinaleWidgetState extends State<SchermataFinaleWidget> {
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Readex Pro',
                               color: FlutterFlowTheme.of(context).secondaryText,
+                              letterSpacing: 0.0,
                               decoration: TextDecoration.underline,
                             ),
                       ),
                     ),
                     Text(
                       '!',
-                      style: FlutterFlowTheme.of(context).bodyMedium,
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Readex Pro',
+                            letterSpacing: 0.0,
+                          ),
                     ),
                   ],
                 ),

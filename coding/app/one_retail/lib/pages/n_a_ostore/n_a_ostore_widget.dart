@@ -190,6 +190,7 @@ class _NAOstoreWidgetState extends State<NAOstoreWidget>
                                             fontFamily: 'Outfit',
                                             color: Colors.white,
                                             fontSize: 24.0,
+                                            letterSpacing: 0.0,
                                             fontWeight: FontWeight.w500,
                                           ),
                                     ),
@@ -210,6 +211,7 @@ class _NAOstoreWidgetState extends State<NAOstoreWidget>
                                     fontFamily: 'Plus Jakarta Sans',
                                     color: Colors.white,
                                     fontSize: 12.0,
+                                    letterSpacing: 0.0,
                                     fontWeight: FontWeight.normal,
                                   ),
                             ).animateOnPageLoad(
@@ -238,6 +240,7 @@ class _NAOstoreWidgetState extends State<NAOstoreWidget>
                               FlutterFlowTheme.of(context).titleSmall.override(
                                     fontFamily: 'Readex Pro',
                                     color: Colors.white,
+                                    letterSpacing: 0.0,
                                   ),
                           elevation: 3.0,
                           borderSide: const BorderSide(
@@ -268,6 +271,7 @@ class _NAOstoreWidgetState extends State<NAOstoreWidget>
                               FlutterFlowTheme.of(context).titleSmall.override(
                                     fontFamily: 'Readex Pro',
                                     color: Colors.white,
+                                    letterSpacing: 0.0,
                                   ),
                           elevation: 3.0,
                           borderSide: const BorderSide(

@@ -10,8 +10,6 @@ class SchedaProdottoModel extends FlutterFlowModel<SchedaProdottoWidget> {
   // Stores action output result for [Backend Call - API (aggiungi al carrello)] action in Button widget.
   ApiCallResponse? aggiungialcarrello;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {}
 
@@ -19,8 +17,4 @@ class SchedaProdottoModel extends FlutterFlowModel<SchedaProdottoWidget> {
   void dispose() {
     unfocusNode.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

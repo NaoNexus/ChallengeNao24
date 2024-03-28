@@ -74,6 +74,7 @@ class _SchedaProdottoWidgetState extends State<SchedaProdottoWidget> {
                   fontFamily: 'Outfit',
                   color: Colors.white,
                   fontSize: 22.0,
+                  letterSpacing: 0.0,
                 ),
           ),
           actions: const [],
@@ -135,7 +136,12 @@ class _SchedaProdottoWidgetState extends State<SchedaProdottoWidget> {
                                 columnViewProdottoResponse.jsonBody,
                                 r'''$.data.categoria''',
                               ).toString(),
-                              style: FlutterFlowTheme.of(context).labelMedium,
+                              style: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                             ),
                           ),
                           Padding(
@@ -149,8 +155,12 @@ class _SchedaProdottoWidgetState extends State<SchedaProdottoWidget> {
                                 ).toString()),
                                 'Error 404',
                               ),
-                              style:
-                                  FlutterFlowTheme.of(context).headlineMedium,
+                              style: FlutterFlowTheme.of(context)
+                                  .headlineMedium
+                                  .override(
+                                    fontFamily: 'Outfit',
+                                    letterSpacing: 0.0,
+                                  ),
                             ),
                           ),
                           Padding(
@@ -161,7 +171,12 @@ class _SchedaProdottoWidgetState extends State<SchedaProdottoWidget> {
                                 columnViewProdottoResponse.jsonBody,
                                 r'''$.data.prezzo''',
                               ).toString()}',
-                              style: FlutterFlowTheme.of(context).headlineSmall,
+                              style: FlutterFlowTheme.of(context)
+                                  .headlineSmall
+                                  .override(
+                                    fontFamily: 'Outfit',
+                                    letterSpacing: 0.0,
+                                  ),
                             ),
                           ),
                           Padding(
@@ -172,7 +187,12 @@ class _SchedaProdottoWidgetState extends State<SchedaProdottoWidget> {
                                 columnViewProdottoResponse.jsonBody,
                                 r'''$.data.descrizione''',
                               ).toString(),
-                              style: FlutterFlowTheme.of(context).labelMedium,
+                              style: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                             ),
                           ),
                           Expanded(
@@ -239,6 +259,7 @@ class _SchedaProdottoWidgetState extends State<SchedaProdottoWidget> {
                                             .override(
                                               fontFamily: 'Readex Pro',
                                               color: Colors.white,
+                                              letterSpacing: 0.0,
                                             ),
                                         elevation: 3.0,
                                         borderSide: const BorderSide(

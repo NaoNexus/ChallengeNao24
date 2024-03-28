@@ -268,6 +268,7 @@ class _CatalogoWidgetState extends State<CatalogoWidget>
                                                           fontFamily:
                                                               'Readex Pro',
                                                           fontSize: 13.0,
+                                                          letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.w200,
                                                         ),
@@ -288,6 +289,7 @@ class _CatalogoWidgetState extends State<CatalogoWidget>
                                                       .override(
                                                         fontFamily:
                                                             'Readex Pro',
+                                                        letterSpacing: 0.0,
                                                         fontWeight:
                                                             FontWeight.w600,
                                                       ),
@@ -299,7 +301,12 @@ class _CatalogoWidgetState extends State<CatalogoWidget>
                                                   ).toString()}',
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyMedium,
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                                 ),
                                               ],
                                             ),
