@@ -1168,10 +1168,3 @@ if __name__ == "__main__":
         
     app.secret_key = os.urandom(12)
     app.run(host=config_helper.srv_host, port=config_helper.srv_port, debug=config_helper.srv_debug)
-
-
-'''
-TO DO
--sistemare euro             DA PROVARE
--get gioiello consigliato   DA PROVARE
-'''
