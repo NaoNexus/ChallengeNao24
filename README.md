@@ -159,7 +159,7 @@ The folder [merch](https://github.com/NaoNexus/ChallengeNao24/tree/main/social/m
 
 ### Website
 
-The [website](https://github.com/NaoNexus/ChallengeNao24/tree/main/social/sito/NaoNexus) folder constitutes the central repository of our web project, containing all the necessary source code for the construction and functioning of our site. Here, all files are stored, organized neatly according to development conventions, defining the appearance, behavior, and functionality of our website. Every component of the site, from HTML pages to backend logic, is present and accessible within this folder.
+The [website](https://github.com/NaoNexus/ChallengeNao24/tree/main/social/website) folder constitutes the central repository of our web project, containing all the necessary source code for the construction and functioning of our site. Here, all files are stored, organized neatly according to development conventions, defining the appearance, behavior, and functionality of our website. Every component of the site, from HTML pages to backend logic, is present and accessible within this folder.
 
 <div align="center">
 <img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/social/sito/screen_sito.png" width="600" height="350"/>
