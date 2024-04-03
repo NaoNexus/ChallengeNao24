@@ -32,7 +32,7 @@ const customSource = {
 
 // SDK MorphCast
 CY.loader()
-    .licenseKey("fc293a6733f11a98a89a3b5cc9ec8ed802715e2c5862")
+    .licenseKey()
     .source(customSource)
     .addModule(CY.modules().FACE_DETECTOR.name)
     .addModule(CY.modules().FACE_AGE.name)
