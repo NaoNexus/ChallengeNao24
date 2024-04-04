@@ -74,6 +74,7 @@ The [dataset](https://github.com/NaoNexus/ChallengeNao24/tree/main/coding/datase
 
 ### App:
 The folder [App/OneRitail](https://github.com/NaoNexus/ChallengeNao24/tree/main/coding/app/one_retail) contains the source code of the app. The app is the way the end user interfaces with the system for inventory control, market analysis, and enhancing business efficiency within the retail sector. Developed in collaboration with Swarovski, this application includes an online shop as well as all the in-store interactions with NAO
+	
 ```ruby
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mycompany.oneretail"
@@ -87,8 +88,9 @@ The folder [App/OneRitail](https://github.com/NaoNexus/ChallengeNao24/tree/main/
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true">
 ```
-<div align="center">
-  <img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/app/screen_app.PNG" hight="50"/>
+
+<div align="left">
+  <img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/app/Schermata%202024-04-04%20alle%2008.28.20963.png" width="300"/>
 </div>
 
 ### Server:
