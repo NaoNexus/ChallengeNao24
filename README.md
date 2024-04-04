@@ -90,7 +90,7 @@ The folder [App/OneRitail](https://github.com/NaoNexus/ChallengeNao24/tree/main/
 ```
 
 <div align="left">
-  <img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/app/Schermata%202024-04-04%20alle%2008.28.20963.png" width="300"/>
+  <img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/app/screen_app.png" width="300"/>
 </div>
 
 ### Server:
