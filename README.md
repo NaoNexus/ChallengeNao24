@@ -89,7 +89,7 @@ The folder [App/OneRitail](https://github.com/NaoNexus/ChallengeNao24/tree/main/
         android:requestLegacyExternalStorage="true">
 ```
 
-<div align="left">
+<div align="center">
   <img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/app/screen_app.PNG" width="300"/>
 </div>
 
@@ -164,7 +164,7 @@ The folder [merch](https://github.com/NaoNexus/ChallengeNao24/tree/main/social/m
 The [website](https://github.com/NaoNexus/ChallengeNao24/tree/main/social/website) folder constitutes the central repository of our web project, containing all the necessary source code for the construction and functioning of our site. Here, all files are stored, organized neatly according to development conventions, defining the appearance, behavior, and functionality of our website. Every component of the site, from HTML pages to backend logic, is present and accessible within this folder.
 
 <div align="center">
-<img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/social/screen_website.png" width="600" height="350"/>
+    <img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/social/screen_website.png" width="600" height="350"/>
 </div>
 
 
@@ -180,7 +180,7 @@ The "[wiki](https://github.com/NaoNexus/ChallengeNao24/tree/main/wiki)" folder c
 ## Time-table
 This [image](https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/NAO_time.png) provides a clear overview of the project timeline table, offering a detailed representation of the start and completion phases for each individual task. This visualization is essential for monitoring the overall project progress and ensuring adherence to established deadlines.
 <div align="center">
-<img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/NAO_time.png" width="600" height="350"/>
+    <img src="https://github.com/NaoNexus/ChallengeNao24/blob/main/coding/NAO_time.png" width="600" height="350"/>
 </div>
 
 ## Authors
