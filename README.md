@@ -131,9 +131,9 @@ if gender == 'male':
 ```ruby
 print("Buongiorno "+nome_utente['nome']+" "+nome_utente['cognome']+", sono peara, il nao del team naonecsus.")
 
-    print("Come posso aiutarti? Anche se sono un robot di gioielli ne so un bel po")
-    risposta1 = input()
-    regalo = estrai_regalo(risposta1)
+print("Come posso aiutarti? Anche se sono un robot di gioielli ne so un bel po")
+risposta1 = input()
+regalo = estrai_regalo(risposta1)
 ```
 ### Sequence Diagram:
 
